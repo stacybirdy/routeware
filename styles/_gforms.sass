@@ -1,0 +1,77 @@
+main .gform_wrapper 
+	&.gform_validation_error .gform_validation_errors 
+		box-shadow: none 
+		padding: 0 
+		margin: 0 0 30px
+		border:  none
+		background: none 
+		
+		text-align: center
+		&:focus, &:active
+			outline: none
+		h2.gform_submission_error
+			+font-b
+			color: $green 
+			+font-setup(14,17,19,23,0,0)
+			text-shadow: none
+			span 
+				display: none 
+	.gform_required_legend 
+		display: none
+	form .gform_body .gform_fields 
+		grid-row-gap: 25px
+	.gfield 
+		&.gfield_error  
+			.gfield_description.validation_message
+				padding: 0 
+				border: none 
+				margin: 5px 0 0
+				background: none 
+				font-size: 12px 
+				+font-b 
+				color: $dgold
+			input, textarea, select 
+				border: 1px solid $gold
+			.gfield_label
+				color: $dblue
+			input + label 
+				color: $dblue
+		input + label 
+			font-size: 16px !important
+			+font-b
+			line-height: 1
+			padding: 0 
+			color: $dblue
+			margin-top: 5px
+		legend.gfield_label, label.gfield_label
+			line-height: 1
+			color: $dblue
+		input, textarea, select 
+			width: 100%
+			border: 1px solid transparent 
+			background: $graye  
+			+font
+			padding: 8px !important
+			+border-radius(5px)
+			+break(tab)
+				padding: 12px !important
+		.gfield_required 
+			color: $green
+form .gform_footer 
+	align-content: center
+	flex-flow: column wrap
+	input.button 
+		+btn
+		margin-bottom: 0
+	.gform_ajax_spinner
+		width: 50px
+		height: 50px
+		display: block
+		margin: 0 auto
+
+.gform_confirmation_message
+	text-align: center 
+	+font-b 
+	line-height: 1.3em 
+	color: springgreen
+

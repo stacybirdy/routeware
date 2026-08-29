@@ -1,0 +1,80 @@
+.single-glossary-terms {
+
+  .addtoany_content {
+    display: none;
+  }
+
+  .site-footer {
+    margin-top: 84px;
+  }
+
+  .cta.top {
+    @media screen and (max-width: 500px) {
+      padding-top: 30px;
+
+      .rw-bc {
+        margin-bottom: 27px;
+
+        nav {
+          justify-content: center;
+        }
+      }
+    }
+    // display: flex;
+    // align-items: center;
+    // flex-wrap: wrap;
+    // gap: 15px;
+  }
+
+  .hero {
+    &__heading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+
+      @media screen and (max-width: 500px) {
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+      }
+    }
+
+    &__description {
+      max-width: 935px;
+      margin: 20px auto 0 auto;
+    }
+
+    &__icon {
+      display: flex;
+      align-items: center;
+
+      svg {
+        height: 65px;
+        width: 65px;
+        color: inherit;
+
+        @media screen and (max-width: 500px) {
+          height: 50px;
+          width: 50px;
+        }
+      }
+    }
+  }
+
+  .contentEditor {
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: $dblue;
+    }
+  }
+
+  &__end-btn {
+    display: table;
+    margin: 83px auto 0 auto;
+  }
+
+}

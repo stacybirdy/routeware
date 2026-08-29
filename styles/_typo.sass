@@ -1,0 +1,354 @@
+//typography
+@mixin icomoon
+	font-family: 'icomoon'
+	speak: none
+	font-style: normal
+	font-weight: normal
+	font-variant: normal
+	text-transform: none
+	line-height: 1
+	-webkit-font-smoothing: antialiased
+	-moz-osx-font-smoothing: grayscale
+
+
+@mixin font
+	font-family: "neue-haas-grotesk-display", sans-serif
+	font-weight: 500
+	font-style: normal
+@mixin font-i
+	font-family: "neue-haas-grotesk-display", sans-serif
+	font-weight: 500
+	font-style: italic
+@mixin font-m
+	font-family: "neue-haas-grotesk-display", sans-serif
+	font-weight: 600
+	font-style: normal
+@mixin font-b
+	font-family: "neue-haas-grotesk-display", sans-serif
+	font-weight: 700
+	font-style: normal
+@mixin font-bi
+	font-family: "neue-haas-grotesk-display", sans-serif
+	font-weight: 700
+	font-style: italic
+
+.seo 
+	color: inherit !important
+	text-decoration: none !important
+	cursor: default !important
+
+@mixin btn($bg: $gold, $color: white, $bgHover: $green, $colorHover: white, $borderHover: $green)
+	text-align: center
+	display: inline-block
+	+font-b
+	+font-setup(15,15,18,18,0,0)
+	padding: 12px 25px
+	text-shadow: 1px 2px 2px rgba(black, .15)
+	background: $bg
+	color: $color
+	+border-radius(5px)
+	border: 1px solid $bg
+	&:hover 
+		background: $bgHover
+		color: $colorHover
+		border: 1px solid $borderHover
+	span 
+		text-shadow: none
+		display: inline-block
+		&.icon-send 
+			margin-right: 8px
+
+@mixin btnOutline($border: $gold, $color: white, $borderHover: $gold, $colorHover: white, $bgHover: $gold,)
+	text-align: center
+	display: inline-block
+	+font-b
+	+font-setup(15,15,18,18,0,0)
+	padding: 12px 25px
+	text-shadow: 1px 2px 2px rgba(black, .15)
+	border: 1px solid $border
+	color: $color
+	+border-radius(5px)
+	background: none
+	&:hover 
+		background: $bgHover
+		color: $colorHover
+		border: 1px solid $borderHover
+
+.alt 
+	*
+		color: white
+	.intro h5 
+		color: white
+	p, li
+		a:not(.btn, .btnOutline, .btnOutline-dark, .btnOutline-white)
+			color: $gold
+			&:hover 
+				color: white
+	button.slick-arrow  
+		background: white 
+		&:before 
+			color: $green 
+		&:hover, &:focus 
+			background: $gold
+			&:before 
+				color: white
+	.btn
+		+btn($gold, white, transparent, white, $gold)
+.centered 
+	text-align: center 
+
+h1
+	+font-b
+	+font-setup(32,38,80,80,-.5,-1)
+	text-shadow: 1px 2px 6px rgba(black, .15)
+	+space1(10,20,mar,bot)
+	&.reduceFS1
+		+font-setup(32,38,52,56,-.5,-1)
+	+ h2 
+		+space1(-5,-10,mar,top)
+
+h2
+	color: $dblue
+	text-shadow: 1px 2px 2px rgba(black, .15)
+	+font-b
+	+font-setup(28,32,42,46,-.5,-1)
+	+space1(15,30,mar,bot)
+
+h3
+	color: $dblue
+	text-shadow: 1px 2px 2px rgba(black, .15)
+	+font-b
+	+font-setup(22,25,32,38,-.5,-1)
+	+space1(10,15,mar,bot)
+	&.stats
+		color: $green 
+		text-shadow: none 
+		+font-setup(36,36,64,64,-1,-2)
+	&.reduceMar1
+		margin-bottom: 5px
+
+h4
+	color: $dblue
+	+font-b
+	+font-setup(16,19,22,26,0,0)
+	margin-bottom: 8px
+	&.reduceMar1
+		margin-bottom: 5px
+	&.increaseMar1
+		+space1(16,26,mar,bot)
+
+h5 
+	+font-m
+	+font-setup(12,12,15,15,15,15,up)
+	display: inline-block
+	padding-bottom: 5px 
+	border-bottom: 1px solid $gold
+	+space1(10,20,mar,bot)
+	color: $green
+	&.centered
+		text-align: center
+		display: block 
+		padding-bottom: 0 
+		border: none 
+		span 
+			display: inline-block
+			padding-bottom: 5px 
+			border-bottom: 1px solid $gold
+	&.noLine, &.noLine span 
+		padding-bottom: 0 
+		border: none
+
+h2, h3, h4
+	a:hover 
+		color: $dgold 
+
+a.inline, button.inline
+	+font-m
+	+font-setup(12,12,14,14,15,15,up)
+	color: $green
+	text-decoration: underline 
+	padding: 0
+	background: none
+	border: none
+	&:hover 
+		color: $dgold 
+
+p, ul:not(.menu, .social, .mega-menu), table, ol, blockquote, .embedContainer
+	+space1(20,30,mar,bot)
+	&.reduceMar1
+		+space1(10,20,mar,bot)
+	&.reduceMar2
+		+space1(5,10,mar,bot)
+	&.increaseMar1
+		+space1(30,40,mar,bot)
+	&.increaseMar2 
+		+space1(40,50,mar,bot)
+	&.increaseFS1
+		+font-setup(18,24,24,30,0,0)
+	&.reduceFS1
+		+font-setup(13,18,15,20,0,0)
+	a:not(.btn, .btnOutline, .btnOutline-dark, .btnOutline-white) 
+		text-decoration: underline 
+		color: $green 
+		&:hover 
+			color: $gold
+
+p, ul:not(.menu, .social, .mega-menu), table, ol, blockquote, .embedContainer, figure
+	+ h2, + h3, + h4, + h5
+		+space1(35,45,mar,top)
+
+p
+	&.anchorBot
+		margin-top: auto	
+
+p + ul, p + ol 
+	margin-top: -15px
+
+
+ul, ol 
+	li 
+		p 
+			+space1(5,10,mar,bot)
+ul
+	margin-left: 30px
+	li
+		position: relative
+		margin-bottom: 5px
+		&:before
+			position: absolute
+			content: "\2022"
+			color: $dblue
+			margin-left: -20px
+			font-weight: bold
+	&.clean, &.menu, &.mega-menu 
+		margin: 0
+		li 
+			margin: 0 
+			&:before 
+				display: none
+				position: relative 
+				margin: 0
+
+
+
+
+ol
+	li
+		counter-increment: numerals
+		margin-bottom: 8px
+		margin-left: 30px
+		position: relative
+		&:before
+			content: counter(numerals) '.'
+			position: absolute
+			margin: 0 0 0 -25px
+		&.boldNum:before 
+			+font-b
+	ol
+		margin-top: 5px
+		margin-left: 0
+		list-style: none
+		li
+			counter-increment: none
+			position: static
+			&:before
+				content: "•"
+				margin-left: -20px
+			
+
+hr 
+	border: none 
+	border-top: 1px solid $grayd
+	+space2(25,25,35,35,mar,tb)
+	clear: both
+	+ img, figure 
+		margin-top: 0 !important
+
+blockquote 
+	background: $green 
+	+border-radius(10px)
+	+space2(20,25,35,40,pad,tb)
+	+space2(25,25,45,45,pad,lr)
+	* 
+		color: white 
+
+	p 
+		color: white 
+		+font-setup(17,23,22,28,0,0)
+	a:not(.btn)
+		text-decoration: underline
+		color: white
+		&:hover 
+			color: $gold
+	h2 
+		margin-bottom: 15px 
+	h4 
+		margin-bottom: 25px
+
+
+h2, h3, h4 
+	+ .alignleft, + .alignright, + .aligncenter, + .alignnone 
+		margin-top: 0
+
+.alignleft, .alignright, .aligncenter, .alignnone 
+	+space1(25,35,mar,top)
+	max-width: 100%
+	clear: both
+	display: block 
+	+space1(15,25,mar,bot)
+	+space2x(auto,auto,mar,lr)
+	+border-radius(10px)
+	&.increaseMar1 
+		+space1(40,50,mar,bot)
+	&.increaseMar2 
+		+space1(50,60,mar,bot)
+	img 
+		max-width: 100%
+	a
+		display: block 
+		overflow: hidden 
+		+border-radius(10px)
+		img
+			+transition(all .25s ease)
+		&:hover img
+			+transform(scale(1.05))
+	figcaption 
+		+font-setup(13,18,15,20,0,0)
+		+font-i
+		margin-top: 5px
+		a 
+			display: inline
+			text-decoration: underline
+			overflow: unset
+			&:hover 
+				color: $green
+
+
+
+.alignleft
+	+break(tab)
+		display: inline
+		float: left
+		+space1(30,40,mar,right)
+
+.alignright
+	+break(tab)
+		display: inline
+		float: right
+		+space1(30,40,mar,left)
+
+
+
+.btnOutline 
+	+btnOutline
+
+.btnOutline-dark 
+	+btnOutline($dblue,white,$dblue,white,$dblue)
+
+.btnOutline-white 
+	+btnOutline(white,white,$gold,white,$gold)
+
+p.multiBtn
+	margin: -10px -5px 0 -5px
+	a.btn, a.btnOutline, a.btnOutline-dark, a.btnOutline-white 
+		margin: 10px 5px 0 5px

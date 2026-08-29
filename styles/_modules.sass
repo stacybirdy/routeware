@@ -1,0 +1,2814 @@
+.fullWidthCallout
+	overflow: hidden
+	&.bg-green
+		&.bg-map
+			+grad(-135deg, $green, 0%, $dgreen, 100%)
+			.overlay
+				background: url('../images/bgMap-green.svg') no-repeat center center
+		&.bg-clock
+			+grad(0deg, $green, 0%, $dgreen, 77%)
+			.overlay
+				background: url('../images/bgClock-green.svg') no-repeat center center
+	
+	&.bg-dblue
+		&.bg-map
+			+grad(135deg, $dblue, 20%, $bblue, 100%)
+			.overlay
+				background: url('../images/bgMap-dblue.svg') no-repeat center center
+		&.bg-clock 
+			+grad(0deg, $dblue, 0%, $bblue, 50%)
+			.overlay
+				background: url('../images/bgClock-dblue.svg') no-repeat center center
+	
+	&.bg-black
+		&.bg-map
+			+grad(-135deg, $gray4, 0%, black, 100%)
+			.overlay
+				background: url('../images/bgMap-black.svg') no-repeat center center
+		&.bg-clock 
+			+grad(0deg, $gray4, 0%, black, 77%)
+			.overlay
+				background: url('../images/bgClock-black.svg') no-repeat center center
+	&.bg-map .overlay
+		position: absolute 
+		left: 0 
+		top: 0 
+		width: 100%
+		height: 100%
+		background-size: cover !important
+		opacity: .5
+	&.bg-clock .overlay
+		background: url('../images/clock.svg') no-repeat center center/contain
+		+vc
+		+break(tinyMax)
+			margin: 0 auto 
+			left: -5vw 
+			width: 110vw
+			height: 110vw
+		+break(tiny)
+			left: 5%
+			width: 350px
+			height: 350px
+		+break(big)
+			left: 15%
+			width: 400px
+			height: 400px
+	.wrap 
+		+wrap(936)
+		+space2(50,60,80,90,pad,tb)
+		.countdown
+			.element_conteiner
+				+break(desk)
+					margin: 0 25px
+.hero
+	.txt
+		z-index: 2
+		position: relative
+		&.bg-green
+			+grad(-135deg, $green, 0%, $dgreen, 100%)
+			.overlay 
+				background: url('../images/bgMap-green.svg') no-repeat center center
+		&.bg-dblue
+			+grad(135deg, $dblue, 20%, $bblue, 100%)
+			.overlay 
+				background: url('../images/bgMap-dblue.svg') no-repeat center center
+		&.bg-black
+			+grad(-135deg, $gray4, 0%, black, 100%)
+			.overlay 
+				background: url('../images/bgMap-black.svg') no-repeat center center
+		.overlay 
+			position: absolute 
+			left: 0 
+			top: 0 
+			width: 100%
+			height: 100%
+			background-size: cover !important
+			opacity: .5
+		.inner 
+			position: relative
+			img 
+				width: 88%
+				max-width: 520px
+					
+			p
+				+font-setup(20,28,24,32,-.5,-1)
+				text-shadow: 1px 2px 6px rgba(black, .15)
+				span 
+					color: $gold 
+					width: 30px 
+					font-size: 80%
+					text-align: center
+					display: inline-block
+			.qlWrap 
+				
+				+break(min)
+					+flex
+					align-items: center
+					justify-content: space-between
+				h1
+					+break(min)
+						width: 47%
+					img 
+						+break(min)
+							width: 100%
+				.quicklinks 
+					box-shadow: 0 4px 10px rgba(black, .15)
+					border: 1px solid white 
+					+border-radius(10px)
+					+grad(45deg,rgba($dgreen, .5),0%,rgba($green, .5),100%)
+					padding: 20px 25px
+					margin: 30px auto 0
+					max-width: 80%
+					+break(min)
+						width: 47%
+						margin: 0
+					+break(big)
+						padding: 25px 30px
+					ul
+						margin: 0 auto
+						li
+							margin-bottom: 10px
+							+font-setup(15,20,18,23,0,0)
+							&:before 
+								display: none
+							a 
+								+font-b 
+								color: white 
+								text-decoration: none
+								&:hover 
+									color: $gold
+
+
+		&.title-logo
+			h1
+				+space1(20,30,mar,bot)
+				&:last-child 
+					margin-bottom: 0
+				img 
+					margin: 0 auto
+					display: block
+					+break(mid)
+						margin-left: 0
+				&.logoSize-tall img
+					max-height: 275px 
+					+break(mid)
+						max-height: 350px
+					+break(big)
+						max-height: 420px
+
+
+	&.type-form 
+		.wrap 
+			+space2(40,50,60,70,pad,tb)
+			+wrap 
+			 
+			position: relative
+			+break(mid)
+				+flex 
+				justify-content: space-between
+			.left
+				margin-bottom: 30px
+				+break(mid)
+					margin: 0
+					width: 44%
+				+break(big)
+					width: 42%
+			.right 
+				+break(mid)
+					width: 50%
+				.hs-richtext p 
+					color: white !important
+	&.type-txt
+		text-align: center
+		.txt 
+			+space2(35,50,65,80,pad,tb)
+			.overlay 
+				+break(mid)
+					background-size: cover !important
+			.inner
+				+wrap
+		&.hasFtImg .txt //resource singles
+			+space2(35,80,65,200,pad,tb)
+		&.hasGatedForm .txt //webvid gated content form
+			+space2(35,120,65,200,pad,tb)
+	&.type-resource
+		h1
+			+wrapFull(1050)
+		h5.noLine 
+			margin-top: 20px
+	&.type-img, &.type-vid 
+		+break(mid)
+			+flex
+		.txt 
+			+space2(35,60,120,130,pad,tb)
+			+break(midMax)
+				text-align: center
+			+break(mid)
+				width: 50%
+				-webkit-mask: url('../images/heroMask.svg') no-repeat right center / cover
+				mask: url('../images/heroMask.svg') no-repeat right center / cover
+				height: 100%
+			.inner
+				padding: 0 4%
+				+break(mid)
+					+calc('padding-left', max((100% - 700px), 8%))
+					padding-right: 10%
+				
+		.img 
+			+break(mid)
+				width: 60%
+				margin-left: -10%
+		.imgInline 
+			position: relative
+			overflow: hidden
+			+break(mid)
+				width: 60%
+				margin-left: -10%
+			img 
+				position: absolute 
+				left: 0 
+				top: 0 
+				object-fit: cover
+				width: 100%
+				height: 100%
+
+	&.type-vid 
+		overflow: hidden 
+		.img 
+			+break(mid)
+				height: 0 
+			video 
+				display: block
+				+break(midMax)
+					width: 100%
+					height: auto
+	&.type-img
+		.img 
+			background-size: cover 
+			background-position: center center
+			height: 245px
+			+break(hand)
+				height: 290px
+			+break(tab)
+				height: 330px
+			+break(mid)
+				height: auto
+	
+.intro 
+	+wrap(936)
+	text-align: center	
+	+space1(35,50,pad,bot)	
+	+noHS
+	&.introFull
+		width: 100%
+	&.introLeft
+		text-align: left
+		h2 
+			max-width: 100%
+			+space2x(0,0,mar,lr)
+	&.reduceMar1
+		+space1(25,30,pad,bot)	
+	h2 
+		max-width: 28ch
+		+space2x(auto,auto,mar,lr)
+	h5 
+		color: $green
+
+
+.foot
+	+space1(35,50,pad,top)	
+	text-align: center
+	&.reduceMar1
+		padding-top: 35px
+
+
+
+	
+
+
+
+
+
+
+
+.boxedCallouts
+	&.type-flips 
+		+grad(135deg, $dblue, 20%, $bblue, 100%)
+		+space2(35,50,50,80,pad,tb) 
+		.sliderNav
+			width: 80px 
+			margin: -25px auto 0
+			height: 30px
+			position: relative
+			+break(mid)	
+				display: none
+			button 
+				width: 30px 
+				height: 30px 
+				top: 15px
+				&:before 
+					font-size: 11px
+				&.slick-prev 
+					left: 0 
+				&.slick-next 
+					right: 0 
+
+		.wrap .boxes 
+			+break(midMax)
+				display: block
+				width: 370px
+				margin: -50px auto 0
+			+break(mid)
+				margin: 0 -1.5%
+			+break(max)
+				margin: 0 -2%
+
+			.slick-track 
+				+break(midMax)
+					padding: 50px 25px
+			.flipCard 
+				-webkit-perspective: 800
+				-ms-perspective: 800
+				-moz-perspective: 800
+				-o-perspective: 800
+				height: auto
+				position: relative
+				
+				
+				+break(midMax)
+					width: 370px !important
+					padding: 0 10px
+					display: inline-block
+					&:focus
+						outline: none
+						.side
+							outline: 1px solid $gold
+
+				+break(mid)
+					width: 30.33%
+					margin: 0 1.5%
+				+break(max)
+					width: 29.33%
+					margin: 0 2%
+				.card 
+					width: 100%
+					height: 100%
+					-webkit-transform-style: preserve-3d
+					-webkit-transition: 0.5s
+					-moz-transform-style: preserve-3d
+					-moz-transition: 0.5s
+					-ms-transform-style: preserve-3d
+					-ms-transition: 0.5s
+					-o-transform-style: preserve-3d
+					-o-transition: 0.5s
+					transform-style: preserve-3d
+					transition: 0.5s
+					&.flipped 
+						+transform(rotateY(-180deg))
+					.side 
+						text-align: center 
+						border: 1px solid $gold 
+						+border-radius(10px)
+						width: 100%
+						height: 100%
+						cursor: pointer
+						position: absolute
+						z-index: 2
+						backface-visibility: hidden  
+						-webkit-backface-visibility: hidden 
+						-moz-backface-visibility: hidden 
+						-ms-backface-visibility: hidden 
+						-o-backface-visibility: hidden 
+						.inner 
+							padding: 25px
+							+break(max)
+								padding: 35px 25px
+							
+					.front
+						background-color: $dblue
+						h5 
+							margin-top: 5px
+						.inner.cardFront 
+							height: 100%
+							+flex 
+							flex-flow: column nowrap 
+							justify-content: space-between
+						&:hover span.btn 
+							background: none 
+
+						
+					.back 
+						background: $green
+						+transform(rotateY(-180deg))
+						.inner 
+							padding-bottom: 55px
+							+break(max)
+								padding-bottom: 65px
+
+						&:hover .icon-clear
+							background: $dgold
+						
+				h5
+					margin-bottom: 10px
+				.icon-clear 
+					width: 40px 
+					height: 40px 
+					background: $gold 
+					+border-radius(50%)
+					font-size: 24px
+					line-height: 40px 
+					margin: auto auto 0
+					display: block
+					position: absolute 
+					left: 0 
+					right: 0 
+					margin: 0 auto 
+					bottom: 25px
+					
+
+				span.btn 
+					width: auto 
+					display: inline-block 
+					margin: 0 auto
+		
+
+				ul.schedule
+					text-align: left
+					margin-bottom: 25px
+					li 
+						+flex
+						border-bottom: 1px solid rgba(white, .25)
+						padding: 10px 0
+						&:last-of-type 
+							border-bottom: none
+					.time 
+						+font-b
+						width: 85px
+						+break(max)
+							width: 100px
+					.details 
+						flex: 1
+						line-height: 1.2em
+				
+
+
+
+	&.type-txt, &.type-video 
+		background: $grayf
+		.boxes 
+			.box
+				border-bottom: 17px solid $gold
+				&:nth-of-type(3n-2)
+					+grad(45deg,$bblue,0%,$dblue,90%)
+				&:nth-of-type(3n-1)
+					+grad(45deg,$dgreen,0%,$green,100%)
+				&:nth-of-type(3n)
+					background: black
+					+grad(45deg,black,0%,$gray4,90%)
+	&.type-txt 
+		+space1(30,50,pad,top) 
+
+		.boxes .box 
+			.btn 
+				margin: auto auto 0 auto
+				max-width: 170px
+	&.type-video 
+		+space1(40,80,pad,bot)
+		.introBg 
+			background: white
+		.colsFull:before
+			content: ""
+			width: 100% 
+			height: 100px
+			background: white
+			position: absolute
+			left: 0 
+			top: 0
+		.wrap .boxes .box 
+			padding: 0
+			.img 
+				cursor: pointer 
+				&:hover span 
+					background: white
+					color: $dgreen
+				span 
+					+vc
+					width: 75px 
+					height: 75px 
+					+border-radius(50%)
+					background: rgba(white, .8) 
+					color: $green
+					margin: 0 auto 
+					font-size: 32px 
+					line-height: 75px
+					left: 0 
+					right: 0 
+					+transition(all .25s)
+					&:before 
+						margin-left: 6px
+				img 
+					+border-radius(10px 10px 0 0)
+					display: block
+			.inner 
+				padding: 25px 25px 50px
+	&.type-imgroll
+		background: $graye
+		+space1(50,80,pad,bot)
+		.introBg
+			background: white
+		.colsFull
+			position: relative
+			&:before 
+				content: ""
+				width: 100% 
+				height: 100px
+				background: white
+				position: absolute
+				left: 0 
+				top: 0
+			.wrap .boxes .box
+				position: relative
+				border-bottom: 17px solid transparent
+				//justify-content: center
+				background-size: auto 110% !important
+				padding: 15px 3.5% 50px
+				+transition(all .5s ease-in-out)
+				&:nth-of-type(3n-2)
+					background: $dblue
+				&:nth-of-type(3n-1)
+					background: $gold
+					&:hover
+						border-color: $dblue
+				&:nth-of-type(3n)
+					background: $green
+				&:hover 
+					border-color: $gold
+				h2 
+					margin: 47px 0 30px
+				.rollover 
+					//display: none
+					a.btn, a.btnOutline, a.btnOutline-dark 
+						width: 100%
+				
+
+	&.type-software
+		+grad(135deg, $dblue, 20%, $bblue, 100%)
+		+space1(50,80,pad,top) 
+		position: relative
+		.overlay 
+			background: url('../images/bgMap-dblue.svg') no-repeat center center
+			width: 100%
+			height: 100%
+			position: absolute 
+			left: 0 
+			top: 0
+			background-size: cover
+			opacity: .5
+		.wrap .boxes
+			+break(tabMax)
+				margin-bottom: -50px
+			.box
+				align-items: center
+				padding: 0
+				+break(tabMax)
+					margin-bottom: 50px
+				img.logo 
+					max-width: 80%
+					width: auto
+					margin: 0 auto 25px
+					+break(tab)
+						max-width: 100%
+						height: 60px
+					+break(desk)
+						height: 70px
+					+break(big)
+						height: 80px
+				img.bg
+					+border-radius(10px)
+				a.btn 
+					margin-top: -22px
+					+btn($gold, white, $green,white, $green)
+	&.type-software, &.type-txt
+		&:after 
+			content: ""
+			width: 100% 
+			height: 100px
+			background: white
+			position: absolute
+			left: 0 
+			bottom: 0
+	&.type-tip
+		.tipBox 
+			+wrap(936)
+			+border-radius(10px)
+			background: $green
+			padding: 60px 40px
+			text-align: center
+			+space2(20,30,50,50,pad,tb)
+			+space2(20,20,35,35,pad,lr)
+			+break(hand)
+				text-align: left
+				+flex 
+				align-items: center
+				flex-flow: row nowrap
+			.icon-tip 
+				font-size: 60px
+				width: 60px
+				height: 60px 
+				+border-radius(50%)
+				margin: 0 auto 15px
+				background: $gold 
+				color: white 
+				display: block
+				+break(hand)
+					margin-bottom: 0
+					+space1(15,30,mar,right)
+					font-size: 75px
+					width: 75px
+					height: 75px 
+				+break(desk)
+					font-size: 90px
+					width: 90px
+					height: 90px 
+			.txt 
+				flex: 1
+				+font-setup(18,24,24,30,.5,.5)
+	.wrap 
+		+wrap
+		position: relative 
+		z-index: 2
+		.boxes
+			+flex
+			flex-flow: row wrap
+			justify-content: center
+			margin: 0 -1.5% -30px
+			.box 
+				+border-radius(10px)
+				text-align: center
+				margin: 0 1.5% 30px
+				+flex 
+				flex-flow: column nowrap
+				padding: 50px 25px
+				width: 100%
+				max-width: 400px
+		&.col2
+			+wrap(1080)
+			.boxes
+				+break(desk)
+					margin: 0 -4%
+				.box 
+					+break(tab)
+						width: 47%
+					+break(desk)
+						width: 42%
+						margin: 0 4%
+		&.col3 .box 
+			+break(tab)
+				width: 46%
+			+break(desk)
+				width: 29.33%
+		&.col4 .box 
+			+break(tab)
+				width: 46%
+			+break(big)
+				width: 22%
+		
+.iconText
+	+noHS
+	&.bg-lgray 
+		+space2(40,50,60,70,pad,tb)
+	.wrap 
+		+wrap 
+		.icons 
+			+flex 
+			flex-flow: row wrap
+			justify-content: center
+
+	&.type-cols
+		.icons 
+			text-align: center
+			margin: 0 -4% -40px
+			+break(hand)
+				margin: 0 -2.5% -40px
+			&.col3 .iconBlock
+				+break(mid)
+					&:nth-of-type(3n)
+						border-right: none
+			&.col4 .iconBlock 					
+				+break(mid)
+					width: 25%
+					&:nth-of-type(4n)
+						border-right: none
+			&.col5 .iconBlock 
+				+break(mid)
+					width: 20%
+					&:nth-of-type(5n)
+						border-right: none
+			.iconBlock
+				padding: 0 4%
+				border-right: 1px solid $grayd
+				margin-bottom: 40px
+				width: 50%
+				+break(handMax)
+					&:nth-of-type(even)
+						border-right: none
+				+break(hand)
+					padding: 0 2.5%
+					width: 33.33%
+				+break-span($break-hand, $break-mid)
+					&:nth-of-type(3n)
+						border-right: none
+					
+				
+					
+				&:last-of-type 
+					border-right: none
+				.icon 
+					+flex
+					align-items: flex-end
+					justify-content: center
+					margin-bottom: 15px
+					height: 65px
+					+break(desk)
+						height: 80px
+					img 
+						max-height: 65px
+						max-width: 65px
+						+break(desk)
+							max-height: 80px
+							max-width: 80px
+	&.type-bullets
+		.icons 
+			+break(tabMax)
+				display: block
+			+break(tab)
+				margin: 0 -3.5%
+			&.col2 
+				+wrapFull(1000)
+			&.col3 
+				+break-span($break-tab, $break-desk)
+					.iconBlock 
+						display: block
+						.txt 
+							padding: 10px 0 0
+			.iconBlock
+				flex: 1
+				+flex 
+				flex-flow: row nowrap
+				width: 100%
+				padding-bottom: 30px
+				border-bottom: 1px solid $grayd
+				margin-bottom: 30px
+				+break(tab)
+					margin: 0
+					border-bottom: none
+					border-right: 1px solid $grayd
+					padding: 0 3.5%
+				&:last-of-type 
+					padding-bottom: 0
+					border: none
+					margin-bottom: 0
+				.icon 
+					img 
+						width: 50px
+						+break(hand)
+							width: 65px
+						+break(max)
+							width: 80px
+					
+				.txt 
+					flex: 1
+					padding: 10px 0 0 15px
+					+break(mid)
+						padding-left: 20px
+					ul li
+						color: $dblue
+						+font-b 
+						+font-setup(16,20,20,24,0,0)
+						margin-bottom: 10px
+	&.type-stack
+		.wrap 
+			+wrap(700)
+			.intro 
+				text-align: left
+			.icons
+				+space1(-20,-30,mar,bot)
+				justify-content: flex-start
+				.iconBlock
+					+flex 
+					flex-flow: row nowrap
+					+space1(20,30,mar,bot)
+					.icon 
+						width: 50px
+						+break(hand)
+							width: 65px
+						+break(tab)
+							width: 80px 
+					.txt
+						flex: 1 
+						+space1(20,30,mar,left)
+
+.contentEditor 
+	.wrap 
+		+wrap(936)
+		+noHS	
+		article 
+			+space1(40,60,mar,bot)	
+			h5 
+				margin-bottom: 10px
+
+button.slick-arrow 
+	background: $green 
+	+border-radius(50%)
+	z-index: 2
+	width: 30px 
+	height: 30px
+	+break(hand)
+		width: 35px 
+		height: 35px 
+	+break(big)
+		width: 48px 
+		height: 48px 
+	.slick-prev-icon, .slick-next-icon
+		display: none
+	&.slick-prev 
+		left: -40px 
+		+break(hand)
+			left: -50px 
+		+break(big)
+			left: -63px 
+	&.slick-next 
+		right: -40px
+		+break(hand)
+			right: -50px
+		+break(big)
+			right: -63px
+	&:before 
+		font-size: 11px 
+		+break(hand)
+			font-size: 13px 
+		+break(big)
+			font-size: 16px 
+	&:hover 
+		background: $dgreen
+	&:focus 
+		background: $gold
+
+@mixin slideArrowWrap
+	+wrap(1170)
+	+calc('width', '92% - 75px')
+	+break(hand)
+		+calc('width', '92% - 90px')
+	+break(big)
+		+calc('width', '92% - 126px')
+	// +break(max)
+	// 	width: 92%
+
+.statSliderModule
+	&.bg-lgray 
+		+space2(40,50,60,70,pad,tb)
+	.statWrap 
+		+slideArrowWrap
+		max-width: 1400px
+		text-align: center
+		.statSlider 
+			.slick-track 
+				+flex 
+
+			.stat
+				//border-right: 1px solid tomato
+				height: inherit !important
+				padding: 0 20px
+				.img 
+					height: 75px
+					+flex
+					align-items: flex-end
+					justify-content: center
+					margin-bottom: 20px
+					img 
+						width: auto 
+						max-width: 80px
+						max-height: 75px
+					&.sizeH100 
+						height: 100px 
+						img 
+							max-height: 100px
+							max-width: 100%
+					&.sizeW215
+						height: auto
+						img 
+							max-height: 100%
+							max-width: 215px
+
+
+.arrowCallout
+	+break(big)
+		+flex 
+	&.type-countdown
+		.media .inner
+			+grad(180deg,$green,0%,$dgreen,100%)
+			position: relative
+			overflow: hidden
+			.overlay 
+				background: url('../images/clock.svg') no-repeat center center/contain
+				+vc
+				left: 5%
+				width: 350px
+				height: 350px
+				+break(big)
+					left: 15%
+					width: 450px
+					height: 450px
+			
+
+	&.type-img 
+		.media 
+			height: 250px 
+			+break(hand)
+				height: 300px 
+			+break(tab)
+				height: 350px
+			+break(desk)
+				height: 400px
+			+break(big)	
+				height: auto
+	&.type-logos
+		align-items: center
+		.media .inner
+			+break(big)
+				+border-radius(20px 0 0 20px)
+		*:focus, *:active 
+			outline: none !important
+	.txt.bg-green
+		+grad(180deg, #22892c, 0%, $green, 90%,)
+		+break(big)
+			+grad(90deg, $dgreen, 0%, $green, 70%,)
+		&:after 
+			background-image: url('../images/arrowDown-green.png')
+	.txt.bg-gold
+		+grad(180deg, #d69429, 0%, $gold, 90%,)
+		+break(big)
+			+grad(90deg, $dgold, 0%, $gold, 70%,)
+		&:after 
+			background-image: url('../images/arrowDown-gold.png') 
+	.txt 
+		z-index: 2
+		position: relative
+		+grad(180deg, $bblue, 0%, $dblue, 90%,)
+		padding: 40px 0 0
+		+break(big)
+			+grad(90deg, $bblue, 0%, $dblue, 70%,)
+			width: 50%
+			-webkit-mask: url('../images/arrowMask.svg') no-repeat right center / cover
+			mask: url('../images/arrowMask.svg') no-repeat right center / cover
+			height: 100%
+			padding: 75px 0 95px
+		.inner
+			text-align: center
+			padding: 0 4%
+			+break(big)
+				+calc('padding-left', max((100% - 700px), 8%))
+				padding-right: 16.667%
+		&:after 
+			content: ""
+			width: 100%
+			background: url('../images/arrowDown.png') no-repeat center bottom
+			position: absolute 
+			left: 0 
+			bottom: -74px
+			background-size: 101% 75px
+			height: 75px
+			+break(tab)
+				bottom: -149px
+				height: 150px
+				background-size: 101% 150px
+			+break(big)
+				display: none
+
+	.media 
+		+break(big)
+			width: 63%
+			margin-left: -13%
+			padding: 20px 0
+		.inner
+			height: 100%
+			box-shadow: 0 0 20px rgba(black, .15)
+			background-size: cover 
+			background-position: center center
+			+space2x(4,4,pad,lr,per)
+			padding-bottom: 40px
+			padding-top: 100px 
+			+break(tab)
+				padding-top: 175px
+			+break(big)
+				+space2x(40,40,pad,tb)
+				padding-left: 20%
+				+calc('padding-right', max(calc(4% * 1.6667), calc(100% - 1400px)))
+				+flex 
+				align-items: center
+			.wrap 
+				width: 100%
+				.logoSlides 
+					margin: 0 -15px
+					+break(big)
+						margin: 0 -15px 0 10px
+					+break(max)
+						margin: 0 -25px 0 0
+					.slick-track 
+						+flex 
+						align-items: center
+					.slick-slide 
+						text-align: center
+						padding: 0 15px
+						+break(max)
+							padding: 0 25px
+						a 
+							display: inline-block
+						img 
+							width: auto
+							max-width: 200px
+							max-height: 70px
+							margin: 0 auto
+					+ .logoSlides 
+						margin-top: 20px
+		
+
+.accordions
+	.wrap 
+		+wrap(1170)
+		margin-top: -20px
+		.usa-accordion
+			margin-top: -20px
+			*
+				font-family: "neue-haas-grotesk-display", sans-serif !important
+			h3.usa-accordion__heading
+				position: relative
+				margin: 20px 0 0
+				button.usa-accordion__button
+					font-weight: 700
+					font-style: normal
+					+font-setup(16,19,22,26,0,0)
+					background: none
+					position: relative
+					background: $graye
+					+border-radius(10px)
+					padding: 15px 35px 15px 70px
+					+break(hand)
+						padding-right: 50px
+					+break(tab)
+						padding: 20px 50px 20px 80px
+					+break(mid)
+						+space2x(115,115,pad,lr)
+					&:before 
+						+icomoon
+						content: "\e910"
+						width: 50px 
+						background: $green
+						height: 100%
+						color: white
+						display: block
+						position: absolute 
+						left: 0 
+						top: 0
+						+border-radius(10px 0 0 10px)
+						+flex 
+						align-items: center
+						justify-content: center
+						+break(tab)
+							width: 60px 
+					&[aria-expanded="true"]
+						+border-radius(10px 10px 0 0)
+						&:before 
+							content: "\e90f"
+							+border-radius(10px 0 0 0)
+				&:not([disabled]):focus
+					outline: none
+					background: $grayf
+				&:hover
+					background: $grayf
+			.usa-accordion__content
+				+font-setup(15,23,18,26,0,0)
+				border: 1px solid $graye 
+				border-top: none
+				box-shadow: 0 3px 20px rgba(black, .05)
+				+border-radius(0 0 10px 10px)
+				padding: 25px 35px 40px 35px
+				+break(hand)
+					padding: 25px 50px 50px 70px
+				+break(tab)
+					padding: 35px 50px 50px 80px
+				+break(mid)
+					+space2x(115,115,pad,lr)
+
+
+.photoColumns
+	&.bg-dblue
+		+grad(135deg, $dblue, 20%, $bblue, 100%)
+		+space2(50,60,80,90,pad,tb)
+		.overlay 
+			background: url('../images/bgMap-dblue.svg') no-repeat center center
+			position: absolute 
+			left: 0 
+			top: 0 
+			width: 100%
+			height: 100%
+			background-size: cover !important
+			opacity: .5
+		.intro, .wrap, .foot 
+			position: relative
+
+	.wrap 
+		+wrap
+	.blocks 
+		text-align: center
+		+flex
+		flex-flow: row wrap
+		justify-content: center 
+		margin: 0 -2% -60px !important
+		.col 
+			+flex 
+			flex-flow: column wrap
+			width: 100%
+			padding: 0 2%
+			margin-bottom: 60px !important
+			+break(min)
+				width: 50%
+			img 
+				display: block
+				+border-radius(10px)
+				margin-bottom: 15px
+			.content 
+				flex: 1
+				+flex 
+				flex-flow: column wrap
+		&.col4 .col 
+			+break(desk)
+				width: 25%
+		&.col3 .col 
+			+break(tab)
+				width: 33.33%
+		&.col2 .col 
+			+break(tab)
+				width: 50%
+
+
+.testimonials 
+	.bg 
+		position: relative 
+		background: $graye 
+		+space1(60,90,pad,bot)
+		&:before 
+			content: ""
+			width: 100%
+			height: 75px 
+			background: white
+			position: absolute 
+			left: 0 
+			top: 0
+	.wrap 
+		+slideArrowWrap
+		.testiSlider
+			margin-bottom: 0
+	.wrap .testiSlider .slide, .testi-txt, .testi-txtimg 
+		+border-radius(10px)
+		overflow: hidden
+		+flex(imp)
+		p.byline 
+			+font-setup(13,17,14,20,0,0)
+		.quote 
+			background: $green
+			position: relative
+			&:before, &:after
+				+icomoon 
+				color: $gold
+				position: absolute
+			&:before 
+				content: "\e91b"
+			&:after 
+				content: "\e91a"
+			p.increaseFS1
+				+font-m
+		.meta 
+			position: relative
+			&:before 
+				+icomoon 
+				content: "\e900"
+				color: $green
+				position: absolute 
+				top: -1px
+		.img 
+			
+			background-size: cover 
+			background-position: center center
+			+break(mid)
+				width: 50%
+			+break(big)
+				width: 55%
+			img 
+				width: auto 
+				object-fit: contain
+				object-position: left top
+				max-width: 200px
+				max-height: 90px
+				margin: 15px 0 0 15px
+				+break(desk)
+					max-width: 260px
+					max-height: 120px
+					margin: 25px 0 0 25px
+		.txt
+			+break(mid)
+				width: 50%
+			+break(big)
+				width: 45%
+			.statBox 
+				background: $dblue 
+				+break(mid)
+					background: rgba($dblue, .85)
+	&.type-img, 
+		.wrap .slide, .testi-txtimg 
+			+break(midMax)
+				flex-flow: column nowrap
+			.txt 
+				+break(midMax)
+					width: 100%
+			.img 
+				background-size: cover 
+				background-position: center center
+				+break(bigMax)
+					background: $green !important
+				+break(midMax)
+					width: 100%
+				.mob 
+					background-size: cover 
+					background-position: center center
+					
+					+border-radius(0 0 50px 0)
+					height: 220px 
+					width: 100%
+					+break(hand)
+						+calc('width', '100% - 75px')
+						height: 400px 
+					+break(mid)
+						+calc('width', '100% - 15px')
+						+calc('height', '100% - 50px')
+					+break(big)
+						display: none
+			.quote
+				padding: 65px 35px 30px
+				+break(hand)
+					padding: 35px 75px 40px
+				+break(mid)
+					padding: 85px 50px 35px
+				+break(big)
+					padding: 100px 65px 35px
+				+break(max)
+					padding: 110px 75px 40px
+				&:before, &:after 
+					font-size: 35px
+					+break(hand)
+						font-size: 40px
+					+break(mid)
+						font-size: 50px
+					+break(big)
+						font-size: 60px
+					+break(max)
+						font-size: 75px
+				&:before 
+					top: 18px 
+					left: 15px
+					+break(hand)
+						top: 15px 
+					+break(mid)
+						top: 20px 
+						left: 0
+				&:after 
+					right: 15px 
+					bottom: 55px
+					+break(hand)
+						right: 17px 
+						bottom: 60px
+					+break(mid)
+						bottom: 20px
+					+break(big)
+						right: 0 
+	&.type-story 
+		.wrap .slide 
+			
+			border: 2px solid $graye
+			background-position: center center
+			background-size: cover
+			+break(midMax)
+				flex-flow: column wrap 
+			+break(handMax)
+				background-repeat: no-repeat
+				background-size: auto 50%
+				background-position: center top
+			.txt
+				position: relative
+				+break-span($break-min, $break-mid)
+					padding: 0 40px 40px 
+					&:after 
+						content: ""
+						width: 100%
+						height: 85%
+						position: absolute
+						left: 0 
+						bottom: 0
+						background: black
+				+break(midMax)
+					width: 100%
+			.img 
+				background-color: transparent !important
+				+break(midMax)
+					padding-bottom: 30%
+					width: 100%
+				.overlay 
+					position: absolute 
+					left: 0 
+					top: 0
+					height: 100%
+					width: 100%
+					mix-blend-mode: multiply
+					+grad(135deg,rgba(black, .4),0%,rgba(black, 0),50%)
+					+border-radius(10px 10px 0 0)
+					+break(hand)
+						+grad(135deg,rgba(black, .4),0%,rgba(black, 0),30%)
+					+break(mid)
+						+border-radius(10px 0 0 10px)
+						+grad(135deg,rgba(black, .5),0%,rgba(black, 0),50%)
+				img 
+					position: relative 
+					z-index: 2
+
+			.quote 
+				position: relative 
+				z-index: 2
+				padding: 30px 50px 35px 55px
+				+break(big)
+					padding: 50px 60px 
+				&:before, &:after 
+					font-size: 25px
+					+break(big)
+						font-size: 30px
+				&:before 
+					top: 20px
+					left: 12px 
+					+break(big)
+						top: 40px
+				&:after 
+					right: 15px
+					bottom: 30px
+					+break(big)
+						bottom: 45px
+			.statBox 
+				position: relative 
+				z-index: 2
+				padding: 15px 25px 25px
+				+break(min)
+					padding-bottom: 35px
+				+break(desk)
+					padding: 15px 25px 45px
+				&:before 
+					+icomoon 
+					content: "\e900"
+					color: $green
+					position: absolute 
+					top: -1px
+					font-size: 35px
+					left: 15px
+				.byline 
+					padding: 0 0 0 40px
+					
+				.stat 
+					text-align: center
+					span 
+						display: block
+					.value 
+						color: $green
+						+font-b
+						+font-setup(72,76,96,95,-1,-2)
+					.label 
+						+font-b
+		.foot
+			padding: 0
+			margin-top: 20px
+			z-index: 2 
+			position: relative
+			+break(min)
+				+space1(-22,-25,mar,top)
+
+	&.type-txt 
+		.testi-txt 
+			.quote 
+				+border-radius(10px)
+			.meta 
+				background: none !important
+
+		.slide, .testi-txt 
+			flex-flow: column wrap
+			.quote
+				padding: 25px 55px 30px
+				+break(mid)
+					padding: 50px 7vw
+				&:before, &:after 
+					font-size: 35px
+					+break(mid)
+						font-size: 5vw
+				&:before 
+					top: 10px 
+					left: 0 
+					+break(mid)
+						top: 20px 
+				&:after 
+					right: 0 
+					bottom: 10px
+					+break(mid)
+						bottom: 20px
+			.meta 
+				//+border-radius(0 0 10px 10px)
+				+grad(30deg, $dgreen, 0%, $green, 100%)
+				padding: 15px 25px 17px 75px
+				+break(mid)
+					padding: 17px 120px 20px 8vw
+				&:before 
+					font-size: 33px
+					left: 27px
+					+break(mid)
+						font-size: 3.5vw
+						left: 3.3vw
+
+
+.imgTxt
+	&.layout-TI 
+		.txt 
+			+break(tab)
+				order: 1 
+		.img 
+			+break(tab)
+				order: 2
+	.wrap 
+		+wrap(1170)
+		+flex 
+		justify-content: space-between
+		+break(tabMax)
+			flex-flow: column nowrap
+		.img, .txt 
+			width: 100%
+			+break(tab)
+				width: 48%
+		.img 
+			background-size: cover 
+			background-position: center center
+			+border-radius(10px)
+			+break(tabMax)
+				margin-bottom: 20px 
+				background: none !important
+			+break(handMax)
+				margin-bottom: 15px
+
+			img 
+				width: 100%
+				display: block
+				+border-radius(10px)
+				// +break(tab)
+				// 	display: none
+				+break(tabMax)
+					+wrapFull(500)
+		.txt 
+			+noHS
+			+break(tabMax)
+				text-align: center
+				ul, ol 
+					text-align: left
+			+break(tab)
+				padding: 10px 0
+		
+
+
+.factsheets 
+	+noHS
+	&.bg-lgray 
+		+space2(40,50,60,80,pad,tb)
+	.wrap 
+		+slideArrowWrap
+	.factsheetSlider 
+		text-align: center 
+		//margin: 0 -20px
+		.slide
+			padding: 0 20px
+			a 
+				display: block
+				&:hover 
+					h4
+						color: $dblue
+				img 
+					+border-radius(10px)
+					box-shadow: 0 3px 10px rgba(black, .1)
+					margin: 0 auto 15px
+					display: block
+					max-width: 234px
+				h4
+					color: $green
+
+
+.events
+	+noHS
+	.wrap 
+		+wrap
+	.eventRoll
+		+flex 
+		flex-flow: row wrap 
+		+break(hand)
+			margin: 0 -2% -50px
+		article 
+			background: $grayf
+			width: 100%
+			margin: 0 0 50px
+			overflow: hidden
+			+border-radius(10px)
+			box-shadow: 0px 5px 10px rgba(black, .1)
+			border: 1px solid $graye
+			+break(hand)
+				margin: 0 2% 50px
+				width: 46%
+			+break(desk)
+				width: 29.33% 
+			.details 
+				padding: 20px 8% 40px
+				h4 
+					color: $green
+					margin-bottom: 15px
+					span 
+						font-size: 18px
+						display: inline-block
+						width: 30px
+				h3
+					margin-bottom: 20px
+				p.meta 
+					+flex 
+					margin-bottom: 15px
+					span[class^="icon-"] 
+						color: $green
+						width: 30px
+						line-height: 25px
+					span.icon-computer 
+						width: 35px
+					&:last-of-type 
+						margin-bottom: 30px
+
+.events
+	.filterbar 
+		margin-bottom: 55px
+	.filterbar2 
+		text-align: center
+		background: url('../images/filterbarBg.png') $dblue no-repeat center right / cover
+		.inner 
+			+flex 
+			flex-flow: row wrap
+			align-items: center
+			justify-content: space-between
+			padding: 22px 4% 30px
+			+break(tab)
+				justify-content: center
+				padding: 25px 0
+				+wrap(1170)
+			.filterLabel
+				+font-b 
+				margin: 0 0 10px
+				color: white
+				width: 100%
+				+break(tab)
+					margin: 0 20px 0 5px
+					width: auto
+				span[class^="icon-"]
+					display: inline-block 
+					color: $gold
+					width: 40px	
+			
+			.search-filter-base
+				width: 47%
+				+break(tab)
+					width: auto 
+					+flex
+					flex-flow: row nowrap 
+					align-items: center
+				.search-filter-component-combobox
+					width: 100%
+					background: $grayf
+					border-color: $grayd
+					+break(tab)
+						width: 240px
+					input, .search-filter-component-combobox__selection,
+					.search-filter-component-combobox__selection span
+						color: $gray2
+						text-align: left
+					.search-filter-component-combobox__listbox-toggle::before
+						display: none
+				+ .search-filter-base
+					+break(tab)
+						margin-left: 20px
+
+.search-filter-component-popup	
+	background: $grayf		
+	border-color: $grayd
+
+.popModal
+	display: none
+	&.alt .popup
+		+grad(135deg, $green, 10%, $dgreen, 100%)
+		.bgOverlay 
+			background: url('../images/bgMap-green.svg') no-repeat top center / 150% auto
+		.closeModal 
+			color: $gold 
+			&:hover 
+				color: white
+	&.open
+		position: fixed
+		z-index: 999999
+		left: 0
+		top: 0
+		width: 100%
+		height: 100%
+		display: flex
+		justify-content: center
+		align-items: center
+	&.tallPop 
+		overflow: auto 
+		align-items: flex-start
+	.overlay
+		position: fixed
+		z-index: 9
+		width: 100%
+		height: 100%
+		top: 0
+		left: 0
+		background: rgba(black,.7)
+	.popup
+		background: white
+		text-align: center
+		position: relative
+		z-index: 10
+		display: block
+		height: auto
+		+wrap(936)
+		+noHS
+		+space2(40,35,60,50,pad,tb)
+		+space2(5,5,7,7,pad,lr,per)
+		+border-radius(10px)
+		.bgOverlay 
+			position: absolute 
+			left: 0 
+			top: 0
+			width: 100%
+			height: 100%
+		.content 
+			position: relative
+
+	.closeModal
+		position: absolute
+		right: 0
+		top: 0
+		+font-b
+		color: $dgreen
+		z-index: 2
+		font-size: 15px
+		width: 35px 
+		height: 35px 
+		line-height: 38px
+		+break(tab)
+			width: 45px 
+			height: 45px 
+			line-height: 48px
+			font-size: 18px
+		&:hover span
+			color: $gold
+	&.type-video
+		.popup 
+			padding: 8px
+			+break(tab)
+				padding: 15px 
+		.closeModal 
+			background: $dgreen 
+			+border-radius(0 10px 0 10px)
+			&:hover 
+				background: $gold
+				span 
+					color: white
+
+
+
+
+
+
+
+
+
+
+
+.video
+	.bg
+		position: relative
+		background: $graye
+		+space1(40,90,pad,bot)
+		&:before 
+			content: ""
+			width: 100%
+			position: absolute 
+			left: 0 
+			top: 0
+			+sizer(40,90,height)
+			background: white
+	.embedContainer
+		+wrap(1170)
+		padding: 0
+		height: 100%
+		video
+			width: 100%
+			height: auto
+			display: block
+
+
+.embedContainer
+	position: relative
+	padding-bottom: 56.25%
+	height: 0
+	overflow: hidden
+	max-width: 100%
+	+border-radius(10px)
+	iframe, object, embed
+		position: absolute
+		top: 0
+		left: 0
+		width: 100%
+		height: 100%
+		display: block
+
+
+.locations
+	text-align: center
+	.box 
+		position: relative
+		+wrap
+		+flex 
+		flex-flow: row wrap
+		justify-content: center
+		border: 1px solid $gold 
+		+border-radius(10px)
+		padding: 40px 6% 0
+		+break(hand)
+			padding: 50px 6% 20px
+		+break(mid)
+			padding: 3.5% 3% 1%
+		&.col-3 .loc
+			+break(desk)
+				width: 33.33%
+			+break(big)
+				padding: 0 1.5%
+
+		.head 
+			position: absolute 
+			left: 0 
+			width: 100% 
+			+font-setup(28,32,42,46,-.5,-1)
+			+sizer(-18,-25,top)
+			h2 
+				background: white 
+				padding: 0 15px
+				margin: 0 auto
+				display: inline-block
+				+break(mid)
+					padding: 0 20px
+		.loc 
+			width: 100%
+			max-width: 500px 
+			margin: 0 auto 40px
+			+break(mid)
+				max-width: 600px 
+				width: 50%
+				padding: 0 2%
+			
+			a 
+				height: 100%
+				+flex 
+				flex-flow: column wrap
+				.txt 
+					margin-bottom: 7px
+					+break(mid)
+						margin-bottom: 15px
+			img 
+				+border-radius(10px)
+				display: block
+				margin-top: auto
+			p 
+				line-height: 1
+				margin-bottom: 5px
+				+ h5 
+					margin-top: 0
+
+
+
+.searchfilter, .events, .partnerModule
+	#filters
+		background: url('../images/filterbarBg.png') $dblue no-repeat center right / cover
+	.filterbar 
+		text-align: left
+		background: none
+		h4
+			button 
+				background: none 
+				color: white
+				+font-b
+				padding: 0
+				text-decoration: none
+
+				.hide 
+					display: none
+				&.open, &[aria-expanded="true"]
+					.inner
+						border-bottom: 1px solid $gold
+					.show 
+						display: none 
+					.hide 
+						display: inline-block
+				&:hover .inner .filterToggle span
+					color: $gold !important
+				&:focus 
+					outline: none
+				&:active  
+					background: $dgreen
+				.reset:hover span
+					color: $green
+				span[class^="icon-"]
+					display: inline-block 
+					color: $gold
+					width: 40px	
+				span.icon-reverse 
+					width: 28px
+				.inner 
+					+flex 
+					align-items: center
+					justify-content: space-between
+					padding: 25px 4%
+					+break(tab)
+						padding: 25px 0
+						+wrap(1170)
+
+		.usa-accordion__content 
+			background: none
+			padding: 30px 0 40px
+			*
+				+font
+			.wrap
+				+wrap(1170)
+				
+				.inner 
+					+break(tab)
+						+flex 
+					+break-span($break-tab, $break-big)
+						margin: 0 -25px
+				.search-filter-base
+					+break(tabMax)
+						border-bottom: 1px solid rgba(white, .3)
+						padding-bottom: 20px 
+						margin-bottom: 30px
+						&:last-of-type 
+							border: none 
+							margin-bottom: 0
+							padding-bottom: 0
+					+break(tab)
+						margin: 0 25px
+					+break(big)
+						margin: 0 40px
+					.search-filter-label
+						color: white 
+						+font-b 
+						margin-bottom: 20px
+						+break(tabMax)
+							color: $gold
+					.search-filter-input-group
+						+break(tabMax)
+							+flex 
+							flex-flow: row wrap 
+							justify-content: space-between
+							.search-filter-input-checkbox 
+								width: 48%
+
+					.search-filter-input-checkbox:not(#foo)
+						padding: 0
+						margin: 0 0 12px
+						> input[type='checkbox'] 
+							opacity: 0
+							float: left
+							width: 1px
+							margin: 0
+						> input[type='checkbox'] + label
+							clear: none
+							margin: 0
+							width: 100%
+							display: block
+							cursor: pointer
+							background: url('../images/checkOff.svg') no-repeat left center
+							background-size: 20px
+							padding: 0 0 0 30px
+						> input[type='checkbox']:checked + label
+							background-image: url('../images/checkOn.svg')
+						span.search-filter-input-checkbox__control 
+							display:  none
+						.search-filter-input-checkbox__label
+							font-size: 16px
+							padding: 0
+							color: white
+
+.partnerModule #filterbar
+	.search-filter-input-group
+		+flex 
+		flex-flow: row wrap 
+		justify-content: space-between
+		max-width: 700px
+		.search-filter-input-checkbox
+			width: 100%
+			+break(min)
+				width: 47%
+			+break(tab)
+				width: 30%
+.searchfilter
+	text-align: center
+	.search-filter-query-posts, .loadLayout
+		.wrap
+			+wrap
+		&.factsheets .wrap
+			+wrap(1170)
+			.resourceRoll article 
+				background: none 
+				box-shadow: none 
+				border: none 
+				padding: 0 20px
+				a 
+					display: block
+					&:hover 
+						h4
+							color: $dblue
+					img 
+						+border-radius(10px)
+						box-shadow: 0 3px 10px rgba(black, .1)
+						margin: 0 auto 15px
+						display: block
+						max-width: 234px
+					h4
+						color: $green
+		.firstPost 
+			position: relative 
+			background: $grayf
+			padding-top: 55px
+			&:after 
+				content: ""
+				width: 100%
+				height: 100px
+				background: white
+				position: absolute 
+				left: 0 
+				bottom: 0
+			article
+				+wrap(936)
+				position: relative 
+				z-index: 2
+				img 
+					//width: 100%
+					display: block
+					+border-radius(10px)
+				.box 
+					overflow: hidden
+					position: relative 
+					z-index: 2
+					+wrap(700)
+					margin-top: -50px
+					background: $green 
+					+border-radius(10px)
+					.details 
+						padding: 60px 8% 50px
+						h2 a:hover 
+							color: $gold
+					.labels 
+						.cpt 
+							background: $gold
+		.resourceRoll
+			+flex 
+			flex-flow: row wrap 
+			margin-top: 50px
+			+break(hand)
+				margin: 50px -2% -50px
+			article 
+				background: $grayf
+				+flex 
+				flex-flow: column wrap
+				width: 100%
+				margin: 0 0 50px
+				overflow: hidden
+				+border-radius(10px)
+				box-shadow: 0px 5px 10px rgba(black, .1)
+				border: 1px solid $graye
+				+break(hand)
+					margin: 0 2% 50px
+					width: 46%
+				+break(desk)
+					width: 29.33% 
+				.articleLink
+					// full-height flex column so the trailing tags + arrow anchor to the bottom of the gray card
+					display: flex
+					flex-flow: column
+					height: 100%
+				img
+					+border-radius(10px)
+				.details
+					padding: 30px 8%
+					// grow to fill, pushing tags + labels(arrow) down as a group
+					flex: 1 0 auto
+					h4
+						color: $green
+						margin-bottom: 15px
+						a:hover
+							color: $dgreen
+					p.date 
+						color: $gold
+						+font-m
+						+font-setup(14,14,16,16,15,15,up)
+						margin-bottom: 20px
+
+		.labels
+			margin-top: auto
+			text-align: center
+			+flex 
+			.tag 
+				color: white
+				+font-m 
+				font-size: 13px 
+				line-height: 26px 
+				display: block
+				//padding: 6px 5px 5px 5px
+				&.cpt 
+					width: 120px
+					background: $green 
+					+border-radius(0 10px 0 0)
+					
+				&.dl, &.link
+					margin-left: auto
+					background: $gold
+					+border-radius(10px 0 0 0)
+					span:before 
+						vertical-align: middle
+					&:hover 
+						background: $dgold
+				&.dl 
+					width: 100px
+					span 
+						margin-left: 3px
+				&.link 
+					width: 25px
+					span:before
+						font-size: 11px
+
+.numberedPager
+	+wrap
+	text-align: left 
+	+space1(40,60,mar,top)
+	&.width-S
+		+wrap(936)
+	.page-numbers 
+		width: 25px 
+		height: 25px 
+		display: inline-block 
+		background: $graye 
+		+font-b
+		font-size: 16px
+		text-align: center
+		line-height: 24px
+		&:hover 
+			background: $dgreen 
+			color: white
+		&.current 
+			background: $green 
+			color: white
+		&.prev, &.next 
+			width: auto 
+			color: $gold 
+			background: none
+			&:hover 
+				color: $dgold
+		&.prev 
+			margin-right: 8px
+		&.next
+			margin-left: 8px
+
+.noResults
+	+wrap
+	+noHS 
+
+
+
+.footnote 
+	border-top: 1px solid $gold 
+	border-bottom: 1px solid $gold
+	+space2(15,15,25,25,pad,tb)
+	*
+		+font-setup(13,18,15,20,0,0)
+	+ .cta
+		border-top: none !important
+		margin-top: 0 !important
+	
+
+
+
+
+.resourceSingle 
+	z-index: 3
+	&.hasFtImg 
+		+space1(-50,-150,mar,top)
+		img.ftImg 
+			+border-radius(10px)
+			display: block
+			width: 100%
+	&.hasGatedForm 
+		+space1(-100,-175,mar,top)
+	//blog tweaks for 2 col layout with sidebar
+	&.post
+
+		.authorBox
+			background: $grayf
+			border-bottom: 1px solid $grayd
+			+border-radius(10px)
+			padding: 30px 30px 35px
+			+break(hand)
+				padding: 40px 45px
+			h5 
+				display: block
+				border: none 
+				color: $dblue
+				margin-bottom: 15px
+				+break(handMax)
+					text-align: center
+					
+			.wrap 
+				+break(hand)
+					+flex
+				.img
+					+change1(width,125,150,hand,max)
+					+change1(margin-right,25,35,hand,max)
+					text-align: center
+					+break(handMax)
+						margin-bottom: 20px
+					img 
+						+border-radius(10px)
+						
+				.txt 
+					flex: 1
+		.resourceWrap 
+			+wrap(1170)
+			+break(mid)
+				+flex 
+				align-items: flex-start
+
+			.primary
+				+break(mid)
+					flex: 1
+				img.ftImg 
+					+space1(30,45,mar,bot)
+				.contentEditor .wrap, .accordions .wrap,
+				.codeBlock .wrap, .iconText.type-stack .wrap,
+				.boxedCallouts .tipBox
+					max-width: 100%
+					width: 100%
+				.boxedCallouts .tipBox
+					padding: 30px
+					.icon-tip 
+						width: 70px 
+						height: 70px 
+						font-size: 70px
+						+break(hand)
+							margin-right: 20px
+
+					.txt 
+						+font-setup(15,23,18,26,0,0)
+
+				.foot 
+					clear: both 
+					text-align: left
+					
+			aside 
+				+noHS
+				background: $grayf
+				+border-radius(10px)
+				+break(midMax)
+					+wrapFull(600)
+					margin-top: 50px
+				+break(mid)
+					margin-left: 25px
+					width: 30%
+				+break(big)
+					width: 27%
+					margin-left: 35px
+				.cta 
+					padding: 0
+					margin-bottom: 27px
+					+break(handMax)
+						display: block
+					+break(hand)
+						padding: 27px
+						border-bottom: 1px solid $grayd
+					
+					+break(mid)
+						border: none
+						margin: 0
+						padding: 0 0 30px
+						text-align: center
+						display: block
+					.share 
+						+break(handMax)
+							text-align: center
+							padding: 20px 27px
+							margin: 0
+						+break(mid)
+							padding: 27px
+							margin: 0
+					.link 
+						+break(handMax)
+							border-top: 1px solid $grayd 
+							border-bottom: 1px solid $grayd 
+							padding: 20px 27px
+						+break(mid)
+							border-top: 1px solid $grayd 
+							border-bottom: 1px solid $grayd 
+							padding: 20px 27px
+						.btn 
+							+break(handMax)
+								width: 100%
+							+break(mid)
+								width: 100%
+				.related
+					padding: 0 27px
+					h3 
+						margin-bottom: 30px
+					.relatedRoll
+						overflow: hidden
+						+break-span($break-min, $break-mid)
+							+flex 
+							flex-flow: row wrap 
+							justify-content: space-between 
+						article 
+							margin-bottom: 40px !important
+							+break-span($break-min, $break-mid)
+								width: 48%
+							img 
+								display: block 
+								margin-bottom: 15px
+							h4 a 
+								color: $green 
+								&:hover 
+									color: $dblue
+	//everything except blog
+	.resourceWrap 
+		+wrap(936)
+		.embedContainer
+			position: relative
+			padding-bottom: 56.25%
+			height: 0
+			overflow: hidden
+			max-width: 100%
+			+border-radius(10px)
+			iframe, object, embed
+				position: absolute
+				top: 0
+				left: 0
+				width: 100%
+				height: 100%
+				display: block
+
+
+		.contentEditor .wrap 
+			+wrapFull(700)
+		.statSliderModule .statWrap 
+			width: 100%
+		.cta 
+			+space2(12,15,22,20,pad,tb)
+			+break(minMax)
+				text-align: center
+			+break(min)
+				+flex 
+				align-items: center
+				justify-content: space-between
+			span 
+				vertical-align: middle
+			&.top 
+				border-bottom: 1px solid $gold
+				margin-bottom: 45px
+			&.bot 
+				border-top: 1px solid $gold
+				+space1(40,70,mar,top)
+			.share 
+				color: $gold 
+				+font-b 
+				+break(minMax)
+					margin-bottom: 10px
+				.addtoany_shortcode
+					display: inline-block
+					margin-left: 5px
+
+//gated form
+.gatedForm
+	&.formHL
+		margin-bottom: 10px
+		text-align: center
+		+break(tab)
+			margin-bottom: 15px
+		h4 
+			color: white
+	&.formContainer
+		max-width: 100%
+		+border-radius(10px)
+		background: white
+		padding: 30px
+		+break(tab)
+			padding: 40px
+
+
+.productSliderModule
+	+space2(40,45,60,65,pad,tb)
+	+grad(135deg, $dblue, 20%, $bblue, 100%)
+	.overlay 
+		background: url('../images/bgMap-dblue.svg') no-repeat center center
+		position: absolute 
+		left: 0 
+		top: 0 
+		width: 100%
+		height: 100%
+		background-size: cover !important
+		opacity: .5
+	.wrap 
+		+wrap
+		position: relative
+		.sliderNav
+			position: absolute 
+			left: 0 
+			top: 0
+			z-index: 9999
+			+flex 
+			
+			justify-content: space-between
+			width: 90px
+			+break(mid)
+				width: 120px
+			button.slick-arrow 
+				position: relative
+				top: 0 
+				left: 0 
+				right: 0
+				transform: none
+
+	.productSlider
+		.slide 
+			+break(mid)
+				+flex(imp)
+				justify-content: space-between
+				align-items: flex-start
+			.txt 
+				text-align: center
+				position: relative 
+				background: $green 
+				margin: 65px 0 40px
+				+border-radius(10px)
+				+break(mid)
+					width: 43%
+					margin-bottom: 0
+				+break(big)
+					width: 39%
+				.inner 
+					+space2(25,30,50,50,pad,tb)
+					+space2(25,25,50,50,pad,lr)
+					text-align: left
+				&:after 
+					+icomoon
+					content: "\e91c"
+					color: $green
+					position: absolute 
+					+break(midMax)
+						font-size: 16px
+						bottom: -17px 
+						left: 0 
+						right: 0 
+						margin: 0 auto
+					+break(mid)
+						+transform(rotate(-90deg))
+						right: -33px
+						top: 50px 
+						font-size: 18px
+
+			.img 
+				+break(mid)
+					width: 53%
+				+break(big)
+					width: 58%
+				img 
+					margin: 0 auto 
+					width: auto 
+					max-height: 240px 
+					+break(hand)
+						max-height: 350px 
+					+break(tab)
+						max-height: 470px 
+					+break(mid)
+						max-height: 550px 
+
+
+.codeBlock 
+	background: $graye
+	+space1(30,50,pad,bot)
+	&:before
+		content: ""
+		width: 100% 
+		height: 100px
+		background: white
+		position: absolute
+		left: 0
+		top: 0
+	&.bg-white
+		background: white
+		&:before
+			display: none
+	.wrap
+		+wrap
+
+
+
+.arrowCallout.type-countdown, .fullWidthCallout
+	.countdown
+		+break(tinyMax)
+			+flex 
+			flex-flow: row wrap 
+			justify-content: space-between
+		.element_conteiner
+			position: relative 
+			min-width: 44% !important
+			margin: 8px
+			+break(tiny)
+				min-width: 70px !important
+			+break(hand)
+				min-width: 90px !important
+				margin: 0 15px
+			.time_left 
+				background: none !important
+				padding: 0  !important
+				font-family: "neue-haas-grotesk-display", sans-serif !important
+				font-weight: 700 !important
+				font-style: normal !important
+				font-size: 48px !important
+				line-height: 45px !important
+				+break(tab)
+					font-size: 60px !important
+					line-height: 55px !important
+				+break(big)
+					font-size: 72px !important
+					line-height: 62px !important
+				+break(max)
+					font-size: 84px !important
+					line-height: 74px !important
+			.time_description 
+				letter-spacing: .1em  !important
+				text-transform: uppercase
+				font-family: "neue-haas-grotesk-display", sans-serif !important
+				font-weight: 700 !important
+				font-style: normal !important
+				font-size: 12px !important
+				+break(hand)
+					font-size: 13px !important
+				+break(big)
+					font-size: 14px !important
+
+.accSliderModule 
+	.wrap 
+		+wrap
+	[id^="accSlider-"]
+		margin: 0
+	.as-panels 
+		&.slides-5
+			img.as-background 
+				
+				width: 92vw
+				+break(hand)
+					width: 69vw
+				+break(tab)
+					width: 61vw
+				+break(desk)
+					width: 46vw
+			// .as-layer 
+			// 	width: 100%
+			// 	+break(desk)
+			// 		width: 45vw
+			// 	@media (min-width: 1500px)
+			// 		width: 43vw
+			// 	@media (min-width: 1700px)
+			// 		width: 41vw
+			// 	@media (min-width: 1800px)
+			// 		width: 39vw
+
+		.as-panel 
+			border: 2px solid $gold 
+			+border-radius(10px)
+			+break(hand)
+				border: 2px solid transparent 
+				
+				
+			&.as-opened 
+				img.as-background
+					+break(hand)
+						+transition(opacity .25s linear)
+						opacity: 1
+						border-color: $gold
+				.as-layer 
+					+break(hand)
+						+transition(opacity .25s linear .15s)
+						opacity: 1
+			img.as-background 
+				+border-radius(10px)
+				height: auto 
+				object-fit: cover
+				+break(handMax)
+					width: 100%
+				+break(hand)
+					opacity: .5
+			.overlay 
+				+grad(0deg, rgba(black, .8), 0%, rgba(black, 0), 100%)
+				height: 77%
+				width: 100%
+				position: absolute 
+				left: 0 
+				bottom: 0
+			.as-layer 
+				width: 100%
+				padding: 30px
+				top: auto !important
+				left: 0 !important
+				bottom: 0
+				+break(hand)
+					opacity: 0
+				+break(big)
+					padding: 40px
+	.as-pagination-buttons
+		display: none
+	.controls 
+		text-align: center 
+		a
+			color: white 
+			font-size: 11px 
+			display: inline-block 
+			margin: 20px 5px 0
+			background: $green 
+			+border-radius(50%)
+			z-index: 2
+			width: 30px 
+			height: 30px
+			line-height: 33px
+			+break(hand)
+				font-size: 13px 
+				width: 35px 
+				height: 35px 
+				line-height: 37px
+			+break(big)
+				font-size: 16px 
+				width: 48px 
+				height: 48px 
+				line-height: 51px
+
+			&:hover 
+				background: $dgreen
+			&:focus 
+				background: $gold
+			&.disabled 
+				background: $grayd 
+				color: $grayf
+				outline: none
+			
+.teamModule
+	+space2(50,10,70,30,pad,tb)
+	&.bg-dblue h5
+		color: $gold
+	&.bg-lgray h5
+		color: $green
+	ul
+		+wrap 
+		+flex
+		justify-content: center
+		flex-flow: row wrap
+		margin: 20px auto 0 !important
+		li 
+			display: block 
+			padding: 0 15px
+			margin-bottom: 50px !important
+			text-align: center
+			text-decoration: none
+			width: 50%
+			+break(hand)
+				width: 33.33%
+			img 
+				display: block 
+				+border-radius(10px)
+				width: 100%
+				max-width: 200px
+				margin: 0 auto 15px
+			h4 
+				margin-bottom: 10px
+			h5 
+				display: block
+				margin: 0 auto 
+				max-width: 250px
+		&.col4 li 
+			+break(mid)
+				width: 25%
+
+		&.col5 li 
+			+break(mid)
+				width: 25%
+			+break(big)
+				width: 20%
+
+.txtColumns
+	.wrap 
+		+wrap 
+		.cols 
+			+flex 
+			flex-flow: row wrap
+			justify-content: center
+			margin: 0 -4% -20px
+			+break(hand)
+				margin: 0 -2.5% -40px
+			&.col3 .col
+				+break(mid)
+					width: 33.33%
+					&:nth-of-type(3n)
+						border-right: none
+
+			.col
+				width: 100%
+				padding: 0 4%
+				margin-bottom: 20px
+				+break(hand)
+					padding: 0 2.5%
+					border-right: 1px solid $grayd
+					width: 50%
+					margin-bottom: 40px
+				+break(midMax)
+					&:nth-of-type(even)
+						border-right: none
+
+
+					
+				&:last-of-type 
+					border-right: none
+				h4 
+					margin-top: 0
+					color: $green
+			
+.gallery
+	.wrap 
+		+wrap
+
+.slick-autoplay-toggle-button
+	display: none	
+
+
+.partnerModule
+	#filters
+		margin-bottom: 40px
+	.wrap 
+		+wrap 
+	.partners 
+		margin-bottom: -40px !important
+		+flex 
+		flex-flow: row wrap 
+		justify-content: center
+		+break(desk)
+			margin-left: -1.5%
+			margin-right: -1.5%
+		article 
+			background: $grayf
+			border: 1px solid $grayd
+			box-shadow: 0 5px 10px 0 rgba(black, .09)
+			+border-radius(10px) 
+			overflow: hidden
+			margin-bottom: 40px
+			width: 100%
+			+break(hand)
+				margin: 0 1.5% 40px
+				width: 47%
+			+break(desk)
+				width: 30.33%
+			.img 
+				background: white 
+				+flex 
+				align-items: center
+				padding: 15px
+				img 
+					max-width: 90%
+					margin: 0 auto
+				
+			.txt 
+				padding: 20px 25px 30px
+				p
+					+font-setup(14,20,16,22,0,0)
+					margin-bottom: 15px
+
+			
+		
+ul.tags
+	+flex
+	flex-flow: row wrap
+	justify-content: flex-start
+	// inset the pill row from the card edges
+	padding: 0 4%
+	li
+		margin: 5px !important
+		+border-radius(50px)
+		padding: 5px 15px
+		color: $dblue
+		+font-setup(10,12,12,14,2,4)
+	li.payments, li.term-55
+		background: #00750F 
+		color: white
+	li.telematics, li.term-56
+		background: $green
+		color: white
+	li.hardware, li.term-57
+		background: #A4DF91
+	li.ai, li.term-58
+		background: #DBF7CB
+	li.telecommunications, li.term-59
+		background: $gold
+	li.location-data, li.term-60
+		background: #F3D190
+	li.gis, li.term-61
+		background: #FAECD1
+	li.software, li.term-62
+		background: $dblue
+		color: white
+	li.distribution, li.term-63 
+		background: #5B6AA2
+		color: white
+	li.scale-solution, li.term-64
+		background: #C6CEE9
+
+.logo-bar
+	&--padded 
+		padding-block: 70px
+
+	&__inner
+		display: grid
+		grid-template-columns: repeat(2, 1fr)
+
+		@media screen and (max-width: $break-tab)
+			grid-template-columns: 100%
+		
+	&__content
+		position: relative
+		padding-right: clamp(90px, 5vw, 180px)
+		display: flex
+		align-items: center
+		justify-content: center
+		text-align: center
+		flex-direction: column
+
+		@media screen and (max-width: $break-tab)
+			padding-right: 0
+			text-align: center
+			margin-bottom: 36px
+
+		&::before
+			content: ""
+			width: 1px
+			height: 100%
+			position: absolute
+			right: 0
+			top: 0
+			bottom: 0
+			background-color: $gold
+
+			@media screen and (max-width: $break-tab)
+				display: none
+			
+	&__logos
+		display: grid
+		grid-template-columns: repeat(2, 50%)
+		justify-content: center
+		gap: 20px
+		padding-left: clamp(90px, 5vw, 180px)
+
+		@media screen and (max-width: $break-tab)
+			padding-left: 0
+
+		@media screen and (max-width: $break-tiny)
+			grid-template-columns: 100%
+			gap: 10px
+	
+	&__logo-item
+		text-align: center
+
+	&__logo-image,
+	&__logo-link
+		max-width: 200px

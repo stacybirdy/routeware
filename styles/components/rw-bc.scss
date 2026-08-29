@@ -1,0 +1,19 @@
+// Breadcrumbs
+.rw-bc {
+  font-size: 18px;
+  color: $dblue;
+  
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__link {
+    font-weight: 500;
+    color: $green;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}

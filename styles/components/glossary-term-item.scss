@@ -1,0 +1,77 @@
+.glossary-term-item {
+  position: relative;
+  background-color: $grayf;
+  // max-width: 332px;
+  border-radius: 10px;
+  padding: 48px 30px;
+  transition: background-color 0.15s ease;
+
+  &--hidden {
+    display: none;
+  }
+
+  &:has(.glossary-term-item__link:hover) {
+    background-color: $graye;
+
+    .glossary-term-item__heading {
+      color: $green;
+    }
+  }
+
+  &__icon {    
+    img, svg {
+      width: 38px;
+      object-fit: contain;
+      height: 38px;
+      color: $green;
+    }
+  }
+
+  &__header {
+    
+    &--has-icon {
+      display: grid;
+      grid-template-columns: 38px auto;
+      gap: 12px;
+      align-items: center;
+    }
+  }
+
+  &__heading {
+    font-size: 20px;
+    line-height: 1.2;
+    text-shadow: none;
+    transition: color 0.15s ease;
+  }
+
+  &__definition {
+    margin-top: 17px;
+    font-weight: 500;
+    color: $dblue;
+    font-size: 16px;
+    margin-bottom: 14px;
+    // limit to three lines
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__link {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 700;
+    color: $green;
+    letter-spacing: 2px;
+    line-height: 1.2;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      inset: 0;
+    }
+  }
+}

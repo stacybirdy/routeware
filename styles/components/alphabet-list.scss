@@ -1,0 +1,54 @@
+.alphabet-list {
+
+
+  &__row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__item {
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: $dblue;
+    font-weight: 600;
+    width: 25px;
+    height: 25px;
+    box-sizing: content-box;
+    box-shadow: inset 0 0 0 1px $grayd;
+    transition: color 0.15s ease;
+    border-radius: 3px;
+    transition: all 0.15s ease;
+    
+    &:hover {
+      background-color: $gold;
+    }
+
+    @media screen and (max-width: 768px) {
+      height: 38px;
+      width: 38px;  
+      font-size: 18px;
+    }
+
+    &--disabled {
+      color: #C5C5C5;
+      background-color: $graye;
+      box-shadow: inset 0 0 0 1px $graye;
+      pointer-events: none;
+    }
+
+    &--active {
+      color: #fff;
+      background-color: $dblue;
+      box-shadow: inset 0 0 0 1px $dblue;
+    }
+  }
+}

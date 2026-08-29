@@ -1,0 +1,665 @@
+/*==============================================================*/
+// colors
+/*==============================================================*/
+$gold: #E6A730 //#FDAA10 //#FFA32B
+$dgold: #A36B00
+$dgreen: #3A5A33
+$green: #33A542
+$dblue: #28335C
+$bblue: #121D46
+
+$gray2: #222222
+
+$gray4: #4E4E50 
+$graye: #EDEDED  
+$grayd: #DDDDDD  
+$grayf: #F5F5F5 
+
+
+/*==============================================================*/
+// common
+/*==============================================================*/
+@mixin wrap($max: 1400)
+	margin: 0 auto
+	width: 92%
+	max-width: #{$max}px
+
+@mixin wrapFull($max)
+	margin: 0 auto
+	max-width: #{$max}px
+
+@mixin flex($imp: false)
+	$important: if($imp == imp, ' !important', '')
+	display: -webkit-box#{$important}
+	display: -moz-box#{$important}
+	display: -ms-flexbox#{$important}
+	display: -webkit-flex#{$important}
+	display: flex#{$important}
+
+@mixin border-radius($radius)
+	-moz-border-radius: $radius
+	-webkit-border-radius: $radius
+	border-radius: $radius
+
+@mixin calc($property, $expression)
+	#{$property}: -moz-calc(#{$expression})
+	#{$property}: -webkit-calc(#{$expression})
+	#{$property}: calc(#{$expression})
+
+@mixin noHS //no head shadow
+	h2, h3
+		text-shadow: none
+/*==============================================================*/
+// margins + padding
+/*==============================================================*/
+@mixin space1($min, $max, $type, $pos, $imp: false)
+	$diff: $max - $min
+	$change: math.div($diff, 6)
+	$space-min: $min + px
+	$space-hand: $max - ($change*5) + px
+	$space-tab: $max - ($change*4) + px
+	$space-mid: $max - ($change*3) + px
+	$space-desk: $max - ($change*2) + px
+	$space-big: $max - ($change*1) + px
+	$space-max: $max + px
+	@if $type == 'pad'
+		$type: 'padding'
+	@else if $type == 'mar'
+		$type: 'margin'
+	@else
+		@warn "Unsupported type: #{$type}"
+	@if $pos == 'top'
+		$pos: 'top'
+	@else if $pos == 'bot'
+		$pos: 'bottom'
+	@else if $pos == 'left' or $pos == 'right'
+		$pos: $pos
+	@else
+		@warn "Unsupported position: #{$pos}"
+	$bang: if($imp, !important, null)
+	#{$type}-#{$pos}: $space-min $bang
+	+break(hand)
+		#{$type}-#{$pos}: $space-hand $bang
+	+break(tab)
+		#{$type}-#{$pos}: $space-tab $bang
+	+break(mid)
+		#{$type}-#{$pos}: $space-mid $bang
+	+break(desk)
+		#{$type}-#{$pos}: $space-desk $bang
+	+break(big)
+		#{$type}-#{$pos}: $space-big $bang
+	+break(max)
+		#{$type}-#{$pos}: $space-max $bang
+
+// top||left mobile, top||left desk, bottom||right mobile, bottom||right desk, pad||mar, TB||LR
+// ex: +space2(10,15,35,40,mar,tb) +space2(4,4,10,10,pad,lr,per)
+
+
+
+
+
+
+@mixin space2($min1, $min2, $max1, $max2, $type, $pos, $unit: px)
+	$unit: if($unit == 'per', '%', 'px')
+	$diff1: $max1 - $min1
+	$change1: math.div($diff1, 6)
+	$space1-min: #{$min1}#{$unit}
+	$space1-hand: #{$max1 - ($change1 * 5)}#{$unit}
+	$space1-tab: #{$max1 - ($change1 * 4)}#{$unit}
+	$space1-mid: #{$max1 - ($change1 * 3)}#{$unit}
+	$space1-desk: #{$max1 - ($change1 * 2)}#{$unit}
+	$space1-big: #{$max1 - ($change1 * 1)}#{$unit}
+	$space1-max: #{$max1}#{$unit}
+	$diff2: $max2 - $min2
+	$change2: math.div($diff2, 6)
+	$space2-min: #{$min2}#{$unit}
+	$space2-hand: #{$max2 - ($change2 * 5)}#{$unit}
+	$space2-tab: #{$max2 - ($change2 * 4)}#{$unit}
+	$space2-mid: #{$max2 - ($change2 * 3)}#{$unit}
+	$space2-desk: #{$max2 - ($change2 * 2)}#{$unit}
+	$space2-big: #{$max2 - ($change2 * 1)}#{$unit}
+	$space2-max: #{$max2}#{$unit}
+	$pos1: null
+	$pos2: null
+	@if $type == 'pad'
+		$type: 'padding'
+	@else if $type == 'mar'
+		$type: 'margin'
+	@else
+		@warn "Unsupported type: #{$type}"
+	@if $pos == 'tb'
+		$pos1: 'top'
+		$pos2: 'bottom'
+	@else if $pos == 'lr'
+		$pos1: 'left'
+		$pos2: 'right'
+	@else
+		@warn "Unsupported position: #{$pos}"
+	@if $pos1 and $pos2
+		#{$type}-#{$pos1}: $space1-min
+		#{$type}-#{$pos2}: $space2-min
+		+break(hand)
+			#{$type}-#{$pos1}: $space1-hand
+			#{$type}-#{$pos2}: $space2-hand
+		+break(tab)
+			#{$type}-#{$pos1}: $space1-tab
+			#{$type}-#{$pos2}: $space2-tab
+		+break(mid)
+			#{$type}-#{$pos1}: $space1-mid
+			#{$type}-#{$pos2}: $space2-mid
+		+break(desk)
+			#{$type}-#{$pos1}: $space1-desk
+			#{$type}-#{$pos2}: $space2-desk
+		+break(big)
+			#{$type}-#{$pos1}: $space1-big
+			#{$type}-#{$pos2}: $space2-big
+		+break(max)
+			#{$type}-#{$pos1}: $space1-max
+			#{$type}-#{$pos2}: $space2-max
+	@else
+		@warn "Position variables not defined correctly."
+
+@mixin space2x($val1, $val2, $type, $pos, $unit: px)
+	$unit: if($unit == 'per', '%', 'px')
+	$pos1: null
+	$pos2: null
+	@if $type == 'pad'
+		$type: 'padding'
+	@else if $type == 'mar'
+		$type: 'margin'
+	@else
+		@warn "Unsupported type: #{$type}"
+	@if $pos == 'tb'
+		$pos1: 'top'
+		$pos2: 'bottom'
+	@else if $pos == 'lr'
+		$pos1: 'left'
+		$pos2: 'right'
+	@else
+		@warn "Unsupported position: #{$pos}"
+	@if $pos1 and $pos2
+		$val1: if($val1 == 'auto', $val1, #{$val1}#{$unit})
+		$val2: if($val2 == 'auto', $val2, #{$val2}#{$unit})
+		#{$type}-#{$pos1}: $val1
+		#{$type}-#{$pos2}: $val2
+	@else
+		@warn "Position variables not defined correctly."
+
+@mixin change1($value, $min, $max, $from: start, $to: max)
+	$keys: start tiny min hand tab mid desk big max
+	$start: index($keys, $from)
+	$end: index($keys, $to)
+	$steps: $end - $start
+	$diff: $max - $min
+	$change: math.div($diff, if($steps == 0, 1, $steps))
+
+	@for $i from 0 through $steps
+		$key: nth($keys, $start + $i)
+		$valNum: math.div(round(($min + ($change * $i)) * 1000), 1000)
+		$val: #{$valNum}px
+
+		@if $start == 1 and $i == 0
+			#{$value}: $val
+		@else
+			+break(#{$key})
+				#{$value}: $val
+/*==============================================================*/
+// type
+/*==============================================================*/
+@mixin font-setup($minFS, $minLH, $maxFS, $maxLH, $minLS, $maxLS: $minLS, $tt: none)
+	$diffFS: $maxFS - $minFS
+	$changeFS: math.div($diffFS, 6)
+	$diffLH: $maxLH - $minLH
+	$changeLH: math.div($diffLH, 6)
+
+	$diffLS: $maxLS - $minLS
+	$changeLS: math.div($diffLS, 6)
+
+	$fs-min: $minFS + px
+	$fs-hand: $maxFS - ($changeFS*5) + px
+	$fs-tab: $maxFS - ($changeFS*4) + px
+	$fs-mid: $maxFS - ($changeFS*3) + px
+	$fs-desk: $maxFS - ($changeFS*2) + px
+	$fs-big: $maxFS - ($changeFS*1) + px
+	$fs-max: $maxFS + px
+	$lh-min: $minLH + px
+	$lh-hand: $maxLH - ($changeLH*5) + px
+	$lh-tab: $maxLH - ($changeLH*4) + px
+	$lh-mid: $maxLH - ($changeLH*3) + px
+	$lh-desk: $maxLH - ($changeLH*2) + px
+	$lh-big: $maxLH - ($changeLH*1) + px
+	$lh-max: $maxLH + px
+
+
+
+	$minLS: (($minLS * $minFS) * .01) //for figma % matching
+	$maxLS: (($maxLS * $maxFS) * .01) //for figma % matching
+	$ls-min: ($minLS) + px
+	$ls-hand: ($maxLS - ($changeLS * 5)) + px
+	$ls-tab: ($maxLS - ($changeLS * 4)) + px
+	$ls-mid: ($maxLS - ($changeLS * 3)) + px
+	$ls-desk: ($maxLS - ($changeLS * 2)) + px
+	$ls-big: ($maxLS - ($changeLS * 1)) + px
+	$ls-max: ($maxLS) + px
+
+	@if $minLS == $maxLS
+		$ls-hand: $ls-min
+		$ls-tab: $ls-min
+		$ls-mid: $ls-min
+		$ls-desk: $ls-min
+		$ls-big: $ls-min
+		$ls-max: $ls-min
+	@if $tt == up
+		text-transform: uppercase
+	@if $tt != up
+		text-transform: none
+	font-size: $fs-min
+	line-height: $lh-min
+	letter-spacing: $ls-min
+	+break(hand)
+		font-size: $fs-hand
+		line-height: $lh-hand
+		letter-spacing: $ls-hand
+	+break(tab)
+		font-size: $fs-tab
+		line-height: $lh-tab
+		letter-spacing: $ls-tab
+	+break(mid)
+		font-size: $fs-mid
+		line-height: $lh-mid
+		letter-spacing: $ls-mid
+	+break(desk)
+		font-size: $fs-desk
+		line-height: $lh-desk
+		letter-spacing: $ls-desk
+	+break(big)
+		font-size: $fs-big
+		line-height: $lh-big
+		letter-spacing: $ls-big
+	+break(max)
+		font-size: $fs-max
+		line-height: $lh-max
+		letter-spacing: $ls-max
+
+
+
+
+
+
+
+
+@mixin sizer($minVal, $maxVal, $attribute)
+	$diff: $maxVal - $minVal
+	$change: math.div($diff, 7)
+	$tiny: $minVal + px
+	$min: $maxVal - ($change*6) + px
+	$hand: $maxVal - ($change*5) + px
+	$tab: $maxVal - ($change*4) + px
+	$mid: $maxVal - ($change*3) + px
+	$desk: $maxVal - ($change*2) + px
+	$big: $maxVal - ($change) + px
+	$max: $maxVal + px
+	#{$attribute}: $tiny
+	+break(min)
+		#{$attribute}: $min
+	+break(hand)
+		#{$attribute}: $hand
+	+break(tab)
+		#{$attribute}: $tab
+	+break(mid)
+		#{$attribute}: $mid
+	+break(desk)
+		#{$attribute}: $desk
+	+break(big)
+		#{$attribute}: $big
+	+break(max)
+		#{$attribute}: $max
+
+
+
+
+/*==============================================================*/
+// breakpoints
+/*==============================================================*/
+$break-max: 1400px
+$break-big: 1240px
+$break-desk: 1024px
+$break-mid: 900px
+$break-tab: 768px
+$break-hand: 600px
+$break-min: 480px
+$break-tiny: 400px
+
+@mixin break-span($size1, $size2)
+	@media (min-width: $size1) and (max-width: $size2 - 1px)
+		@content
+
+
+@mixin break-multi($mq1min, $mq1max, $mq2min, $mq2max)
+	@if $mq1min != null and $mq1max != null
+		@media (min-width: $mq1min) and (max-width: $mq1max - 1px)
+			@content
+	@if $mq1min == null
+		@media (max-width: $mq1max - 1px)
+			@content 
+	@if $mq1max == null
+		@media (min-width: $mq1min)
+			@content
+	@if $mq2min != null and $mq2max != null
+		@media (min-width: $mq2min) and (max-width: $mq2max - 1px)
+			@content
+	@if $mq2min == null
+		@media (max-width: $mq2max - 1px)
+			@content 
+	@if $mq2max == null
+		@media (min-width: $mq2min)
+			@content
+
+
+@mixin break($size)
+	@if $size == tiny
+		@media (min-width: $break-tiny)
+			@content
+	@else if $size == min
+		@media (min-width: $break-min)
+			@content
+	@else if $size == hand
+		@media (min-width: $break-hand)
+			@content
+	@else if $size == tab
+		@media (min-width: $break-tab)
+			@content
+	@else if $size == mid
+		@media (min-width: $break-mid)
+			@content
+	@else if $size == desk
+		@media (min-width: $break-desk)
+			@content
+	@else if $size == big
+		@media (min-width: $break-big)
+			@content
+	@else if $size == max
+		@media (min-width: $break-max)
+			@content
+	@else if $size == tinyMax
+		@media (max-width: $break-tiny - 1px)
+			@content
+	@else if $size == minMax
+		@media (max-width: $break-min - 1px)
+			@content
+	@else if $size == handMax
+		@media (max-width: $break-hand - 1px)
+			@content
+	@else if $size == tabMax
+		@media (max-width: $break-tab - 1px)
+			@content
+	@else if $size == midMax
+		@media (max-width: $break-mid - 1px)
+			@content
+	@else if $size == deskMax
+		@media (max-width: $break-desk - 1px)
+			@content
+	@else if $size == bigMax
+		@media (max-width: $break-big - 1px)
+			@content
+	@else if $size == maxMax
+		@media (max-width: $break-max - 1px)
+			@content
+	@else if $size == landscape 
+		@media (orientation: landscape)
+			@content 
+	@else if $size == portrait 
+		@media (orientation: portrait)
+			@content 	
+	@else
+		@warn "breakpoint mixin not defined"
+
+
+/*==============================================================*/
+// module padding + margins
+/*==============================================================*/
+$none: 0px 
+$xs: 25px 
+$s: 50px 
+$m: 75px 
+$l: 100px 
+$xl: 125px
+
+@mixin mobilePad($breakpoint) 
+	+break($breakpoint)
+		&.padTmob-none 
+			padding-top: $none
+		&.padTmob-xs 
+			padding-top: $xs
+		&.padTmob-s 
+			padding-top: $s
+		&.padTmob-m 
+			padding-top: $m 
+		&.padTmob-l 
+			padding-top: $l 
+		&.padTmob-xl 
+			padding-top: $xl
+		&.padBmob-none 
+			padding-bottom: $none
+		&.padBmob-xs 
+			padding-bottom: $xs 
+		&.padBmob-s 
+			padding-bottom: $s
+		&.padBmob-m 
+			padding-bottom: $m 
+		&.padBmob-l 
+			padding-bottom: $l
+		&.padBmob-xl 
+			padding-bottom: $xl
+		&.marTmob-none 
+			margin-top: $none
+		&.marTmob-xs 
+			margin-top: $xs
+		&.marTmob-s 
+			margin-top: $s
+		&.marTmob-m 
+			margin-top: $m 
+		&.marTmob-l 
+			margin-top: $l 
+		&.marTmob-xl 
+			margin-top: $xl
+		&.marBmob-none 
+			margin-bottom: $none
+		&.marBmob-xs 
+			margin-bottom: $xs 
+		&.marBmob-s 
+			margin-bottom: $s
+		&.marBmob-m 
+			margin-bottom: $m 
+		&.marBmob-l 
+			margin-bottom: $l
+		&.marBmob-xl 
+			margin-bottom: $xl
+			
+section, div
+	position: relative 
+	&.padT-xs 
+		padding-top: $xs
+	&.padT-s 
+		padding-top: $s
+	&.padT-m 
+		padding-top: $m 
+	&.padT-l 
+		padding-top: $l
+	&.padT-xl 
+		padding-top: $xl 
+	&.padB-xs 
+		padding-bottom: $xs 
+	&.padB-s 
+		padding-bottom: $s 
+	&.padB-m 
+		padding-bottom: $m
+	&.padB-l 
+		padding-bottom: $l
+	&.padB-xl 
+		padding-bottom: $xl 
+	&.marT-xs 
+		margin-top: $xs
+	&.marT-s 
+		margin-top: $s
+	&.marT-m 
+		margin-top: $m 
+	&.marT-l 
+		margin-top: $l
+	&.marT-xl 
+		margin-top: $xl 
+	&.marB-xs 
+		margin-bottom: $xs 
+	&.marB-s 
+		margin-bottom: $s 
+	&.marB-m 
+		margin-bottom: $m
+	&.marB-l 
+		margin-bottom: $l
+	&.marB-xl 
+		margin-bottom: $xl 
+	+mobilePad(tabMax)
+
+
+
+
+
+
+/*==============================================================*/
+// other
+/*==============================================================*/
+@mixin transform($properties)
+	-ms-transform: $properties
+	-webkit-transform: $properties
+	transform: $properties
+
+@mixin transition($properties)
+	-webkit-transition: $properties
+	-moz-transition: $properties
+	-ms-transition: $properties
+	-o-transition: $properties
+	transition: $properties
+
+
+// @mixin table 
+// 	display: table
+// 	table-layout: fixed 
+// 	width: 100%
+
+// @mixin tablewrap 
+// 	+table 
+// 	+wrap
+
+
+@mixin vc
+	position: absolute
+	top: 50%
+	transform: translate(0%, -50%)
+	-ms-transform: translate(0%, -50%)
+	-webkit-transform: translate(0%, -50%)
+
+@mixin vhc
+	position: absolute
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+	-ms-transform: translate(-50%, -50%)
+	-webkit-transform: translate(-50%, -50%)
+	margin: 0 auto
+
+@mixin grad($direction, $color1, $percent1, $color2, $percent2)
+	//background-color: $color1
+	background-image: -webkit-linear-gradient($direction, $color1 $percent1, $color2 $percent2 )
+	background-image: -moz-linear-gradient($direction, $color1 $percent1, $color2 $percent2 )
+	background-image: -o-linear-gradient($direction, $color1 $percent1, $color2 $percent2 )
+	background-image: linear-gradient($direction, $color1 $percent1, $color2 $percent2 )
+	
+
+
+// @mixin ratio($width, $height)
+// 	position: relative
+// 	&:before 
+// 		display: block
+// 		content: ""
+// 		width: 100%
+// 		+calc('padding-top', math.div($height, $width) * 100%)
+// 	> .ratio 
+// 		position: absolute
+// 		top: 0
+// 		left: 0
+// 		right: 0
+// 		bottom: 0
+
+
+// @mixin transition-delay($delay)
+// 	-webkit-transition-delay: $delay !important
+// 	-moz-transition-delay: $delay !important
+// 	-ms-transition-delay: $delay !important
+// 	-o-transition-delay: $delay !important
+// 	transition-delay: $delay !important
+
+// @mixin animation($animate) 
+// 	$max: length($animate)
+// 	$animations: ''
+// 	@for $i from 1 through $max
+// 		$animations: #{$animations + nth($animate, $i)}
+// 		@if $i < $max
+// 			$animations: #{$animations + ", "}
+// 	-webkit-animation: $animations
+// 	-moz-animation: $animations
+// 	-o-animation: $animations
+// 	animation: $animations
+
+// @mixin noAnimate
+// 	-webkit-animation: none
+// 	-moz-animation: none
+// 	-o-animation: none
+// 	animation: none
+
+// @mixin delay($delay) 
+// 	$max: length($delay)
+// 	$delays: ''
+// 	@for $i from 1 through $max
+// 		$delays: #{$delays + nth($delay, $i)}
+// 		@if $i < $max
+// 			$delays: #{$delays + ", "}
+// 	-webkit-animation-delay: $delays
+// 	-moz-animation-delay: $delays
+// 	-o-animation-delay: $delays
+// 	animation-delay: $delays
+		
+// @mixin keyframes($animationName)
+// 	@-webkit-keyframes #{$animationName}
+// 		@content
+// 	@-moz-keyframes #{$animationName}
+// 		@content
+// 	@-o-keyframes #{$animationName}
+// 		@content
+// 	@keyframes #{$animationName}
+// 		@content
+
+
+// @mixin unsetFlex
+// 	margin: 0
+// 	-ms-flex-negative: unset
+// 	-webkit-flex-shrink: unset
+// 	flex-shrink: unset	
+// 	-ms-flex-negative: unset
+// 	-webkit-flex-shrink: unset
+// 	flex-shrink: unset
+// 	-webkit-align-self: unset
+// 	-ms-flex-item-align: unset
+// 	align-self: unset
+// 	-webkit-box-flex: unset
+// 	-ms-flex: unset
+// 	-webkit-flex: unset
+// 	flex: unset
+// 	-webkit-box-pack: unset
+// 	-ms-flex-pack: unset
+// 	-webkit-justify-content: unset
+// 	justify-content: unset
+// 	display: unset
+// 	-ms-flex-preferred-size: unset
+// 	-webkit-flex-basis: unset
+// 	flex-basis: unset
+

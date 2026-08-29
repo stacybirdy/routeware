@@ -1,0 +1,96 @@
+.post-type-archive-glossary-terms {
+  .site-footer {
+    margin-top: 99px;
+  }
+}
+
+.glossary-filters {
+  margin: 50px auto;
+  max-width: 900px;
+  text-align: center;
+  padding-inline: 15px;
+
+  &__btn {
+    cursor: pointer;
+    margin-top: 29px;
+  }
+}
+
+.glossary-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 332px));
+  justify-content: center;
+  gap: 25px;
+  max-width: 1403px;
+  margin-inline: auto;
+  padding-inline: 15px;
+  box-sizing: content-box;
+}
+
+.glossary-no-results {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 18px;
+  color: $gray2;
+}
+
+.search-form {
+  margin-top: 15px;
+  background-color: #fff;
+  border: 1px solid $grayd;
+  border-radius: 3px;
+  max-width: 100%;
+  width: 347px;
+  position: relative;
+
+  @media screen and (max-width: 900px) {
+    margin-inline: auto;
+  }
+  
+  &__input {
+    border: none;
+    padding: 12px 13px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 18px;
+    color: $gray2;
+    padding-right: 45px;
+    
+    // style placeholder
+    &::placeholder {
+      color: $gray4;
+      font-size: 14px;
+      font-size: 18px;
+    }
+  }
+
+  &__button {
+    appearance: none;
+    background-color: transparent;
+    color: transparent;
+    border: none;
+    padding: 12px 13px;
+    cursor: pointer;
+    width: 45px;
+    height: calc(100% + 2px);
+    position: absolute;
+    right: -1px;
+    top: -1px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    transition: all 0.15s ease;
+    
+    svg path {
+      fill: $green;
+      transition: all 0.15s ease;
+    }
+
+    &:hover {
+      background-color: $green;
+
+        svg path {
+          fill: #fff;
+        }
+    }
+  }
+}

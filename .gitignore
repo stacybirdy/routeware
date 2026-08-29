@@ -1,0 +1,14 @@
+# Credentials — never commit
+sftp-config.json
+
+# OS junk
+.DS_Store
+._*
+
+# Dependencies
+node_modules/
+
+# Editor / tooling
+*.sublime-workspace
+.idea/
+.vscode/

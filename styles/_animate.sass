@@ -1,0 +1,125 @@
+// animate.style • Version - 4.1.1 • Copyright (c) 2020 Animate.css
+// Licensed under opensource.org/licenses/MIT
+// tweaked by STACY@sundaram
+
+/*==============================================================*/
+// SETUP
+/*==============================================================*/
+$duration: 1s
+$delay: .15s
+$repeat: 1
+
+@mixin ani-duration($time)
+	-webkit-animation-duration: $time
+	animation-duration: $time
+
+@mixin ani-delay($time)
+	-webkit-animation-delay: $time
+	animation-delay: $time
+
+@mixin ani-fill-mode($property)
+	-webkit-animation-fill-mode: $property
+	animation-fill-mode: $property
+
+@mixin ani-name($name)
+	-webkit-animation-name: $name
+	animation-name: $name
+
+@mixin keyframes($animationName)
+	@-webkit-keyframes #{$animationName}
+		@content
+	@-moz-keyframes #{$animationName}
+		@content
+	@-o-keyframes #{$animationName}
+		@content
+	@keyframes #{$animationName}
+		@content
+
+.animate__animated 
+	+ani-duration(1s)
+	+ani-duration($duration)
+	+ani-fill-mode(both)
+
+//change durataion from default
+//ex: animate__duration-5 = .5s load (faster), animate__duration-20 = 2s (slower)
+@for $durationChange from 1 through 20
+	.animate__duration-#{$durationChange}
+		+ani-duration($durationChange * .1s)
+
+//not sure?
+// @for $delayPause from 1 through 10
+// 	.animate__delay-pause-#{$delayPause}s
+// 		+ani-fill-mode(backwards)
+// 		+ani-delay($delayPause * $delay)
+
+//delay loading, like for flexbox lists
+//often used in conjunction with counter $i		
+@for $delayCounter from 1 through 50
+	.animate__delay-#{$delayCounter}
+		+ani-delay($delayCounter * $delay)
+
+/*==============================================================*/
+// ANIMATIONS
+/*==============================================================*/
++keyframes(zoomIn)
+	0% 
+		opacity: 0
+		+transform(scale3d(0.7, 0.7, 0.7))
+	50% 
+		opacity: 1
+.inView.animate__zoomIn 
+	+ani-name(zoomIn)
+
++keyframes(fadeIn)
+	from 
+		opacity: 0
+	to 
+		opacity: 1
+.inView.animate__fadeIn 
+	+ani-name(fadeIn)
+	
++keyframes(fadeInDown)
+	from 
+		opacity: 0
+		+transform(translate3d(0, -50px, 0))
+	to 
+		opacity: 1
+		+transform(translate3d(0, 0px, 0))
+.inView.animate__fadeInDown 
+	+ani-name(fadeInDown)
+	
++keyframes(fadeInUp)
+	from 
+		opacity: 0
+		+transform(translate3d(0, 50px, 0))
+	to 
+		opacity: 1
+		+transform(translate3d(0, 0px, 0))
+.inView.animate__fadeInUp 
+	+ani-name(fadeInUp)
+
+
+
++keyframes(fadeInLeft)
+	from 
+		opacity: 0
+		+transform(translate3d(-100px, 0, 0))
+	to 
+		opacity: 1
+		+transform(translate3d(0, 0px, 0))
+.inView.animate__fadeInLeft 
+	+ani-name(fadeInLeft)
+	
++keyframes(fadeInRight)
+	from 
+		opacity: 0
+		+transform(translate3d(100px, 0, 0))
+	to 
+		opacity: 1
+		+transform(translate3d(0px, 0, 0))
+.inView.animate__fadeInRight 
+	+ani-name(fadeInRight)
+
+
+	
+	
