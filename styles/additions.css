@@ -1,1 +1,2 @@
 /*style tweaks can go here without adjusting sass*/
+.boxedCallouts .colsFull { content-visibility: visible !important; }
