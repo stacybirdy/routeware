@@ -1415,3 +1415,20 @@ function rw_filter_posts_by_title_prefix( $where, $query ) {
     return $where;
 }
 add_filter( 'posts_where', 'rw_filter_posts_by_title_prefix', 10, 2 );
+
+/**
+ * Exclude elements from WP Rocket's Automatic Lazy Rendering.
+ *
+ * WP Rocket adds data-wpr-lazyrender="1" plus [data-wpr-lazyrender]{content-visibility:auto}
+ * to containers below the fold. The layout containment that comes with content-visibility
+ * collapses .colsFull to 0px, so boxedCallouts sizes itself from the intro only and the
+ * cards render below the section background instead of inside it.
+ *
+ * This filter matches raw HTML, not CSS selectors.
+ */
+function rw_rocket_lazyrender_exclusions( $exclusions ) {
+    $exclusions[] = 'colsFull';
+
+    return $exclusions;
+}
+add_filter( 'rocket_lrc_exclusions', 'rw_rocket_lazyrender_exclusions' );
