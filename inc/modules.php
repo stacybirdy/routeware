@@ -81,7 +81,21 @@
 					$hasPop = get_sub_field('hasPop'); $btnLabel = get_sub_field('btnLabel');
 					$poster = get_sub_field('poster'); $altPoster = get_post_meta( $poster, '_wp_attachment_image_alt', true); 
 				?>
-					<div class="box animate__animated animate__fadeInUp animate__delay-<?php echo $i; ?>" <?php if($type == 'type-imgroll'): ?>style="background-image:url('<?php echo wp_get_attachment_url( $img ); ?>');"<?php endif; ?>>
+					<div class="box animate__animated animate__fadeInUp animate__delay-<?php echo $i; ?>"><?php
+						/* type-imgroll used an inline background-image, so it shipped the
+						   full-size original with no srcset or lazy loading. Now a real
+						   img filling .box via object-fit — see img.boxBg under
+						   &.type-imgroll in _modules.sass. The brand colour still shows
+						   through underneath on hover. */
+						if($type == 'type-imgroll' && $img):
+							echo wp_get_attachment_image( $img, 'full', false, array(
+								'class'   => 'boxBg',
+								'alt'     => '',
+								'sizes'   => '(min-width: 1522px) 460px, (min-width: 900px) 30vw, 92vw',
+								'loading' => 'lazy',
+							) );
+						endif;
+						?>
 						<?php if($type == 'type-txt'): ?>
 							<?php echo $content; ?>
 							<?php if($hasPop): ?><button id="trigger-<?php echo $l . '-' . $i; ?>" class="btn popTrigger"><?php echo $btnLabel; ?></button><?php endif; ?>
@@ -205,7 +219,20 @@
 
 <section <?php if($hasAnchor && $anchor): echo 'id="' . $anchor . '"'; endif; ?> class="arrowCallout <?php echo $type . ' mar' . $spaceT . ' mar' . $spaceTmob . ' mar' . $spaceB . ' mar' . $spaceBmob; ?>">
 	<div class="txt alt <?php echo $arrowBg; ?>"><div class="inner animate__animated animate__fadeInLeft"><?php echo $content; ?></div></div>
-	<div class="media"><div class="inner animate__animated animate__fadeInRight" <?php if($type == 'type-img'): ?>style="background-image:url('<?php echo $img; ?>')"<?php endif; ?>>
+	<div class="media"><div class="inner animate__animated animate__fadeInRight"><?php
+		/* type-img used an inline background-image with no background-size set, so
+		   it rendered at natural size from the top left. Now a real img filling
+		   .inner via object-fit — see img.mediaBg under &.type-img in
+		   _modules.sass. .media is full width below $break-big and 50% above. */
+		if($type == 'type-img' && $img):
+			echo wp_get_attachment_image( $img, 'full', false, array(
+				'class'   => 'mediaBg',
+				'alt'     => $alt,
+				'sizes'   => '(min-width: 1240px) 50vw, 100vw',
+				'loading' => 'lazy',
+			) );
+		endif;
+		?>
 		<?php if($type == 'type-countdown'): ?><div class="overlay"></div><?php endif; ?>
 		<div class="wrap">
 			<?php if($type == 'type-logos'): ?>
@@ -249,86 +276,10 @@
 
 
 <!-- / / / / / / ------------------------------------------------------>
-<?php elseif( get_row_layout() == 'testimonialModule--OLD' ): 
-	if(is_singular() && !is_page()): $type = 'type-txt'; else: $type = get_sub_field('type'); endif;
-	$typeSingle = get_sub_field('typeSingle');
-	$quoteSingle = get_sub_field('quoteSingle');
-	$imgSingle = get_sub_field('imgSingle'); $altSingle = get_post_meta( $imgSingle, '_wp_attachment_image_alt', true);
-	$nameSingle = get_sub_field('nameSingle'); $posSingle = get_sub_field('posSingle'); 
-	$hasIntro = get_sub_field('hasIntro'); $intro = get_sub_field('intro');
-	$spaceT = get_sub_field('spaceT'); $spaceTmob = get_sub_field('spaceTmob'); $spaceB = get_sub_field('spaceB'); $spaceBmob = get_sub_field('spaceBmob'); ?>
-<section class="testimonials <?php echo $type . ' ' . $typeSingle . ' mar' . $spaceT . ' mar' . $spaceTmob . ' mar' . $spaceB . ' mar' . $spaceBmob; ?>">
-	<?php if(is_singular() && !is_page()): //single resources ?>
-
-		<?php if($typeSingle == 'type-txt'): ?>
-			<div class="testi-txt animate__animated animate__fadeInRight">
-				<div class="quote alt"><?php echo $quoteSingle; ?></div>
-				<div class="meta">
-					<p class="byline"><strong><?php echo $nameSingle; if($posSingle): echo ',&nbsp;&nbsp;'; endif; ?></strong><?php if($posSingle): echo '<em>' . $posSingle . '</em>'; endif; ?></p>
-				</div>
-			</div>	
-		<?php elseif($typeSingle == 'type-img'): ?>	
-
-
-			<div class="testi-txtimg alt animate__animated animate__fadeInUp">
-				<div class="img" style="background-image:url('<?php echo $imgSingle; ?>');"><div class="mob" style="background-image:url('<?php echo $imgSingle; ?>');"></div></div><!--end img-->
-				<div class="txt">
-					<div class="quote">
-						<?php echo $quoteSingle;  ?>
-						<p class="byline"><strong><?php echo $nameSingle; if($posSingle): echo ',&nbsp;&nbsp;'; endif; ?></strong><?php if($posSingle): echo '<em>' . $posSingle . '</em>'; endif; ?></p>
-					</div><!--end quote-->
-				</div><!--end txt-->
-			</div><!--end testi-txtimg-->
-		<?php endif; ?>
-
-
-	<?php else: ?>
-		<?php if($hasIntro && $intro): echo '<div class="intro animate__animated animate__zoomIn">' . $intro . '</div>'; endif; ?>
-		<div class="bg"><div class="wrap">
-			<?php if( have_rows('testimonials') ): ?>
-		      <div class="testiSlider alt animate__animated animate__fadeInUp">
-		        <?php while( have_rows('testimonials') ): the_row(); $quote = get_sub_field('quote'); $name = get_sub_field('name'); $pos = get_sub_field('position'); $byline = get_sub_field('byline'); $value = get_sub_field('value'); $label = get_sub_field('label'); $img = get_sub_field('image'); $logo = get_sub_field('logo');  $alt = get_post_meta( $logo, '_wp_attachment_image_alt', true); ?>
-		            <div class="slide" <?php if($type == 'type-story'): ?>style="background-image:url('<?php echo $img; ?>');"<?php endif; ?>>
-						<?php if($type == 'type-txt'): ?>
-							<div class="quote"><?php echo $quote; ?></div>
-							<div class="meta">
-								<p class="byline"><strong><?php echo $name; if($pos): echo ',&nbsp;&nbsp;'; endif; ?></strong><em><?php if($pos): echo $pos; endif; if($byline): echo '<br />' . $byline; endif; ?></em></p>
-							</div><!--end byline-->
-						<?php else: ?>
-							<div class="img" <?php if($type == 'type-img'): ?>style="background-image:url('<?php echo $img; ?>');"<?php endif; ?>>
-								<?php if($type == 'type-img'): ?><div class="mob" style="background-image:url('<?php echo $img; ?>');"></div><?php endif; ?>
-								<?php if($type == 'type-story'): echo '<div class="overlay"></div>' . wp_get_attachment_image( $logo, $size, "", ['alt' => $alt] ); endif; ?>
-							</div><!--end img-->
-							<div class="txt">
-								<div class="quote">
-									<?php echo $quote; //limit to 30 on stories ?>
-									<?php if($type == 'type-img'): ?>
-										<p class="byline"><strong><?php echo $name; if($pos): echo ',<br />'; endif; ?></strong><em><?php if($pos): echo $pos; endif; if($byline): echo '<br />' . $byline; endif; ?></em></p>
-									<?php endif; ?>
-								</div><!--end quote-->
-								<?php if($type == 'type-story'): ?>
-									<div class="statBox">
-										<p class="byline"><strong><?php echo $name; if($pos): echo ',&nbsp;&nbsp;'; endif; ?></strong><em><?php if($pos): echo $pos; endif; if($byline): echo ', ' . $byline; endif; ?></em></p>
-
-										<div class="stat"><span class="value"><?php echo $value; ?></span><span class="label"><?php echo $label; ?></span></div>
-											
-									</div><!--end stat-->
-								<?php endif; ?>
-							</div><!--end txt-->
-						<?php endif; //end type ?>
-		            </div><!--end slide-->
-		        <?php endwhile;  ?>
-		      </div><!--end testiSlider-->
-		      <?php if($type == 'type-story'): ?><div class="foot animate__animated animate__fadeInDown"><a href="/resources/customer-stories/" class="btn bot">View Customer Stories</a></div><?php endif; ?>
-		    <?php endif; wp_reset_query(); ?>
-		</div></div><!--end wrap/bg-->
-	<?php endif; //end post type ?>
-</section>
-
-
 <!-- / / / / / / ------------------------------------------------------>
-<?php elseif( get_row_layout() == 'testimonialModule' ): 
-	if(is_singular() && !is_page()): $type = 'type-txt'; else: $type = get_sub_field('type'); endif;
+<?php elseif( get_row_layout() == 'testimonialModule' ):
+	// The old 'type' select and 'testimonials' repeater were removed from this
+	// layout; nothing here read them. typecpt drives the layout instead.
 	$typeCPT = get_sub_field('typecpt'); $typeCPT = $typeCPT->slug;
 	$testiCPT = get_sub_field('testicpt');
 	$typeSingle = get_sub_field('typeSingle');
@@ -353,7 +304,23 @@
 
 
 			<div class="testi-txtimg alt animate__animated animate__fadeInUp">
-				<div class="img" style="background-image:url('<?php echo $imgSingle; ?>');"><div class="mob" style="background-image:url('<?php echo $imgSingle; ?>');"></div></div><!--end img-->
+				<div class="img"><?php
+					/* Was .img plus a nested .mob carrying the same background image, one
+					   visible below $break-big and the other above. A single img now covers
+					   both cases — see img.testiBg under &.type-img in _modules.sass, which
+					   takes .mob's geometry below big and fills .img above.
+					   $imgSingle must be an attachment ID; a URL still renders. */
+					if( is_numeric($imgSingle) ):
+						echo wp_get_attachment_image( $imgSingle, 'full', false, array(
+							'class'   => 'testiBg',
+							'alt'     => $altSingle,
+							'sizes'   => '(min-width: 1240px) 50vw, 100vw',
+							'loading' => 'lazy',
+						) );
+					elseif( $imgSingle ):
+						echo '<img class="testiBg" src="' . esc_url($imgSingle) . '" alt="" loading="lazy" />';
+					endif;
+				?></div><!--end img-->
 				<div class="txt">
 					<div class="quote">
 						<?php echo $quoteSingle;  ?>
@@ -408,8 +375,22 @@
 								<p class="byline"><strong><?php echo $name; if($pos): echo ',&nbsp;&nbsp;'; endif; ?></strong><em><?php if($pos): echo $pos; endif; if($byline): echo '<br />' . $byline; endif; ?></em></p>
 							</div><!--end byline-->
 						<?php else: ?>
-							<div class="img" <?php if($typeCPT == 'type-img'): ?>style="background-image:url('<?php echo $img; ?>');"<?php endif; ?>>
-								<?php if($typeCPT == 'type-img'): ?><div class="mob" style="background-image:url('<?php echo $img; ?>');"></div><?php endif; ?>
+							<div class="img"><?php
+								/* Same .img / .mob background pair as the single variant,
+								   replaced by one img.testiBg. See _modules.sass. */
+								if($typeCPT == 'type-img' && $img):
+									if( is_numeric($img) ):
+										echo wp_get_attachment_image( $img, 'full', false, array(
+											'class'   => 'testiBg',
+											'alt'     => '',
+											'sizes'   => '(min-width: 1240px) 50vw, 100vw',
+											'loading' => 'lazy',
+										) );
+									else:
+										echo '<img class="testiBg" src="' . esc_url($img) . '" alt="" loading="lazy" />';
+									endif;
+								endif;
+								?>
 								<?php if($typeCPT == 'type-story'): echo '<div class="overlay"></div>' . wp_get_attachment_image( $logo, $size, "", ['alt' => $alt] ); endif; ?>
 							</div><!--end img-->
 							<div class="txt">
