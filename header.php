@@ -271,7 +271,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<div class="wrap">
 
 
-                    <?php if($hasIcon && $alertIcon): echo wp_get_attachment_image( $alertIcon, 'full', "", ['alt' => $altIcon] ); endif; ?>
+                    <?php if($hasIcon && $alertIcon): echo wp_get_attachment_image( $alertIcon, 'full', "", ['alt' => $altIcon, 'loading' => 'eager'] ); endif; // alert bar, above the fold ?>
                 <div class="txt"><?php echo $alert; ?></div>
                     
             </div>

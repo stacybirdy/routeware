@@ -11,7 +11,22 @@ $logoWhite = get_field('logoWhite', 'options');
 <div id="pum-<?php pum_popup_ID(); ?>" class="<?php pum_popup_classes(); ?>" <?php pum_popup_data_attr(); ?> role="dialog" aria-modal="false" <?php if ( pum_get_popup_title() !== '' ) : ?> aria-labelledby="pum_popup_title_<?php pum_popup_ID(); ?>"<?php endif; ?>>
 	<div id="popmake-<?php pum_popup_ID(); ?>" class="<?php pum_popup_classes( null, 'container' ); ?> <?php if($bg): echo 'hasImg'; else: echo 'noImg'; endif; ?>">
 		<div class="popWrap ">
-			<?php if($bg): ?><div class="img" style="background-image:url('<?php echo $bg; ?>');"></div><?php endif; ?>
+			<?php if($bg): ?><div class="img"><?php
+				/* Was an inline background-image, so it shipped the full-size
+				   original with no srcset or lazy loading. Now a real img filling
+				   .img via object-fit — see .popWrap .img img in _rules.sass:541.
+				   Full width below 600px, then a fixed 180/200/220px column.
+				   $bg must be an attachment ID; a URL string still renders. */
+				if( is_numeric($bg) ):
+					echo wp_get_attachment_image( $bg, 'full', false, array(
+						'alt'     => get_post_meta( $bg, '_wp_attachment_image_alt', true),
+						'sizes'   => '(min-width: 1024px) 220px, (min-width: 768px) 200px, (min-width: 600px) 180px, 100vw',
+						'loading' => 'lazy',
+					) );
+				else:
+					echo '<img src="' . esc_url($bg) . '" alt="" loading="lazy" />';
+				endif;
+			?></div><?php endif; ?>
 			<div class="txt">
 
 				<?php do_action( 'pum_popup_before_title' ); ?>

@@ -533,6 +533,26 @@
 				background-size: auto 110% !important
 				padding: 15px 3.5% 50px
 				+transition(all .5s ease-in-out)
+				overflow: hidden
+				// The card photo is a real <img> now rather than a CSS background,
+				// so it can carry srcset and lazy loading. Height 110% matches the
+				// old background-size: auto 110%; cover is used instead of width:auto
+				// because the img carries width/height attributes and auto would
+				// resolve to the attribute width, not the aspect ratio.
+				> img.boxBg
+					position: absolute
+					left: 0
+					top: 0
+					width: 100%
+					height: 110%
+					object-fit: cover
+					object-position: left top
+					z-index: 0
+				// A positioned element paints above static in-flow content, so the
+				// card text has to be lifted or the photo would cover it.
+				> *:not(img.boxBg)
+					position: relative
+					z-index: 1
 				&:nth-of-type(3n-2)
 					background: $dblue
 				&:nth-of-type(3n-1)
@@ -921,17 +941,33 @@ button.slick-arrow
 					height: 450px
 			
 
-	&.type-img 
-		.media 
-			height: 250px 
+	&.type-img
+		.media
+			height: 250px
 			+break(hand)
-				height: 300px 
+				height: 300px
 			+break(tab)
 				height: 350px
 			+break(desk)
 				height: 400px
-			+break(big)	
+			+break(big)
 				height: auto
+			// The media photo is a real <img> now rather than a CSS background, so
+			// it can carry srcset and lazy loading.
+			.inner
+				position: relative
+				overflow: hidden
+				> img.mediaBg
+					position: absolute
+					left: 0
+					top: 0
+					width: 100%
+					height: 100%
+					object-fit: cover
+					z-index: 0
+				> .wrap
+					position: relative
+					z-index: 1
 	&.type-logos
 		align-items: center
 		.media .inner
@@ -1231,23 +1267,56 @@ button.slick-arrow
 			.txt 
 				+break(midMax)
 					width: 100%
-			.img 
-				background-size: cover 
+			.img
+				background-size: cover
 				background-position: center center
+				position: relative
 				+break(bigMax)
 					background: $green !important
 				+break(midMax)
 					width: 100%
-				.mob 
-					background-size: cover 
-					background-position: center center
-					
+				// One <img> replaces the old .img / .mob background pair, so the photo
+				// can carry srcset and lazy loading. Below $break-big it takes the
+				// geometry .mob had, including the 0 0 50px 0 corner and the calc
+				// widths that leave the green edge showing. At big and up it fills
+				// .img, which is what .img's own background used to do while .mob was
+				// display: none.
+				> img.testiBg
+					display: block
+					object-fit: cover
+					object-position: center center
+					// The generic .img img rule above caps the type-story client logo
+					// at 200/260px wide and 90/120px tall with a margin. max-* beats
+					// width/height, so the photo has to opt out of all three.
+					max-width: none
+					max-height: none
+					margin: 0
 					+border-radius(0 0 50px 0)
-					height: 220px 
+					height: 220px
 					width: 100%
 					+break(hand)
 						+calc('width', '100% - 75px')
-						height: 400px 
+						height: 400px
+					+break(mid)
+						+calc('width', '100% - 15px')
+						+calc('height', '100% - 50px')
+					+break(big)
+						position: absolute
+						left: 0
+						top: 0
+						width: 100%
+						height: 100%
+						border-radius: 0
+				.mob
+					background-size: cover
+					background-position: center center
+
+					+border-radius(0 0 50px 0)
+					height: 220px
+					width: 100%
+					+break(hand)
+						+calc('width', '100% - 75px')
+						height: 400px
 					+break(mid)
 						+calc('width', '100% - 15px')
 						+calc('height', '100% - 50px')
@@ -1291,18 +1360,45 @@ button.slick-arrow
 						bottom: 20px
 					+break(big)
 						right: 0 
-	&.type-story 
-		.wrap .slide 
-			
+	&.type-story
+		.wrap .slide
+
 			border: 2px solid $graye
 			background-position: center center
 			background-size: cover
+			position: relative
 			+break(midMax)
-				flex-flow: column wrap 
+				flex-flow: column wrap
 			+break(handMax)
 				background-repeat: no-repeat
 				background-size: auto 50%
 				background-position: center top
+			// The slide photo is a real <img> now rather than a CSS background, so
+			// it can carry srcset and lazy loading. First child in the DOM, so the
+			// .img and .txt siblings still paint over it.
+			> img.slideBg
+				position: absolute
+				left: 0
+				top: 0
+				width: 100%
+				height: 100%
+				object-fit: cover
+				object-position: center center
+				z-index: 0
+				// Stacked layout starts at midMax (899px), same breakpoint as the
+				// flex-flow: column wrap above, so the photo sits across the top of
+				// the card from there down and shows whole.
+				// Do not set width:auto here: the img carries width/height
+				// attributes, so auto resolves to the attribute width rather than
+				// the aspect ratio, and object-fit:fill then stretches it.
+				+break(midMax)
+					width: 100%
+					height: auto
+					max-width: 100%
+					left: 0
+					+transform(none)
+					object-fit: contain
+					object-position: center top
 			.txt
 				position: relative
 				+break-span($break-min, $break-mid)

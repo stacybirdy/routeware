@@ -28,7 +28,24 @@
     <?php $matchFound = false; foreach( $noFooterForm as $page ){ if( $page->ID == get_the_ID() ){ $matchFound = true; break; } } if( !$matchFound && !is_404() ): ?>
 
 		<div class="topFoot">
-			<div class="img" style="background-image:url('<?php echo $footerImg; ?>');"></div>
+			<div class="img">
+				<?php
+				/* Was an inline background-image, which can't carry srcset or lazy
+				   loading. Now a real img filling .img via object-fit (see
+				   _head-foot.sass:563). Displays at 100vw below $break-desk and 60vw
+				   above (_head-foot.sass:572).
+				   $footerImg must be an attachment ID; a URL string still renders. */
+				if( is_numeric($footerImg) ):
+					echo wp_get_attachment_image( $footerImg, 'full', false, array(
+						'alt'     => get_post_meta( $footerImg, '_wp_attachment_image_alt', true),
+						'sizes'   => '(min-width: 1024px) 60vw, 100vw',
+						'loading' => 'lazy',
+					) );
+				elseif( $footerImg ):
+					echo '<img src="' . esc_url($footerImg) . '" alt="" loading="lazy" />';
+				endif;
+				?>
+			</div>
 			<div id="form" class="txt <?php if( have_rows('modules') ): $i = 0; while ( have_rows('modules') ) : the_row(); $i++; if( $i > 1 ): break; endif; $bg = get_sub_field('bg'); echo $bg; endwhile; endif; ?>"><div class="overlay"></div><div class="inner"><?php if(is_page(11509) && $footerPartnerContent): echo $footerPartnerContent; else: echo $footerContent; endif; if(is_page(11509) && $footerHSPartners): echo $footerHSPartners; else: echo $footerHS; endif; ?>
 			</div></div>
 		</div><!--end topFoot-->

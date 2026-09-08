@@ -538,10 +538,12 @@ form.passProtect
 		.popWrap
 			+break(hand)
 				+flex 
-			.img 
-				background-size: cover 
-				background-position: center center 
+			.img
+				background-size: cover
+				background-position: center center
 				width: 100%
+				position: relative
+				overflow: hidden
 				+break(handMax)
 					height: 150px
 				+break(hand)
@@ -550,10 +552,16 @@ form.passProtect
 					width: 200px
 				+break(desk)
 					width: 220px
-				img 
-					object-fit: cover 
+				// The popup photo is a real <img> now rather than a CSS background,
+				// so it can carry srcset and lazy loading. width was auto here, which
+				// resolves to the img's width attribute rather than the aspect ratio.
+				img
+					object-fit: cover
+					position: absolute
+					left: 0
+					top: 0
 					height: 100%
-					width: auto
+					width: 100%
 			.txt 
 				flex: 1
 				.inner

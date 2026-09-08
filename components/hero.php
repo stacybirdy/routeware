@@ -92,7 +92,6 @@ $typeClass = $type == 'type-glossary' ? 'type-img' : $type;
 				endif;
 				?>
 			</div>
-			<!-- <div class="img" style="background-image:url('<?php echo $bgImg; ?>');"></div> -->
 
 		<?php elseif($type == 'type-vid'): ?>
 			<div class="img">

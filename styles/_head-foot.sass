@@ -563,6 +563,8 @@ footer#colophon
 		.img
 			background-size: cover
 			height: 180px
+			position: relative
+			overflow: hidden
 			+break(tab)
 				height: 330px
 			+break(tab)
@@ -571,6 +573,18 @@ footer#colophon
 				height: auto
 				width: 60%
 				margin-right: -10%
+			// The footer image is a real <img> now rather than a CSS background,
+			// so it can carry srcset and lazy loading. Absolute + object-fit keeps
+			// the same cover behaviour, including at desk where height is auto and
+			// the flex row supplies the height.
+			img
+				position: absolute
+				left: 0
+				top: 0
+				width: 100%
+				height: 100%
+				object-fit: cover
+				display: block
 		.txt 
 			position: relative
 			+grad(-135deg, $green, 0%, $dgreen, 100%)

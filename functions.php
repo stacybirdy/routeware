@@ -1432,3 +1432,23 @@ function rw_rocket_lazyrender_exclusions( $exclusions ) {
     return $exclusions;
 }
 add_filter( 'rocket_lrc_exclusions', 'rw_rocket_lazyrender_exclusions' );
+
+/**
+ * Default every wp_get_attachment_image() to loading="lazy".
+ *
+ * WordPress decides this itself, but on this site almost nothing was getting a
+ * loading attribute at all — 43 of 47 images on the homepage had none. Rather
+ * than rely on core's heuristic, set it here so it is deterministic.
+ *
+ * Above-the-fold images opt out by passing their own loading or fetchpriority:
+ * the hero image (components/hero.php), the hero title logo (inc/heroTitle.php)
+ * and the alert bar icon (header.php) all do.
+ */
+function rw_default_image_loading( $attr ) {
+    if ( empty( $attr['loading'] ) && empty( $attr['fetchpriority'] ) ) {
+        $attr['loading'] = 'lazy';
+    }
+
+    return $attr;
+}
+add_filter( 'wp_get_attachment_image_attributes', 'rw_default_image_loading' );
