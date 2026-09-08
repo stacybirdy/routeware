@@ -381,7 +381,27 @@
 		      <div class="testiSlider alt animate__animated animate__fadeInUp">
 		        <?php while( $testiQuery->have_posts() ): $testiQuery->the_post();
 		        	$quote = get_field('quote'); $name = get_field('name'); $pos = get_field('position'); $byline = get_field('byline'); $value = get_field('value'); $label = get_field('label'); $img = get_field('image'); $logo = get_field('logo'); $alt = get_post_meta( $logo, '_wp_attachment_image_alt', true); ?>
-		            <div class="slide" <?php if($typeCPT == 'type-story'): ?>style="background-image:url('<?php echo $img; ?>');"<?php endif; ?>>
+		            <div class="slide"><?php
+					/* type-story used an inline background-image, so it shipped the
+					   full-size original to every phone with no lazy loading.
+					   Now a real img filling .slide via object-fit — see the
+					   img.slideBg rules under &.type-story in _modules.sass:1295,
+					   which also reproduce the mobile 'auto 50% / center top'
+					   behaviour. .slide is 92% of the wrap, capped at 1400px.
+					   $img must be an attachment ID; a URL string still renders. */
+					if($typeCPT == 'type-story'):
+						if( is_numeric($img) ):
+							echo wp_get_attachment_image( $img, 'full', false, array(
+								'class'   => 'slideBg',
+								'alt'     => '',
+								'sizes'   => '(min-width: 1522px) 1400px, 92vw',
+								'loading' => 'lazy',
+							) );
+						elseif( $img ):
+							echo '<img class="slideBg" src="' . esc_url($img) . '" alt="" loading="lazy" />';
+						endif;
+					endif;
+					?>
 						<?php if($typeCPT == 'type-txt'): ?>
 							<div class="quote"><?php echo $quote; ?></div>
 							<div class="meta">
