@@ -645,15 +645,25 @@
 		<?php while( have_rows('slider') ): the_row(); $bg = get_sub_field('bg'); $content = get_sub_field('content'); ?>
 			<div class="as-panel">
 				<?php
-				/* Panel background. Widths for .slides-5 come from _modules.sass:2492
-				   (92vw / 69vw at 600px / 61vw at 768px / 46vw at 1024px). Other panel
-				   counts have no width rule, so the widest case is used as the hint.
+				/* Panel background.
+				   The sizes hint depends on the panel count, because only .slides-5 has
+				   viewport-width rules (_modules.sass:2492 — 92vw / 69vw at 600px /
+				   61vw at 768px / 46vw at 1024px).
+				   Any other count falls through to accSlider.css's height:100%,
+				   width:auto, so the panel is the slider's fixed 500px height times the
+				   image aspect ratio — a fixed pixel width, not a percentage. Measured
+				   on staging at a 1440px viewport: 883px and 857px, which is 500 x 1.766
+				   and 500 x 1.714. 900px covers that with headroom.
+				   Below 600px, _modules.sass:2534 sets width:100%.
 				   $bg must be an attachment ID; a URL string still renders, unsized. */
+				$asSizes = ( (int) $count === 5 )
+					? '(min-width: 1024px) 46vw, (min-width: 768px) 61vw, (min-width: 600px) 69vw, 92vw'
+					: '(min-width: 600px) 900px, 100vw';
 				if( is_numeric($bg) ):
 					echo wp_get_attachment_image( $bg, '1200-700', false, array(
 						'class' => 'as-background',
 						'alt'   => get_post_meta( $bg, '_wp_attachment_image_alt', true),
-						'sizes' => '(min-width: 1024px) 46vw, (min-width: 768px) 61vw, (min-width: 600px) 69vw, 92vw',
+						'sizes' => $asSizes,
 					) );
 				elseif( $bg ):
 					echo '<img class="as-background" src="' . esc_url($bg) . '" alt="" />';
