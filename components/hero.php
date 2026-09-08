@@ -76,7 +76,21 @@ $typeClass = $type == 'type-glossary' ? 'type-img' : $type;
 
 		<?php if($type == 'type-img' || $type == 'type-glossary'): ?>
 			<div class="imgInline">
-				<img src="<?php echo $bgImg; ?>" />
+				<?php
+				/* Responsive hero image. .imgInline is full width below $break-mid (900px)
+				   and 60% of the viewport at mid and up, per _modules.sass:221.
+				   $bgImg must be an attachment ID; a URL string still renders, unsized. */
+				if( is_numeric($bgImg) ):
+					echo wp_get_attachment_image( $bgImg, '1800-1019', false, array(
+						'alt'           => get_post_meta( $bgImg, '_wp_attachment_image_alt', true),
+						'sizes'         => '(min-width: 900px) 60vw, 100vw',
+						'fetchpriority' => 'high',
+						'decoding'      => 'sync',
+					) );
+				elseif( $bgImg ):
+					echo '<img src="' . esc_url($bgImg) . '" alt="" fetchpriority="high" />';
+				endif;
+				?>
 			</div>
 			<!-- <div class="img" style="background-image:url('<?php echo $bgImg; ?>');"></div> -->
 

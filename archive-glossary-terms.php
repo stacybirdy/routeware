@@ -72,7 +72,7 @@ get_template_part(
 		'bgColor'     => 'bg-green',
 		'pageTitle'   => 'title-custom',
 		'customTitle' => 'Glossary',
-		'bgImg'       => '/wp-content/uploads/2026/03/hero-RCC.jpg',
+		'bgImg'       => 11710, // hero-RCC.jpg — attachment ID, so the hero can emit srcset
 		'content'     => 'A quick-reference guide to the terms, acronyms, and jargon you\'ll encounter in waste management and recycling. Browse by letter or search for a specific term to get started.',
 	)
 );

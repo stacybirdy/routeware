@@ -644,7 +644,21 @@
 	<div id="accSlider-<?php echo $row; ?>" class="accordion-slider"><div class="as-panels slides-<?php echo $count; ?>">
 		<?php while( have_rows('slider') ): the_row(); $bg = get_sub_field('bg'); $content = get_sub_field('content'); ?>
 			<div class="as-panel">
-				<img class="as-background" src="<?php echo $bg; ?>"/>
+				<?php
+				/* Panel background. Widths for .slides-5 come from _modules.sass:2492
+				   (92vw / 69vw at 600px / 61vw at 768px / 46vw at 1024px). Other panel
+				   counts have no width rule, so the widest case is used as the hint.
+				   $bg must be an attachment ID; a URL string still renders, unsized. */
+				if( is_numeric($bg) ):
+					echo wp_get_attachment_image( $bg, '1200-700', false, array(
+						'class' => 'as-background',
+						'alt'   => get_post_meta( $bg, '_wp_attachment_image_alt', true),
+						'sizes' => '(min-width: 1024px) 46vw, (min-width: 768px) 61vw, (min-width: 600px) 69vw, 92vw',
+					) );
+				elseif( $bg ):
+					echo '<img class="as-background" src="' . esc_url($bg) . '" alt="" />';
+				endif;
+				?>
 				<div class="overlay"></div>
 				<div class="as-layer text alt">
 	        		<?php echo $content; ?>
@@ -710,7 +724,15 @@
 	<?php if($hasIntro && $intro): echo '<div class="intro reduceMar1 animate__animated animate__zoomIn">' . $intro . '</div>'; endif; ?>
 	<?php $args = array('post_type'=>'team','posts_per_page'=>-1,'orderby'=>'menu_order','order'=>'ASC','tax_query'=>array(array('taxonomy'=>'team-type','field'=>'term_id','terms'=>$type))); $loop = new WP_Query($args); echo '<ul class="clean animate__animated animate__fadeInUp '.$cols.'">'; while($loop->have_posts()): $loop->the_post(); $pos = get_field('pos'); ?>
 		<li>
-    	<?php if(has_post_thumbnail()): the_post_thumbnail( '400-500' );  else: echo '<img src="https://routeware.com/wp-content/uploads/2025/08/teamPlaceholder.jpg" />'; endif; ?>
+    	<?php
+		/* Placeholder path was hardcoded to routeware.com, so staging and local both
+		   pulled it from production. content_url() resolves to the current site. */
+		if(has_post_thumbnail()):
+			the_post_thumbnail( '400-500' );
+		else:
+			echo '<img src="' . esc_url( content_url( 'uploads/2025/08/teamPlaceholder.jpg' ) ) . '" width="400" height="500" alt="" loading="lazy" />';
+		endif;
+		?>
     	<h4><?php the_title(); ?></h4>
     	<?php if($pos): ?><h5 class="noLine"><?php echo $pos; ?></h5><?php endif; ?>
 		</li>
@@ -752,7 +774,15 @@
 						<?php if( $url ): ?>
 							<a class="logo-bar__logo-link" href="<?php echo $url; ?>">
 						<?php endif; ?>
-						<img class="logo-bar__logo-image" src="<?php echo wp_get_attachment_url( $image_id ); ?>" alt="<?php echo get_post_meta( $image_id, '_wp_attachment_image_alt', true); ?>" />
+						<?php
+						/* $image_id is already an attachment ID here, so this needs no ACF
+						   change. base.css:11868 caps .logo-bar__logo-image at 200px wide. */
+						echo wp_get_attachment_image( $image_id, 'medium', false, array(
+							'class' => 'logo-bar__logo-image',
+							'alt'   => get_post_meta( $image_id, '_wp_attachment_image_alt', true),
+							'sizes' => '200px',
+						) );
+						?>
 						<?php if( $url ): ?>
 							</a>
 						<?php endif; ?>
