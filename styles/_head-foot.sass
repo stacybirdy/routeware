@@ -88,31 +88,21 @@ nav#primaryNav
 
 
 [lang="en-GB"]
+	// The UK labels are longer than the US ones, so just above the tab
+	// breakpoint the Pricing button is a few pixels short of fitting. Everything
+	// else is shared; this narrow band is the one genuine UK exception.
+	@media (min-width: 768px) and (max-width: 790px)
+		nav#primaryNav #mega-menu-wrap-primary ul#mega-menu-primary li.mega-menu-item
+			margin-right: 10px
+			a.mega-menu-link
+				font-size: 12px
+			&.btn a
+				font-size: 12px
+				padding: 9px 10px
 	nav#eyebrowNav #mega-menu-wrap-eyebrow ul#mega-menu-eyebrow li.mega-menu-item .trp_language_switcher_shortcode .trp-language-switcher
 		width: 113px
 	nav#primaryNav #mega-menu-wrap-primary ul#mega-menu-primary li.mobHead .trp-ls-clicked.trp-ls-shortcode-language
 		left: -15px !important
-	nav#primaryNav #mega-menu-wrap-primary ul#mega-menu-primary li.mega-menu-item.btn a
-		+break(deskMax)
-			padding: 12px 15px
-			font-size: 14px
-		+break(midMax)
-			font-size: 13px
-	nav#primaryNav #mega-menu-wrap-primary ul#mega-menu-primary li.mega-menu-item
-		+break(deskMax)
-			margin-right: 20px
-		+break(midMax)
-			margin-right: 15px	
-	nav#primaryNav #mega-menu-wrap-primary ul#mega-menu-primary li.mega-menu-item a.mega-menu-link
-		font-size: 13px
-		+break(mid)
-			font-size: 14px
-		+break(desk)
-			font-size: 15px 
-		@media (min-width: 1060px) 
-			font-size: 16px
-		+break(big)
-			font-size: 18px
 
 [lang="en-US"]
 	nav#eyebrowNav #mega-menu-wrap-eyebrow ul#mega-menu-eyebrow li.mega-menu-item .trp_language_switcher_shortcode .trp-language-switcher
@@ -230,18 +220,28 @@ nav#primaryNav
 			+break(tab)
 				justify-content: space-between
 				+transition(all .25s ease-in-out)
-			.logo 
+			.logo
 				+transition(all .25s ease-in-out)
-				+break(desk)
-					width: 180px 
+				// The logo used to appear at a flat 180px from $break-desk up, taking
+				// about 215px with its margin. The long UK labels do not fit in what
+				// was left, so it now arrives later and smaller, reaching full size
+				// only where there is genuinely room for it.
+				+break(big)
+					width: 120px
 					opacity: 1
-					+space1(0,35,mar,right)
+					+space1(0,16,mar,right)
+				+break(max)
+					width: 180px
+					+space1(0,24,mar,right)
 			#mega-menu-wrap-primary
 				+break(tab)
 					margin-left: auto
 				#mega-menu-primary li.mega-menu-item
 					+break(tab)
-						+space1(10,45,mar,right)
+						// Matches the unstuck values above; was space1(10,45).
+						+space1(12,28,mar,right)
+					+break(big)
+						margin-right: 40px
 	#mega-menu-wrap-primary
 		+break(tab)
 			width: 100%
@@ -443,16 +443,52 @@ nav#primaryNav
 				+flex
 				align-items: center
 				li.mega-menu-item
-					+space1(10,45,mar,right)
+					// Was space1(10,45). 45px of gap per item at the widest end left
+					// no room for the long labels once the logo appears on stick.
+					+space1(12,28,mar,right)
+					// From big up there is more room, so let them breathe again.
+					// big and max are the same on purpose — no reason to step twice.
+					+break(big)
+						margin-right: 40px
+					// Tighter below 900 so the row still fits. Was [lang="en-GB"] only.
+					+break(midMax)
+						margin-right: 15px
 					border-bottom: 5px solid transparent
 					&.mega-current-page-ancestor, &.mega-current-menu-item
 						border-bottom-color: $gold
 					a.mega-menu-link
-						+font-setup(14,70,18,70,0,0)
+						// font-setup removed: its font-size and line-height were both overridden
+						// below, Mega Menu's own stylesheet already sets text-transform: none,
+						// and its letter-spacing had no visible effect. It only emitted seven
+						// dead media queries.
+						// font-setup's 2nd and 4th arguments are line-height, so the
+						// above sets line-height: 70px to centre text in the 70px bar.
+						// A label that wrapped then became 2 x 70px tall and pushed its
+						// second line out of the bar. Centre with flex instead, and stop
+						// labels breaking mid-phrase, so the bar cannot grow.
+						line-height: 1.2
+						white-space: nowrap
+						+flex
+						align-items: center
+						height: 70px
 						margin-bottom: -5px
-						span.mega-indicator 
-							+space1(2,6,mar,left)
+						// These sizes used to live only under [lang="en-GB"], so the US site
+						// fell back to font-setup's own interpolation and the two languages did
+						// not match. One set for every language now.
+						font-size: 13px
+						+break(mid)
+							font-size: 14px
+						+break(desk)
+							font-size: 16px
+						+break(big)
+							font-size: 18px
+						span.mega-indicator
+							// 2px tighter to the label than before.
+							+space1(0,4,mar,left)
 							+font-setup(11,70,14,70,0,0)
+							// The 70px line-height from the mixin is meaningless now the link is
+							// flex-centred.
+							line-height: 1
 						&:hover 
 							color: $gold
 							+transition(color .25s)
@@ -461,9 +497,24 @@ nav#primaryNav
 						margin-right: 0 !important
 						margin-left: auto
 						border: none
-						a 
+						a
 							+btn
 							height: auto
+							// The btn mixin sizes this 15-18px with 25px of side padding, which
+							// is larger than the links beside it and overflowed between 768 and
+							// 900. Matched to the link sizes instead. These used to be set only
+							// under [lang="en-GB"], so the US button did not shrink at all.
+							font-size: 13px
+							padding: 10px 14px
+							+break(mid)
+								font-size: 14px
+								padding: 11px 18px
+							+break(desk)
+								font-size: 16px
+								padding: 12px 22px
+							+break(big)
+								font-size: 18px
+								padding: 12px 25px
 					&.col4 ul.mega-sub-menu
 						max-width: 1050px
 						padding: 0
