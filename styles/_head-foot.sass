@@ -547,6 +547,11 @@ nav#primaryNav
 								+font-setup(16,20,16,20,0,0)
 								+font
 								padding: 7px 15px 7px 35px
+								// The top-level rule sets height: 70px and flex centring to hold the nav
+								// bar open. Submenu links must not inherit any of that.
+								display: block
+								height: auto
+								white-space: normal
 								&:after 
 									+icomoon 
 									content: "\e91d"
