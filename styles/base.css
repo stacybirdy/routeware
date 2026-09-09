@@ -3133,11 +3133,6 @@ nav#primaryNav {
 }
 @media (min-width: 1024px) {
   [lang=en-GB] nav#primaryNav #mega-menu-wrap-primary ul#mega-menu-primary li.mega-menu-item a.mega-menu-link {
-    font-size: 15px;
-  }
-}
-@media (min-width: 1060px) {
-  [lang=en-GB] nav#primaryNav #mega-menu-wrap-primary ul#mega-menu-primary li.mega-menu-item a.mega-menu-link {
     font-size: 16px;
   }
 }
@@ -3583,11 +3578,6 @@ nav#primaryNav.stick .wrap .logo {
 }
 @media (min-width: 1240px) {
   nav#primaryNav.stick .wrap #mega-menu-wrap-primary #mega-menu-primary li.mega-menu-item {
-    margin-right: 32px;
-  }
-}
-@media (min-width: 1400px) {
-  nav#primaryNav.stick .wrap #mega-menu-wrap-primary #mega-menu-primary li.mega-menu-item {
     margin-right: 40px;
   }
 }
@@ -3922,11 +3912,6 @@ nav#primaryNav #mega-menu-wrap-primary .mega-menu-toggle .mega-toggle-block .meg
   }
 }
 @media (min-width: 768px) and (min-width: 1240px) {
-  nav#primaryNav #mega-menu-wrap-primary #mega-menu-primary li.mega-menu-item {
-    margin-right: 32px;
-  }
-}
-@media (min-width: 768px) and (min-width: 1400px) {
   nav#primaryNav #mega-menu-wrap-primary #mega-menu-primary li.mega-menu-item {
     margin-right: 40px;
   }
