@@ -1527,6 +1527,12 @@ function rw_page_uses( $feature ) {
         // arrowCallout type-countdown holds the countdown shortcode in a wysiwyg field.
         case 'countdown':
             return false !== strpos( $blob, 'type-countdown' );
+
+        // Widget Options adds classes to widgets. If none are present in the
+        // rendered sidebars there is nothing for its stylesheet to style.
+        case 'widget-options':
+            return false !== strpos( $blob, 'widgetopts' )
+                || false !== strpos( $blob, 'hide-widget' );
     }
 
     return true;
@@ -1570,9 +1576,17 @@ function rw_conditional_asset_map() {
             ),
             'scripts' => array(),
         ),
+        // 'animated' is Widget Countdown's own handle for its legacy effects.css,
+        // despite the generic name.
         'countdown' => array(
-            'styles'  => array( 'countdown_css' ),
+            'styles'  => array( 'countdown_css', 'animated' ),
             'scripts' => array( 'countdown-front-end' ),
+        ),
+        // Widget Options is an admin plugin. Its front-end stylesheet is only
+        // needed if a widget is using one of its visibility or styling classes.
+        'widget-options' => array(
+            'styles'  => array( 'widgetopts-styles' ),
+            'scripts' => array(),
         ),
     );
 }
@@ -1608,15 +1622,6 @@ function rw_dequeue_unused_plugin_assets() {
     }
 }
 add_action( 'wp_enqueue_scripts', 'rw_dequeue_unused_plugin_assets', 100 );
-
-/**
- * Search & Filter also prints small inline blocks — dom-ready-head, data,
- * api-url and dom-ready-body. The footer one is enqueued after
- * wp_enqueue_scripts has finished, so the pass above cannot catch it. Repeat
- * the dequeue immediately before the header and footer scripts print.
- */
-add_action( 'wp_print_scripts', 'rw_dequeue_unused_plugin_assets', 100 );
-add_action( 'wp_print_footer_scripts', 'rw_dequeue_unused_plugin_assets', 1 );
 
 /**
  * Add To Any enqueues its stylesheet, its script and a request to
