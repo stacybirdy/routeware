@@ -1452,3 +1452,200 @@ function rw_default_image_loading( $attr ) {
     return $attr;
 }
 add_filter( 'wp_get_attachment_image_attributes', 'rw_default_image_loading' );
+
+
+/*==============================================================*/
+// LOAD PLUGIN ASSETS ONLY ON PAGES THAT USE THEM
+/*==============================================================*/
+
+/**
+ * Everything this page could possibly render, as one searchable string.
+ *
+ * Post content alone is not enough: this theme builds pages from ACF flexible
+ * content, so module layout names and any shortcodes typed into module fields
+ * live in post meta rather than post_content. Both are collected here.
+ *
+ * Built once per request.
+ */
+function rw_page_content_blob() {
+    static $blob = null;
+
+    if ( $blob !== null ) {
+        return $blob;
+    }
+
+    $blob    = '';
+    $post_id = get_queried_object_id();
+
+    if ( ! $post_id ) {
+        return $blob;
+    }
+
+    $post = get_post( $post_id );
+
+    if ( $post ) {
+        $blob .= ' ' . $post->post_content;
+    }
+
+    foreach ( get_post_meta( $post_id ) as $key => $values ) {
+        // Skip ACF's underscore-prefixed field key references, which hold no content.
+        if ( isset( $key[0] ) && '_' === $key[0] ) {
+            continue;
+        }
+
+        foreach ( (array) $values as $value ) {
+            if ( is_string( $value ) ) {
+                $blob .= ' ' . $value;
+            }
+        }
+    }
+
+    return $blob;
+}
+
+/**
+ * Does this page use a given plugin's front-end feature?
+ *
+ * Anything not listed here returns true, so an unrecognised feature is never
+ * unloaded by accident.
+ */
+function rw_page_uses( $feature ) {
+    $blob = rw_page_content_blob();
+
+    switch ( $feature ) {
+
+        // The resourceFiltering module (inc/modules.php) prints [searchandfilter]
+        // shortcodes. The layout name appears in the flexible content meta.
+        case 'search-filter':
+            return false !== strpos( $blob, 'resourceFiltering' )
+                || false !== strpos( $blob, '[searchandfilter' );
+
+        // TablePress renders from a [table id=..] shortcode.
+        case 'tablepress':
+            return (bool) preg_match( '/\[table[\s\]]/i', $blob );
+
+        // arrowCallout type-countdown holds the countdown shortcode in a wysiwyg field.
+        case 'countdown':
+            return false !== strpos( $blob, 'type-countdown' );
+    }
+
+    return true;
+}
+
+/**
+ * Handles to unload, grouped by the feature that needs them.
+ *
+ * Taken from the id="<handle>-css" / id="<handle>-js" attributes WordPress
+ * printed on the staging homepage, so these are the real registered handles.
+ */
+function rw_conditional_asset_map() {
+    return array(
+        'search-filter' => array(
+            'styles'  => array(
+                'search-filter-frontend',
+                'search-filter-frontend-ugc',
+                'search-filter-frontend-component-combobox',
+                'search-filter-frontend-component-date-picker',
+                'search-filter-frontend-component-range',
+            ),
+            'scripts' => array(
+                'search-filter-frontend',
+                'search-filter-frontend-component-combobox',
+                'search-filter-frontend-component-checkbox',
+                'search-filter-frontend-component-date-picker',
+                'search-filter-frontend-component-range',
+                'search-filter-data',
+                'search-filter-api-url',
+            ),
+        ),
+        'tablepress' => array(
+            'styles'  => array(
+                'tablepress-default',
+                'tablepress-datatables-buttons',
+                'tablepress-datatables-columnfilterwidgets',
+                'tablepress-datatables-fixedheader',
+                'tablepress-datatables-fixedcolumns',
+                'tablepress-datatables-scroll-buttons',
+                'tablepress-responsive-tables',
+            ),
+            'scripts' => array(),
+        ),
+        'countdown' => array(
+            'styles'  => array( 'countdown_css' ),
+            'scripts' => array( 'countdown-front-end' ),
+        ),
+    );
+}
+
+/**
+ * Dequeue the assets for features this page does not use.
+ *
+ * Only runs on singular pages and posts. Archives, search results and 404s have
+ * no single queried post to inspect, so they are left alone rather than risk
+ * unloading something they do need.
+ *
+ * Priority 100 so plugins have finished enqueueing first.
+ */
+function rw_dequeue_unused_plugin_assets() {
+    if ( is_admin() || ! is_singular() ) {
+        return;
+    }
+
+    foreach ( rw_conditional_asset_map() as $feature => $assets ) {
+        if ( rw_page_uses( $feature ) ) {
+            continue;
+        }
+
+        foreach ( $assets['styles'] as $handle ) {
+            wp_dequeue_style( $handle );
+            wp_deregister_style( $handle );
+        }
+
+        foreach ( $assets['scripts'] as $handle ) {
+            wp_dequeue_script( $handle );
+            wp_deregister_script( $handle );
+        }
+    }
+}
+add_action( 'wp_enqueue_scripts', 'rw_dequeue_unused_plugin_assets', 100 );
+
+/**
+ * Search & Filter also prints small inline blocks — dom-ready-head, data,
+ * api-url and dom-ready-body. The footer one is enqueued after
+ * wp_enqueue_scripts has finished, so the pass above cannot catch it. Repeat
+ * the dequeue immediately before the header and footer scripts print.
+ */
+add_action( 'wp_print_scripts', 'rw_dequeue_unused_plugin_assets', 100 );
+add_action( 'wp_print_footer_scripts', 'rw_dequeue_unused_plugin_assets', 1 );
+
+/**
+ * Add To Any enqueues its stylesheet, its script and a request to
+ * static.addtoany.com on every single page, with no check for whether share
+ * buttons are actually rendered. It does expose a filter to switch that off:
+ *
+ *     $script_disabled = apply_filters( 'addtoany_script_disabled', false );
+ *     if (is_admin() || $script_disabled) return;
+ *
+ * Returning true prevents the enqueue rather than undoing it, so nothing is
+ * registered in the first place.
+ *
+ * The share buttons appear on single resources only — blog posts plus the
+ * story, newsmedia, guide, factsheet and webinarsvids post types.
+ */
+function rw_addtoany_only_on_resources( $disabled ) {
+    $with_share_buttons = array(
+        'post',
+        'story',
+        'newsmedia',
+        'guide',
+        'factsheet',
+        'webinarsvids',
+    );
+
+    if ( is_singular( $with_share_buttons ) ) {
+        return $disabled;
+    }
+
+    return true;
+}
+add_filter( 'addtoany_script_disabled', 'rw_addtoany_only_on_resources' );
