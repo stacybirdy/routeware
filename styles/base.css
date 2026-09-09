@@ -4187,6 +4187,9 @@ nav#primaryNav #mega-menu-wrap-primary .mega-menu-toggle .mega-toggle-block .meg
     font-weight: 500;
     font-style: normal;
     padding: 7px 15px 7px 35px;
+    display: block;
+    height: auto;
+    white-space: normal;
   }
 }
 @media (min-width: 768px) and (min-width: 600px) {
