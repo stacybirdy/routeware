@@ -3096,6 +3096,18 @@ nav#primaryNav {
   z-index: 2;
 }
 
+@media (min-width: 768px) and (max-width: 790px) {
+  [lang=en-GB] nav#primaryNav #mega-menu-wrap-primary ul#mega-menu-primary li.mega-menu-item {
+    margin-right: 10px;
+  }
+  [lang=en-GB] nav#primaryNav #mega-menu-wrap-primary ul#mega-menu-primary li.mega-menu-item a.mega-menu-link {
+    font-size: 12px;
+  }
+  [lang=en-GB] nav#primaryNav #mega-menu-wrap-primary ul#mega-menu-primary li.mega-menu-item.btn a {
+    font-size: 12px;
+    padding: 9px 10px;
+  }
+}
 [lang=en-GB] nav#eyebrowNav #mega-menu-wrap-eyebrow ul#mega-menu-eyebrow li.mega-menu-item .trp_language_switcher_shortcode .trp-language-switcher {
   width: 113px;
 }
