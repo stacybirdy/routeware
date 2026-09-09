@@ -1576,11 +1576,14 @@ function rw_conditional_asset_map() {
             ),
             'scripts' => array(),
         ),
-        // 'animated' is Widget Countdown's own handle for its legacy effects.css,
-        // despite the generic name.
+        // Widget Countdown's generete_front_javascript() in
+        // includes/legacy/front_end.php enqueues all of these together:
+        // countdown-front-end, thickbox (script), animated, countdown_css,
+        // thickbox (style). 'animated' is its handle for effects.css despite the
+        // generic name, and Thickbox is WordPress core being pulled in by it.
         'countdown' => array(
-            'styles'  => array( 'countdown_css', 'animated' ),
-            'scripts' => array( 'countdown-front-end' ),
+            'styles'  => array( 'countdown_css', 'animated', 'thickbox' ),
+            'scripts' => array( 'countdown-front-end', 'thickbox' ),
         ),
         // Widget Options is an admin plugin. Its front-end stylesheet is only
         // needed if a widget is using one of its visibility or styling classes.
