@@ -5,7 +5,7 @@
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
- <script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"FNQaKAsBHeaSN91Rg8ZkEe",debug:false});oaiq("measure","page_viewed",{type:"contents"});</script>
+ <script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("consent",false);oaiq("init",{pixelId:"FNQaKAsBHeaSN91Rg8ZkEe",debug:false});oaiq("measure","page_viewed",{type:"contents"});</script>
 
 <script>
 (function () {
@@ -75,6 +75,8 @@
                     'ad_personalization': granted ? 'granted' : 'denied',
                     'analytics_storage': granted ? 'granted' : 'denied'
                 });
+
+                if (window.oaiq) { oaiq('consent', granted); }
             }]);
         })();
     </script>
