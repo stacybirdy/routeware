@@ -7,7 +7,21 @@
 <head>
 
 <script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"FNQaKAsBHeaSN91Rg8ZkEe",debug:true});oaiq("measure","page_viewed",{type:"contents"});</script>
- 
+
+<script>
+(function () {
+	function oaiqLead() {
+		if (window.oaiq) { oaiq("measure", "lead_created", { type: "customer_action" }); }
+	}
+	window.addEventListener('message', function (event) {
+		if (event.data && event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormSubmitted') {
+			oaiqLead();
+		}
+	});
+	document.addEventListener('hs-form-event:on-submission:success', oaiqLead);
+})();
+</script>
+
  <!-- ============================================================
  Google Consent Mode v2 + HubSpot Banner Bridge
  MUST load synchronously, BEFORE the Google Tag Manager snippet.
