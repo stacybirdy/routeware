@@ -1514,10 +1514,12 @@ function rw_page_uses( $feature ) {
 
     switch ( $feature ) {
 
-        // The resourceFiltering module (inc/modules.php) prints [searchandfilter]
-        // shortcodes. The layout name appears in the flexible content meta.
+        // The resourceFiltering and events modules (inc/modules.php) print
+        // [searchandfilter] shortcodes from the template, so the shortcode itself
+        // never appears in the content. Match the layout names instead.
         case 'search-filter':
             return false !== strpos( $blob, 'resourceFiltering' )
+                || false !== strpos( $blob, 'events' )
                 || false !== strpos( $blob, '[searchandfilter' );
 
         // TablePress renders from a [table id=..] shortcode.
