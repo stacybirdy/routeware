@@ -441,7 +441,7 @@ $('.logoSlider-col3').each( function() {
   numSlick++;
   $(this).addClass( 'slider-' + numSlick ).slick({
     autoplay: true,
-    autoplaySpeed: 8000,
+    autoplaySpeed: 1500,
     adaptiveHeight: false,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -556,6 +556,35 @@ $('ol').each(function(){
 
 
 
+
+
+/*==============================================================*/
+// in view
+/*==============================================================*/
+
+// Adds .inView to .animate__animated elements once they enter the viewport.
+var inViewElements = document.querySelectorAll('.animate__animated')
+
+if (inViewElements.length) {
+  if ('IntersectionObserver' in window) {
+    var inViewObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('inView')
+          inViewObserver.unobserve(entry.target)
+        }
+      })
+    })
+    Array.prototype.forEach.call(inViewElements, function (element) {
+      inViewObserver.observe(element)
+    })
+  } else {
+    // No IntersectionObserver: show everything rather than leave it hidden.
+    Array.prototype.forEach.call(inViewElements, function (element) {
+      element.classList.add('inView')
+    })
+  }
+}
 
 
 /*==============================================================*/
