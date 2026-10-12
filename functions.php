@@ -1661,6 +1661,24 @@ function rw_dequeue_unused_plugin_assets() {
 }
 add_action( 'wp_enqueue_scripts', 'rw_dequeue_unused_plugin_assets', 100 );
 
+
+/**
+ * Drop Dashicons on the front end.
+ *
+ * Max Mega Menu prints <span class="dashicons dashicons-search"> for the nav
+ * search, but the theme already draws that glyph from Icomoon (\e915 in
+ * styles/_head-foot.sass), so nothing on the page renders from the Dashicons
+ * font. Kept for logged-in users because the admin bar needs it.
+ */
+function rw_dequeue_dashicons() {
+	if ( is_admin() || is_user_logged_in() || is_admin_bar_showing() ) {
+		return;
+	}
+	wp_dequeue_style( 'dashicons' );
+	wp_deregister_style( 'dashicons' );
+}
+add_action( 'wp_enqueue_scripts', 'rw_dequeue_dashicons', 100 );
+
 /**
  * Add To Any enqueues its stylesheet, its script and a request to
  * static.addtoany.com on every single page, with no check for whether share
