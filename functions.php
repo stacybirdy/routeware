@@ -701,12 +701,11 @@ CSS
 	}
 
     wp_enqueue_style( 'routeware-style', get_stylesheet_directory_uri() . '/styles/base.css', array(), filemtime( get_stylesheet_directory() . '/styles/base.css' ) );
-	wp_enqueue_style( 'additions', get_stylesheet_directory_uri() . '/styles/additions.css', array(), filemtime( get_stylesheet_directory() . '/styles/additions.css' ) );
 
 	// Max Mega Menu and TranslatePress draw these three icons from Dashicons, which
 	// is the only reason the 26 KB Dashicons font downloads. Icomoon is already
 	// loaded and has the same glyphs, so the font request goes away entirely.
-	wp_add_inline_style( 'additions', <<<CSS
+	wp_add_inline_style( 'routeware-style', <<<CSS
 		span.mega-indicator:after { font-family: 'icomoon' !important; content: "\\e924" !important; }
 		button.mega-close:before { font-family: 'icomoon' !important; content: "\\e907" !important; }
 		#trp_ald_modal_popup #trp_ald_x_button::before,
@@ -725,15 +724,15 @@ wp_enqueue_style( 'slick-styles', '//cdn.jsdelivr.net/npm/@accessible360/accessi
 
 
 	wp_enqueue_script( 'inView', get_template_directory_uri() . '/js/inView.js', array(), '1', true );
-	wp_enqueue_script( 'alert', get_template_directory_uri() . '/js/alert.js', array(), filemtime(get_template_directory() . '/js/alert.js') );
+	wp_enqueue_script( 'alert', get_template_directory_uri() . '/js/alert.js', array( 'jquery' ), filemtime(get_template_directory() . '/js/alert.js'), true );
 
     if ( ! is_admin() && rw_page_uses( 'acc-slider' ) ) {
-        wp_enqueue_script( 'accordionSlider-scripts', get_template_directory_uri() . '/js/accSlider.js', array(), filemtime(get_template_directory() . '/js/accSlider.js') );
+        wp_enqueue_script( 'accordionSlider-scripts', get_template_directory_uri() . '/js/accSlider.js', array( 'jquery' ), filemtime(get_template_directory() . '/js/accSlider.js'), true );
     }
 
     wp_enqueue_script( 'bgVids-script', get_template_directory_uri() . '/js/bgVids.js', array(), '1', true );
 
-	wp_enqueue_script( 'scripts', get_stylesheet_directory_uri() . '/js/scripts.js', array(), filemtime( get_stylesheet_directory() . '/js/scripts.js' ) );
+	wp_enqueue_script( 'scripts', get_stylesheet_directory_uri() . '/js/scripts.js', array( 'jquery' ), filemtime( get_stylesheet_directory() . '/js/scripts.js' ), true );
 
     // load glossary script only on glossary terms archive page
     if (is_post_type_archive('glossary-terms')) {
