@@ -676,7 +676,7 @@ function myprefix_remove_tax() {
 // SCRIPTS AND STYLES
 /*==============================================================*/
 function routeware_scripts() {
-	wp_enqueue_style( 'icomoon', '//cdn.icomoon.io/45376/Routeware/style.css?2dfxlu');
+	wp_enqueue_style( 'icomoon', '//cdn.icomoon.io/45376/Routeware/style.css?a0b84f');
 	wp_enqueue_style( 'adobeFonts', '//use.typekit.net/ovh1wav.css');
 
 	// Adobe serves these faces with font-display:block, which hides text until they load.
@@ -703,14 +703,15 @@ CSS
     wp_enqueue_style( 'routeware-style', get_stylesheet_directory_uri() . '/styles/base.css', array(), filemtime( get_stylesheet_directory() . '/styles/base.css' ) );
 	wp_enqueue_style( 'additions', get_stylesheet_directory_uri() . '/styles/additions.css', array(), filemtime( get_stylesheet_directory() . '/styles/additions.css' ) );
 
-	// TranslatePress's popup draws its close buttons with the Dashicons X, which is
-	// the only thing still pulling in the 26 KB Dashicons font. Icomoon is already
-	// loaded and has the same glyph, so use that and let the font request go.
+	// Max Mega Menu and TranslatePress draw these three icons from Dashicons, which
+	// is the only reason the 26 KB Dashicons font downloads. Icomoon is already
+	// loaded and has the same glyphs, so the font request goes away entirely.
 	wp_add_inline_style( 'additions', <<<CSS
+		span.mega-indicator:after { font-family: 'icomoon' !important; content: "\\e924" !important; }
+		button.mega-close:before { font-family: 'icomoon' !important; content: "\\e907" !important; }
 		#trp_ald_modal_popup #trp_ald_x_button::before,
 		#trp_no_text_popup #trp_close::before,
-		#trp_ald_no_text_popup_x_button::before { content: "\\e907"; font-family: 'icomoon'; }
-		@font-face { font-family: dashicons; src: local('ThisFontDoesNotExist'); }
+		#trp_ald_no_text_popup_x_button::before { font-family: 'icomoon' !important; content: "\\e907" !important; }
 CSS
 	);
 
