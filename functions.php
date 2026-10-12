@@ -694,6 +694,7 @@ CSS
 	if ( ! is_admin() && rw_page_uses( 'uswds' ) ) {
 		wp_enqueue_script( 'uswds-init', get_template_directory_uri() . '/uswds/dist/js/uswds-init.min.js', array(), '1' );
 		wp_enqueue_style( 'uswds', get_template_directory_uri() . '/uswds/dist/css/uswds.min.css', array(), '1' );
+		wp_enqueue_script( 'uswds', get_template_directory_uri() . '/uswds/dist/js/uswds.min.js', array(), '1', true );
 	}
 
 	if ( ! is_admin() && rw_page_uses( 'acc-slider' ) ) {
@@ -723,7 +724,6 @@ CSS
 wp_enqueue_style( 'slick-styles', '//cdn.jsdelivr.net/npm/@accessible360/accessible-slick@1.0.1/slick/accessible-slick-theme.min.css');
 
 
-	wp_enqueue_script( 'inView', get_template_directory_uri() . '/js/inView.js', array(), '1', true );
 	wp_enqueue_script( 'alert', get_template_directory_uri() . '/js/alert.js', array( 'jquery' ), filemtime(get_template_directory() . '/js/alert.js'), true );
 
     if ( ! is_admin() && rw_page_uses( 'acc-slider' ) ) {
