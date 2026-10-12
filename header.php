@@ -292,11 +292,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<?php endif; ?>
 
 	<nav id="eyebrowNav" role="navigation" aria-label="Eyebrow"><div class="wrap">
-		<a class="logo" href="/"><img src="<?php echo $logo; ?>" alt="Routeware logo" /></a>
+		<a class="logo" href="/"><img src="<?php echo $logo; ?>" alt="Routeware logo" width="614" height="123" /></a>
 		<?php wp_nav_menu( array( 'theme_location' => 'eyebrow' ) ); ?> 
 	</div></nav>
 	<nav id="primaryNav" class="megamenu" role="navigation" aria-label="Primary"><div class="wrap">
-		<a class="logo" href="/"><img src="<?php echo $logoWhite; ?>" alt="Routeware logo" /></a>
+		<a class="logo" href="/"><img src="<?php echo $logoWhite; ?>" alt="Routeware logo" width="614" height="123" /></a>
 		<span class="spacer"></span>
 		<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?> 
 	</div></nav>
