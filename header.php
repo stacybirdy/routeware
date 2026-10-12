@@ -90,6 +90,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
+<link rel="dns-prefetch" href="//js.hsforms.net">
+<link rel="preconnect" href="https://js.hsforms.net">
 
 <script>
   window.uetq = window.uetq || [];
