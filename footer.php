@@ -62,7 +62,7 @@
 		</div>
 		<div class="wrap botRow">
 			<div class="col colNav colLogo"> 
-				<a class="logo" href="/"><img src="<?php echo $logoWhite; ?>" alt="Routeware logo" /></a>
+				<a class="logo" href="/"><img src="<?php echo $logoWhite; ?>" alt="Routeware logo" width="614" height="123" /></a>
 				<?php if($footerBlurb): echo $footerBlurb; endif; ?>
 			</div>
 			<div class="col colNav colInfo colSocial"> 
@@ -106,6 +106,11 @@ PROMPT;
 				?>
 
 				<h5 class="social noLine ask-ai-heading">Ask AI About Routeware</h5>	
+				<?php
+				// Matches the sizes set in styles/components/ask-ai-list.scss. Each icon's
+				// viewBox is square, so one number does both dimensions.
+				$askAiLogoSizes = array( 'grok' => 18, 'perplexity' => 23 );
+				?>
 				<ul class="ask-ai-list clean" aria-label="Ask an AI agent about Routeware">
 					<?php foreach ($askAiAgents as $askAiSlug => $askAiAgent): ?>
 						<li class="ask-ai-list__item ask-ai-list__item--type--<?php echo esc_attr($askAiSlug); ?>">
@@ -116,9 +121,12 @@ PROMPT;
 								target="_blank"
 								rel="noopener noreferrer"
 							>
+								<?php $askAiSize = isset($askAiLogoSizes[$askAiSlug]) ? $askAiLogoSizes[$askAiSlug] : 16; ?>
 								<img
 									class="ask-ai-list__logo"
 									src="<?php echo esc_url(get_template_directory_uri() . '/images/ai-logo-' . $askAiSlug . '.svg'); ?>"
+									width="<?php echo $askAiSize; ?>"
+									height="<?php echo $askAiSize; ?>"
 									alt=""
 								/>
 							</a>
