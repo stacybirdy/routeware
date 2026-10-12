@@ -678,6 +678,17 @@ function myprefix_remove_tax() {
 function routeware_scripts() {
 	wp_enqueue_style( 'icomoon', '//cdn.icomoon.io/45376/Routeware/style.css?2dfxlu');
 	wp_enqueue_style( 'adobeFonts', '//use.typekit.net/ovh1wav.css');
+
+	// Adobe serves these faces with font-display:block, which hides text until they load.
+	// Re-declaring them with swap lets the fallback show first.
+	wp_add_inline_style( 'adobeFonts', <<<CSS
+		@font-face{font-family:"neue-haas-grotesk-display"; src:url("https://use.typekit.net/af/174ae3/00000000000000007735bb5a/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3") format("woff2"),url("https://use.typekit.net/af/174ae3/00000000000000007735bb5a/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3") format("woff"); font-display:swap;font-style:normal;font-weight:500;font-stretch:normal;}
+		@font-face{font-family:"neue-haas-grotesk-display"; src:url("https://use.typekit.net/af/db1ce7/00000000000000007735bb5e/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i5&v=3") format("woff2"),url("https://use.typekit.net/af/db1ce7/00000000000000007735bb5e/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i5&v=3") format("woff"); font-display:swap;font-style:italic;font-weight:500;font-stretch:normal;}
+		@font-face{font-family:"neue-haas-grotesk-display"; src:url("https://use.typekit.net/af/c7a282/00000000000000007735bb62/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3") format("woff2"),url("https://use.typekit.net/af/c7a282/00000000000000007735bb62/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3") format("woff"); font-display:swap;font-style:normal;font-weight:600;font-stretch:normal;}
+		@font-face{font-family:"neue-haas-grotesk-display"; src:url("https://use.typekit.net/af/216c2e/00000000000000007735bb6a/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/216c2e/00000000000000007735bb6a/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"); font-display:swap;font-style:normal;font-weight:700;font-stretch:normal;}
+		@font-face{font-family:"neue-haas-grotesk-display"; src:url("https://use.typekit.net/af/a311fa/00000000000000007735bb6c/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff2"),url("https://use.typekit.net/af/a311fa/00000000000000007735bb6c/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff"); font-display:swap;font-style:italic;font-weight:700;font-stretch:normal;}
+CSS
+	);
 	wp_enqueue_style( 'accordionSlider-style', get_stylesheet_directory_uri() . '/styles/accSlider.css', array(), filemtime( get_stylesheet_directory() . '/styles/accSlider.css' ) );
 
     wp_enqueue_style( 'routeware-style', get_stylesheet_directory_uri() . '/styles/base.css', array(), filemtime( get_stylesheet_directory() . '/styles/base.css' ) );
