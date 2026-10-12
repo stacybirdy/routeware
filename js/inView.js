@@ -1,37 +1,37 @@
-// Detect request animation frame
-var scroll = window.requestAnimationFrame ||
-  // IE Fallback
-  function(callback){ window.setTimeout(callback, 1000/60)};
+// Adds .inView to .animate__animated elements once they enter the viewport.
+//
+// This used to run a requestAnimationFrame loop for the life of the page,
+// calling getBoundingClientRect() on every element and then writing a class in
+// the same pass. That is a layout read followed by a style write, 60 times a
+// second, forever, which is what showed up as forced reflow and as the theme's
+// largest single script cost. IntersectionObserver does the same job off the
+// main thread and stops watching each element once it has been shown.
 
-var elementsToShow = document.querySelectorAll('.animate__animated');
+(function () {
+	var elements = document.querySelectorAll('.animate__animated');
 
-function loop() {
-  Array.prototype.forEach.call(elementsToShow, function(element){
-    if (isElementInViewport(element)) {
-      element.classList.add('inView');
-    }
-    //comment in for repeat animations
-    //else {element.classList.remove('inView');}
-  });
-scroll(loop);
-}
+	if (!elements.length) {
+		return;
+	}
 
-// Call the loop for the first time
-loop();
+	// No IntersectionObserver: show everything rather than leave it hidden.
+	if (!('IntersectionObserver' in window)) {
+		Array.prototype.forEach.call(elements, function (element) {
+			element.classList.add('inView');
+		});
+		return;
+	}
 
-// Helper function from: http://stackoverflow.com/a/7557433/274826
-function isElementInViewport(el) {
-  // special bonus for those using jQuery
-  if (typeof jQuery === "function" && el instanceof jQuery) {
-    el = el[0];
-  }
-  var rect = el.getBoundingClientRect();
-  return (
-    (rect.top <= 0 && rect.bottom >= 0)
-    ||
-    (rect.bottom >= (window.innerHeight || document.documentElement.clientHeight)
-      && rect.top <= (window.innerHeight || document.documentElement.clientHeight))
-    ||
-    (rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight))
-  );
-}
+	var observer = new IntersectionObserver(function (entries) {
+		entries.forEach(function (entry) {
+			if (entry.isIntersecting) {
+				entry.target.classList.add('inView');
+				observer.unobserve(entry.target);
+			}
+		});
+	});
+
+	Array.prototype.forEach.call(elements, function (element) {
+		observer.observe(element);
+	});
+})();
