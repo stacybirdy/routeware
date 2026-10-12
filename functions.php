@@ -689,7 +689,16 @@ function routeware_scripts() {
 		@font-face{font-family:"neue-haas-grotesk-display"; src:url("https://use.typekit.net/af/a311fa/00000000000000007735bb6c/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff2"),url("https://use.typekit.net/af/a311fa/00000000000000007735bb6c/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff"); font-display:swap;font-style:italic;font-weight:700;font-stretch:normal;}
 CSS
 	);
-	wp_enqueue_style( 'accordionSlider-style', get_stylesheet_directory_uri() . '/styles/accSlider.css', array(), filemtime( get_stylesheet_directory() . '/styles/accSlider.css' ) );
+	// USWDS is only needed where a usa-accordion renders. It was a hardcoded
+	// link in header.php and render-blocked every page for 61 KB.
+	if ( ! is_admin() && rw_page_uses( 'uswds' ) ) {
+		wp_enqueue_script( 'uswds-init', get_template_directory_uri() . '/uswds/dist/js/uswds-init.min.js', array(), '1' );
+		wp_enqueue_style( 'uswds', get_template_directory_uri() . '/uswds/dist/css/uswds.min.css', array(), '1' );
+	}
+
+	if ( ! is_admin() && rw_page_uses( 'acc-slider' ) ) {
+		wp_enqueue_style( 'accordionSlider-style', get_stylesheet_directory_uri() . '/styles/accSlider.css', array(), filemtime( get_stylesheet_directory() . '/styles/accSlider.css' ) );
+	}
 
     wp_enqueue_style( 'routeware-style', get_stylesheet_directory_uri() . '/styles/base.css', array(), filemtime( get_stylesheet_directory() . '/styles/base.css' ) );
 	wp_enqueue_style( 'additions', get_stylesheet_directory_uri() . '/styles/additions.css', array(), filemtime( get_stylesheet_directory() . '/styles/additions.css' ) );
@@ -706,7 +715,9 @@ wp_enqueue_style( 'slick-styles', '//cdn.jsdelivr.net/npm/@accessible360/accessi
 	wp_enqueue_script( 'inView', get_template_directory_uri() . '/js/inView.js', array(), '1', true );
 	wp_enqueue_script( 'alert', get_template_directory_uri() . '/js/alert.js', array(), filemtime(get_template_directory() . '/js/alert.js') );
 
-    wp_enqueue_script( 'accordionSlider-scripts', get_template_directory_uri() . '/js/accSlider.js', array(), filemtime(get_template_directory() . '/js/accSlider.js') );
+    if ( ! is_admin() && rw_page_uses( 'acc-slider' ) ) {
+        wp_enqueue_script( 'accordionSlider-scripts', get_template_directory_uri() . '/js/accSlider.js', array(), filemtime(get_template_directory() . '/js/accSlider.js') );
+    }
 
     wp_enqueue_script( 'bgVids-script', get_template_directory_uri() . '/js/bgVids.js', array(), '1', true );
 
@@ -1532,6 +1543,17 @@ function rw_page_uses( $feature ) {
             return false !== strpos( $blob, 'resourceFiltering' )
                 || false !== strpos( $blob, 'events' )
                 || false !== strpos( $blob, '[searchandfilter' );
+
+        // USWDS only styles the usa-accordion, used by the filter bar
+        // (resourceFiltering and events layouts) and the accordionModule layout.
+        case 'uswds':
+            return false !== strpos( $blob, 'resourceFiltering' )
+                || false !== strpos( $blob, 'events' )
+                || false !== strpos( $blob, 'accordionModule' );
+
+        // The accordion slider module.
+        case 'acc-slider':
+            return false !== strpos( $blob, 'accSlider' );
 
         // TablePress renders from a [table id=..] shortcode.
         case 'tablepress':
