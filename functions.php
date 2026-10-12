@@ -703,6 +703,17 @@ CSS
     wp_enqueue_style( 'routeware-style', get_stylesheet_directory_uri() . '/styles/base.css', array(), filemtime( get_stylesheet_directory() . '/styles/base.css' ) );
 	wp_enqueue_style( 'additions', get_stylesheet_directory_uri() . '/styles/additions.css', array(), filemtime( get_stylesheet_directory() . '/styles/additions.css' ) );
 
+	// TranslatePress's popup draws its close buttons with the Dashicons X, which is
+	// the only thing still pulling in the 26 KB Dashicons font. Icomoon is already
+	// loaded and has the same glyph, so use that and let the font request go.
+	wp_add_inline_style( 'additions', <<<CSS
+		#trp_ald_modal_popup #trp_ald_x_button::before,
+		#trp_no_text_popup #trp_close::before,
+		#trp_ald_no_text_popup_x_button::before { content: "\\e907"; font-family: 'icomoon'; }
+		@font-face { font-family: dashicons; src: local('ThisFontDoesNotExist'); }
+CSS
+	);
+
 	wp_enqueue_script( 'routeware-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '1', true );
 	wp_enqueue_script( 'jquery', '//code.jquery.com/jquery-1.11.0.min.js', array(), '1', true );
 	wp_enqueue_script( 'waypointsCounter', '//cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js', array(), '1', true );
