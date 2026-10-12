@@ -90,8 +90,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-<script src="<?php echo get_template_directory_uri(); ?>/uswds/dist/js/uswds-init.min.js"></script>
-<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/uswds/dist/css/uswds.min.css" />
 
 <script>
   window.uetq = window.uetq || [];
