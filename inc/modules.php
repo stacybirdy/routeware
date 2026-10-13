@@ -347,8 +347,19 @@
 				if( $testiQuery && $testiQuery->have_posts() ): ?>
 		      <div class="testiSlider alt animate__animated animate__fadeInUp">
 		        <?php while( $testiQuery->have_posts() ): $testiQuery->the_post();
-		        	$quote = get_field('quote'); $name = get_field('name'); $pos = get_field('position'); $byline = get_field('byline'); $value = get_field('value'); $label = get_field('label'); $img = get_field('image'); $logo = get_field('logo'); $alt = get_post_meta( $logo, '_wp_attachment_image_alt', true); ?>
-		            <div class="slide"><?php
+		        	$quote = get_field('quote'); $name = get_field('name'); $pos = get_field('position'); $byline = get_field('byline'); $value = get_field('value'); $label = get_field('label'); $img = get_field('image'); $logo = get_field('logo'); $alt = get_post_meta( $logo, '_wp_attachment_image_alt', true);
+					/* Below 900px the photo is a CSS background on .img, which is a
+					   fixed 2:1 box, so the top section is the same height on every
+					   slide whatever the source image's proportions are. The <img>
+					   below is hidden at that width and only serves desktop. */
+					$slideStyle = '';
+					if( $typeCPT == 'type-story' && $img ):
+						$slideBgUrl = is_numeric($img) ? wp_get_attachment_image_url( $img, 'large' ) : $img;
+						if( $slideBgUrl ):
+							$slideStyle = ' style="--slideImg: url(' . esc_url($slideBgUrl) . ')"';
+						endif;
+					endif; ?>
+		            <div class="slide"<?php echo $slideStyle; ?>><?php
 					/* type-story used an inline background-image, so it shipped the
 					   full-size original to every phone with no lazy loading.
 					   Now a real img filling .slide via object-fit — see the
