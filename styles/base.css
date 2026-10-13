@@ -8635,7 +8635,7 @@ button.slick-arrow:focus {
     width: 100%;
     height: auto;
     max-width: 100%;
-    aspect-ratio: 10/3;
+    aspect-ratio: 2/1;
     left: 0;
     -ms-transform: none;
     -webkit-transform: none;
