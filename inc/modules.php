@@ -351,15 +351,8 @@
 					/* Below 900px the photo is a CSS background on .img, which is a
 					   fixed 2:1 box, so the top section is the same height on every
 					   slide whatever the source image's proportions are. The <img>
-					   below is hidden at that width and only serves desktop. */
-					$slideStyle = '';
-					if( $typeCPT == 'type-story' && $img ):
-						$slideBgUrl = is_numeric($img) ? wp_get_attachment_image_url( $img, 'large' ) : $img;
-						if( $slideBgUrl ):
-							$slideStyle = ' style="--slideImg: url(' . esc_url($slideBgUrl) . ')"';
-						endif;
-					endif; ?>
-		            <div class="slide"<?php echo $slideStyle; ?>><?php
+					   below is hidden at that width and only serves desktop. */ ?>
+		            <div class="slide"><?php
 					/* type-story used an inline background-image, so it shipped the
 					   full-size original to every phone with no lazy loading.
 					   Now a real img filling .slide via object-fit — see the
@@ -377,6 +370,20 @@
 							) );
 						elseif( $img ):
 							echo '<img class="slideBg" src="' . esc_url($img) . '" alt="" loading="lazy" />';
+						endif;
+					endif;
+
+					/* Below 900px .slideBg and .img are both hidden and .top is the
+					   whole top section: a fixed 2:1 box with the photo as a
+					   background set to cover, so it is the same width and height on
+					   every slide whatever shape the source image is. */
+					if( $typeCPT == 'type-story' && $img ):
+						$topUrl = is_numeric($img) ? wp_get_attachment_image_url( $img, 'large' ) : $img;
+						if( $topUrl ):
+							echo '<div class="top" style="background-image:url(' . esc_url($topUrl) . ')">'
+							   . '<div class="overlay"></div>'
+							   . wp_get_attachment_image( $logo, $size, '', array('alt' => $alt) )
+							   . '</div>';
 						endif;
 					endif;
 					?>
