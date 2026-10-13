@@ -153,7 +153,6 @@ PROMPT;
 
 
 </main><!--end main-->
-<script src="<?php echo get_template_directory_uri(); ?>/uswds/dist/js/uswds.min.js"></script>
 
 <!-- Start of HubSpot code snippet -->
 <button type="button" id="hs_show_banner_button"
