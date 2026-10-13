@@ -1369,6 +1369,12 @@ button.slick-arrow
 			position: relative
 			+break(midMax)
 				flex-flow: column wrap
+			// .txt's black :after only covers its lower 85%, so a long quote pushed
+			// the top of that block below the photo and left a white stripe across
+			// the card. Putting the black on the slide itself fills it at any quote
+			// length. Same range the :after runs in, so nothing else changes.
+			+break-span($break-min, $break-mid)
+				background-color: black
 			+break(handMax)
 				background-repeat: no-repeat
 				background-size: auto 50%
@@ -1385,39 +1391,71 @@ button.slick-arrow
 				object-fit: cover
 				object-position: center center
 				z-index: 0
-				// Stacked layout starts at midMax (899px), same breakpoint as the
-				// flex-flow: column wrap above, so the photo sits across the top of
-				// the card from there down and shows whole.
-				// Do not set width:auto here: the img carries width/height
-				// attributes, so auto resolves to the attribute width rather than
-				// the aspect ratio, and object-fit:fill then stretches it.
+				// Below 900px the photo is a background on .img instead, so this
+				// tag is desktop only.
 				+break(midMax)
-					width: 100%
-					height: auto
-					max-width: 100%
-					left: 0
-					+transform(none)
-					object-fit: contain
-					object-position: center top
+					display: none
 			.txt
 				position: relative
 				+break-span($break-min, $break-mid)
-					padding: 0 40px 40px 
-					&:after 
+					padding: 0 40px 40px
+					&:after
 						content: ""
 						width: 100%
 						height: 85%
 						position: absolute
-						left: 0 
+						left: 0
 						bottom: 0
 						background: black
+				// Pulls up over the bottom of the photo section. Percentage margins
+				// resolve against the slide width, so the quote always begins 30% of
+				// the way down, exactly where the old 10:3 band put it.
 				+break(midMax)
 					width: 100%
-			.img 
+					margin-top: -20%
+			// The mobile top section. Its own class because .img is caught by a
+			// `background: $green !important` shorthand further up, which wipes any
+			// background-image set on it. Below 900px this is the only photo on the
+			// card: a fixed 2:1 box with the image set inline in inc/modules.php and
+			// sized to cover, so every slide's top is the same width and height.
+			.top
+				display: none
+				+break(midMax)
+					display: block
+					position: relative
+					width: 100%
+					aspect-ratio: 2 / 1
+					background-size: cover
+					background-position: center center
+					background-repeat: no-repeat
+					+border-radius(10px 10px 0 0)
+					overflow: hidden
+					> .overlay
+						position: absolute
+						left: 0
+						top: 0
+						height: 100%
+						width: 100%
+						mix-blend-mode: multiply
+						+grad(135deg,rgba(black, .4),0%,rgba(black, 0),50%)
+						+break(hand)
+							+grad(135deg,rgba(black, .4),0%,rgba(black, 0),30%)
+					// Same logo treatment .img gives it, so it keeps its corner.
+					> img
+						display: block
+						position: relative
+						z-index: 2
+						width: auto
+						object-fit: contain
+						object-position: left top
+						max-width: 200px
+						max-height: 90px
+						margin: 15px 0 0 15px
+			.img
 				background-color: transparent !important
+				// .top replaces this below 900px.
 				+break(midMax)
-					padding-bottom: 30%
-					width: 100%
+					display: none
 				.overlay 
 					position: absolute 
 					left: 0 
