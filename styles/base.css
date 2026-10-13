@@ -8635,12 +8635,13 @@ button.slick-arrow:focus {
     width: 100%;
     height: auto;
     max-width: 100%;
+    aspect-ratio: 10/3;
     left: 0;
     -ms-transform: none;
     -webkit-transform: none;
     transform: none;
-    object-fit: contain;
-    object-position: center top;
+    object-fit: cover;
+    object-position: center center;
   }
 }
 .testimonials.type-story .wrap .slide .txt {
@@ -8670,7 +8671,7 @@ button.slick-arrow:focus {
 }
 @media (max-width: 899px) {
   .testimonials.type-story .wrap .slide .img {
-    aspect-ratio: var(--slideRatio, 10/3);
+    aspect-ratio: 10/3;
     width: 100%;
   }
 }
