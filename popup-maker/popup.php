@@ -36,7 +36,7 @@ $logoWhite = get_field('logoWhite', 'options');
 				<?php do_action( 'pum_popup_before_content' ); ?>
 				<div class="<?php pum_popup_classes( null, 'content' ); ?>" <?php pum_popup_content_tabindex_attr(); ?>>
 					<div class="inner"><?php pum_popup_content(); ?></div>
-					<div class="foot"><div class="overlay"></div><a class="logo" href="/"><img src="<?php echo $logoWhite; ?>" alt="Routeware logo" /></a></div>
+					<div class="foot"><div class="overlay"></div><a class="logo" href="/"><img src="<?php echo $logoWhite; ?>" alt="Routeware logo" width="614" height="123" /></a></div>
 				</div>
 				<?php do_action( 'pum_popup_after_content' ); ?>
 				<?php do_action( 'popmake_popup_after_inner' ); // Backward compatibility. ?>
