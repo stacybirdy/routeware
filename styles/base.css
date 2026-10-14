@@ -13643,7 +13643,7 @@ form.passProtect input.submit:focus {
   }
 }
 .ai-summary__label {
-  margin: 0 0 6px;
+  margin: 0 0 2px;
   color: #e6a730;
   font-family: "neue-haas-grotesk-display", sans-serif;
   font-weight: 700;
@@ -13651,7 +13651,7 @@ form.passProtect input.submit:focus {
 }
 .ai-summary__sub {
   margin: 0 0 18px;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.35;
 }
 .ai-summary__list {
