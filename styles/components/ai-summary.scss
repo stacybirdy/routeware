@@ -1,0 +1,80 @@
+// Per-article "Summarize with AI" block, top of the blog sidebar in single.php.
+// Takes its cues from the sidebar's own .cta .share and .cta .link: gold label
+// in the bold face, green marks, and a 1px rule closing it off.
+.ai-summary {
+	padding: 20px 27px;
+	text-align: center;
+	border-bottom: 1px solid #dddddd;
+
+	@media (min-width: 900px) {
+		padding: 27px;
+	}
+
+	&__label {
+		margin: 0 0 2px;
+		color: #e6a730;
+		font-family: "neue-haas-grotesk-display", sans-serif;
+		font-weight: 700;
+		font-style: normal;
+	}
+
+	&__sub {
+		margin: 0 0 18px;
+		font-size: 14px;
+		line-height: 1.35;
+	}
+
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 18px;
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+	}
+
+	&__link {
+		display: grid;
+		width: 26px;
+		height: 26px;
+		place-items: center;
+		transition: opacity 0.2s ease;
+
+		&:hover,
+		&:focus-visible {
+			opacity: 0.75;
+		}
+	}
+
+	// The logo files are solid black for the footer's white tiles. Here they are
+	// masks instead, so the same file paints in the site green.
+	&__logo {
+		display: block;
+		width: 22px;
+		height: 22px;
+		background-color: #33a542;
+		-webkit-mask-image: var(--ai-logo);
+		mask-image: var(--ai-logo);
+		-webkit-mask-repeat: no-repeat;
+		mask-repeat: no-repeat;
+		-webkit-mask-position: center center;
+		mask-position: center center;
+		-webkit-mask-size: contain;
+		mask-size: contain;
+	}
+
+	// Matches the per-logo sizing in ask-ai-list.scss; these two sit differently
+	// inside their viewBox.
+	&__item {
+		&--type--perplexity .ai-summary__logo {
+			width: 26px;
+			height: 26px;
+		}
+
+		&--type--grok .ai-summary__logo {
+			width: 24px;
+			height: 24px;
+		}
+	}
+}
