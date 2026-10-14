@@ -75,64 +75,7 @@
 					<?php if($x): ?><li><a aria-label="X feed, opens in new window" href="<?php echo $x; ?>" target="_blank" class="icon-x"></a></li><?php endif; ?>
 				</ul>
 
-				<?php
-				$askAiPrompt = <<<'PROMPT'
-Review Routeware's website at routeware.com and provide a concise, factual overview of the company.
-
-Requirements:
-Keep the response between 200 and 300 words.
-Organize the response into concise bullets.
-Link every factual claim to the most relevant supporting page on Routeware.com.
-Use only information published on Routeware.com.
-Do not infer capabilities, customer use cases, or results that the website does not explicitly support.
-Use direct, informative language.
-Avoid promotional filler, lengthy product descriptions, and repeated information.
-
-Include:
-A brief explanation of what Routeware is.
-Routeware's capabilities across route optimization, dispatch, in-cab and driver tools, resident engagement, billing and back-office operations, and fleet and equipment reporting.
-The organizations Routeware serves, including private waste haulers, municipalities, higher education institutions, and specialty fleets.
-Two or three customer examples with specific, quantified results.
-Routeware's full product portfolio, with a short explanation of the areas each product covers.
-Present products as parts of Routeware's broader portfolio. Do not recommend a specific product or match products to a customer's needs, since Routeware's sales team determines the best fit.
-PROMPT;
-				$askAiAgents = array(
-					'chatgpt'    => array('name' => 'ChatGPT',    'url' => 'https://chat.openai.com/?q='),
-					'claude'     => array('name' => 'Claude',     'url' => 'https://claude.ai/new?q='),
-					'gemini'     => array('name' => 'Gemini',     'url' => 'https://www.google.com/search?udm=50&aep=11&q='),
-					'grok'       => array('name' => 'Grok',       'url' => 'https://grok.com/?q='),
-					'perplexity' => array('name' => 'Perplexity', 'url' => 'https://www.perplexity.ai/?q='),
-				);
-				?>
-
-				<h5 class="social noLine ask-ai-heading">Ask AI About Routeware</h5>	
-				<?php
-				// Matches the sizes set in styles/components/ask-ai-list.scss. Each icon's
-				// viewBox is square, so one number does both dimensions.
-				$askAiLogoSizes = array( 'grok' => 18, 'perplexity' => 23 );
-				?>
-				<ul class="ask-ai-list clean" aria-label="Ask an AI agent about Routeware">
-					<?php foreach ($askAiAgents as $askAiSlug => $askAiAgent): ?>
-						<li class="ask-ai-list__item ask-ai-list__item--type--<?php echo esc_attr($askAiSlug); ?>">
-							<a
-								class="ask-ai-list__link"
-								aria-label="Ask <?php echo esc_attr($askAiAgent['name']); ?> about Routeware, opens in new window"
-								href="<?php echo esc_url($askAiAgent['url'] . rawurlencode($askAiPrompt)); ?>"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<?php $askAiSize = isset($askAiLogoSizes[$askAiSlug]) ? $askAiLogoSizes[$askAiSlug] : 16; ?>
-								<img
-									class="ask-ai-list__logo"
-									src="<?php echo esc_url(get_template_directory_uri() . '/images/ai-logo-' . $askAiSlug . '.svg'); ?>"
-									width="<?php echo $askAiSize; ?>"
-									height="<?php echo $askAiSize; ?>"
-									alt=""
-								/>
-							</a>
-						</li>
-					<?php endforeach; ?>
-				</ul>
+				<?php $askAiMode = 'site'; include('inc/ask-ai.php'); ?>
 
 				<div class="colMob"><?php wp_nav_menu( array( 'theme_location' => 'footer' ) ); ?> 
 				<?php if($copyright): echo '<div class="copyright">' . $copyright . '</div>'; endif; ?></div>
