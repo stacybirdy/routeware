@@ -94,6 +94,7 @@ get_header();
 	</div><!--end primary-->
 	<?php if($postType == 'post'): ?>
 		<aside>
+			<?php $askAiMode = 'article'; include('inc/ask-ai.php'); ?>
 			<div class="cta">
 				<div class="share"><span>Share this:</span><?php echo do_shortcode( '[addtoany]' ); ?></div>
 				<div class="link">
