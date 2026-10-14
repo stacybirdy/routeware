@@ -13632,6 +13632,70 @@ form.passProtect input.submit:focus {
   margin-top: 30px;
 }
 
+.ai-summary {
+  padding: 20px 27px;
+  text-align: center;
+  border-bottom: 1px solid #dddddd;
+}
+@media (min-width: 900px) {
+  .ai-summary {
+    padding: 27px;
+  }
+}
+.ai-summary__label {
+  margin: 0 0 6px;
+  color: #e6a730;
+  font-family: "neue-haas-grotesk-display", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.ai-summary__sub {
+  margin: 0 0 18px;
+  font-size: 15px;
+  line-height: 1.35;
+}
+.ai-summary__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.ai-summary__link {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  transition: opacity 0.2s ease;
+}
+.ai-summary__link:hover, .ai-summary__link:focus-visible {
+  opacity: 0.75;
+}
+.ai-summary__logo {
+  display: block;
+  width: 22px;
+  height: 22px;
+  background-color: #33a542;
+  -webkit-mask-image: var(--ai-logo);
+  mask-image: var(--ai-logo);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center center;
+  mask-position: center center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+.ai-summary__item--type--perplexity .ai-summary__logo {
+  width: 26px;
+  height: 26px;
+}
+.ai-summary__item--type--grok .ai-summary__logo {
+  width: 24px;
+  height: 24px;
+}
+
 .post-type-archive-glossary-terms .site-footer {
   margin-top: 99px;
 }
