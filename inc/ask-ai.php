@@ -24,7 +24,7 @@ $askAiAgents = array(
 
 if ( $askAiMode === 'article' ) {
 
-	$askAiPrompt    = 'Analyze and summarize the key insights from ' . get_permalink();
+	$askAiPrompt    = 'Summarize the key insights and takeaways from this blog in 3-5 lines: ' . get_permalink();
 	$askAiBase      = 'ai-summary';
 	$askAiListClass = 'ai-summary__list';
 	$askAiListLabel = 'Open this article in an AI model';
